@@ -111,11 +111,26 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
     src: 
       url("fonts/caveat/caveat-regular.ttf") format("tff");
 }
+@font-face {
+    font-family: nanum;    
+    src: 
+      url("fonts/nanum-brush-script/NanumBrushScript-Regular.ttf") format("tff");
+}
 
-.postit{
+
+body {
+  background-color: lightblue;
+  color: black;
+}
+
+
+.post-it{
+  max-width: 90%;
+  margin: auto;
+  border: 3px solid #73AD21;
   body {
-    margin: 10px auto;
-    font-family: caveat;
+    margin:auto;
+    font-family: 'Lato';
     background:#666;
     color:#fff;
   }
@@ -128,11 +143,12 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
     font-size: .75rem;
   }
   p {
-    font-size: .5rem;
+    font-size: .75rem;
     font-weight: normal;
   }
   ul,li{
     list-style:none;
+ 
   }
   ul{
     display: flex;
@@ -146,50 +162,52 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
     display:block;
     height:5em;
     width:5em;
-    padding:.5em;
+    padding:1em;
   }
   ul li{
-    margin:1em;
+    margin:-2em;
   }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.hi = function() {
   /* code */
 	return "hi";
   
 }</script><tw-passagedata pid="1" name="Intro" tags="" position="300,400" size="100,100">Intro Screen Here
-What say you:
-
 /* call javascript function hi */
 &lt;&lt;= hi();&gt;&gt;
-
 /*set return value from function hi to variable stuff*/
 &lt;&lt;set $stuff = hi()&gt;&gt;
 $stuff
-&lt;div class=&quot;postit&quot;&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;#&quot;&gt;
-      &lt;h2&gt;Title #1&lt;/h2&gt;
-      &lt;p&gt;Text Content #1&lt;/p&gt;
-    &lt;/a&gt;
-  &lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="100,200" size="100,100">&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Reenie+Beanie&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
-
-/* Initialize Gamewide Variables */
+</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="100,200" size="100,100">/* Initialize Gamewide Variables */
 
 &lt;&lt;set $mood = 50&gt;&gt;
 &lt;&lt;set $stress = 50&gt;&gt;
 
-&lt;&lt;set $toDoList = [ {name:&quot;callMom&quot;, text: &quot;Call your mum&quot;, time: 20}]&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageFooter" tags="" position="100,600" size="100,100">Tasks: $toDoList.length
+&lt;&lt;set $toDoList = [ 
+{name:&quot;callMom&quot;, text: &quot;Call your mum&quot;, time: 20}, 
+{name:&quot;feedCats&quot;, text: &quot;Feed the Cats&quot;, time: 5},
+{name:&quot;callMom&quot;, text: &quot;Call your mum&quot;, time: 20}, 
+{name:&quot;feedCats&quot;, text: &quot;Feed the Cats&quot;, time: 5},
+{name:&quot;callMom&quot;, text: &quot;Call your mum&quot;, time: 20}, 
+{name:&quot;feedCats&quot;, text: &quot;Feed the Cats&quot;, time: 5},
+{name:&quot;callMom&quot;, text: &quot;Call your mum&quot;, time: 20}, 
+{name:&quot;feedCats&quot;, text: &quot;Feed the Cats&quot;, time: 5},
+{name:&quot;callMom&quot;, text: &quot;Call your mum&quot;, time: 20}, 
+{name:&quot;feedCats&quot;, text: &quot;Feed the Cats&quot;, time: 5}
+]&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageFooter" tags="" position="100,600" size="100,100">Tasks: $toDoList.length
 &lt;&lt;if $toDoList.length &gt; 0&gt;&gt;
+&lt;div class=&quot;post-it&quot;&gt;
+&lt;ul&gt;
 &lt;&lt;for _i to 0; _i lt $toDoList.length; _i++&gt;&gt; 
 &lt;&lt;set _item = $toDoList[_i]&gt;&gt;
-&lt;div id=&quot;postit&quot; class=&quot;postit&quot;&gt;
- _item[&quot;text&quot;]
- _item[&quot;time&quot;] min
- &lt;/div&gt;
-
+  &lt;li&gt;
+    &lt;a href=&quot;#&quot;&gt;
+      &lt;h2&gt; _item[&quot;text&quot;]&lt;/h2&gt;
+      &lt;p&gt; _item[&quot;time&quot;] min&lt;/p&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
 &lt;&lt;/for&gt;&gt; 
+&lt;/ul&gt;
+&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 </tw-passagedata><tw-passagedata pid="5" name="Idea Placeholder" tags="" position="100,25" size="100,100">Locations:
 Beach
