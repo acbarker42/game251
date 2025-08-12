@@ -107,14 +107,14 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 	<tw-storydata name="Game251Collab" startnode="1" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="78CD0189-FA91-48BF-A708-3B61D9CCB46B" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*Post it css taken from: https://webdesign.tutsplus.com/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934t 
 */
 @font-face {
-    font-family: caveat;    
+    font-family: 'caveat';    
     src: 
-      url("fonts/caveat/caveat-regular.ttf") format("tff");
+      url('fonts/caveat/caveat-regular.ttf') format('truetype');
 }
 @font-face {
-    font-family: nanum;    
+    font-family: 'nanum';    
     src: 
-      url("fonts/nanum-brush-script/NanumBrushScript-Regular.ttf") format("tff");
+      url('fonts/nanum-brush-script/NanumBrushScript-Regular.ttf') format('truetype');
 }
 
 
@@ -128,22 +128,20 @@ body {
   max-width: 90%;
   margin: auto;
   border: 3px solid #73AD21;
-  body {
-    margin:auto;
-    font-family: 'Lato';
-    background:#666;
-    color:#fff;
-  }
+  margin:auto;
+  background:#666;
+  color:#fff;
+   
   *{
     margin:0;
     padding:0;
   }
   h2 {
     font-weight: bold;
-    font-size: .75rem;
+    font-size: .95rem;
   }
   p {
-    font-size: .75rem;
+    font-size: .85rem;
     font-weight: normal;
   }
   ul,li{
@@ -162,9 +160,11 @@ body {
     color:#000;
     background:#ffc;
     display:block;
+    font-family: 'nanum';
     height:5em;
     width:5em;
-    padding:.5em;
+    padding:.25em;
+    margin-top: 0;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
 
   }
@@ -203,6 +203,7 @@ $stuff
 {name:&quot;feedCats&quot;, text: &quot;Feed the Cats&quot;, time: 5}
 ]&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,525" size="100,100">
 </tw-passagedata><tw-passagedata pid="5" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;br&gt;
+&lt;&lt;nobr&gt;&gt;
 Tasks: $toDoList.length
 &lt;&lt;if $toDoList.length &gt; 0&gt;&gt;
 &lt;div class=&quot;post-it&quot;&gt;
@@ -219,7 +220,7 @@ Tasks: $toDoList.length
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
-</tw-passagedata><tw-passagedata pid="6" name="Idea Placeholder" tags="" position="100,25" size="100,100">Locations:
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Idea Placeholder" tags="" position="100,25" size="100,100">Locations:
 Beach
 Your room
 Shop
