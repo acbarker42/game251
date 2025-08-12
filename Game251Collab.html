@@ -171,6 +171,50 @@ body {
   ul li{
     margin: .5em;
   }
+}
+
+  .floating-div {
+      position: absolute;
+      top: 25px;
+      left: 10%;
+      width: 80%;
+      height: 60%;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-size: 2.5em;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 1000;
+      margin-bottom: 30px;
+    }
+
+	.colorCodeScreen {
+		background-color: white;
+		margin: auto;
+      	margin-top: 50px;
+      	width: 50%;
+        border-radius: 10px;
+        font-size: 4em;
+      	align-items: center;
+      	padding: 50px;
+      
+}
+
+	.colorCodeYes {
+ 		border-radius: 10px; 
+        background-color: green;
+      	margin: 10px;
+}
+
+	.colorCodeNo {
+ 		border-radius: 10px;
+      	background-color: rgba(200,73,75,1);
+      	margin: 10px;
+}
+
+	.colorCodeTimer {
+ 		margin: 30px;     
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*Grab task from taskDB to add to todo list using the passage name*/
 window.addTask = function(taskDB, todoList, passageName) {
   var taskToAdd = taskDB.find(task => task.name === passageName);
@@ -180,7 +224,96 @@ window.addTask = function(taskDB, todoList, passageName) {
 window.getTask = function(taskDB, passageName) {
   var taskToGet = taskDB.find(task => task.name === passageName);
   return taskToGet;
-};</script><tw-passagedata pid="1" name="Intro" tags="" position="325,225" size="100,100">Intro Screen Here
+};
+
+/*Starts and Runs the Color Code Minigame*/
+window.colorCode = function(){
+	const colorCodeDiv = document.createElement('div');
+  	colorCodeDiv.className = "floating-div";
+  	colorCodeDiv.textContent = 'Do the word and color match?';
+  	document.body.appendChild(colorCodeDiv);
+    const colorCodeScreen = document.createElement('p');
+  colorCodeScreen.className = "colorCodeScreen";
+  	colorCodeDiv.appendChild(colorCodeScreen);
+  	const colorCodeScore = document.createElement('p');
+  colorCodeScore.className = "colorCodeScore";
+  	colorCodeDiv.appendChild(colorCodeScore);
+  	const colorCodeButtonDiv = document.createElement('div');
+  colorCodeButtonDiv.className = "colorCodeButtonDiv";
+  	colorCodeDiv.appendChild(colorCodeButtonDiv);
+  	const colorCodeYes = document.createElement('button');
+  colorCodeYes.className = "colorCodeYes";
+  	colorCodeYes.textContent = 'YES';
+  	colorCodeButtonDiv.appendChild(colorCodeYes);
+    const colorCodeNo = document.createElement('button');
+  colorCodeNo.className = "colorCodeNo";
+  	colorCodeNo.textContent = 'NO';
+  	colorCodeButtonDiv.appendChild(colorCodeNo);
+  const colorCodeTimer = document.createElement('div');
+  colorCodeTimer.className = "colorCodeTimer";
+  	colorCodeDiv.appendChild(colorCodeTimer);
+  
+  let score = 0;
+  colorCodeScore.textContent = 'SCORE: ' + score;
+  
+  let colors = ["blue", "black", "green", "orange"];
+  
+  let newProblem = function(){
+    let randomTextColor = colors[Math.floor(Math.random()*colors.length)];
+  let randomText = colors[Math.floor(Math.random()*colors.length)];
+    if(randomTextColor == randomText){
+    	colorCodeYes.addEventListener("click", scorePoint);
+        colorCodeNo.addEventListener("click", incorrect);
+    } else {
+    	colorCodeYes.addEventListener("click", incorrect);
+        colorCodeNo.addEventListener("click", scorePoint);
+    }
+    
+    colorCodeScreen.textContent = randomText;
+  	colorCodeScreen.style.color = randomTextColor;
+  }
+	let scorePoint = function(){
+   score += 1;
+   colorCodeScore.textContent = 'SCORE: ' + score;
+
+   colorCodeYes.removeEventListener("click", scorePoint);
+   colorCodeYes.removeEventListener("click", incorrect);
+   colorCodeNo.removeEventListener("click", scorePoint);
+   colorCodeNo.removeEventListener("click", incorrect);
+   newProblem();
+  }
+  
+  let incorrect = function(){
+   score -= 1;
+   colorCodeScore.textContent = 'SCORE: ' + score;
+   colorCodeYes.removeEventListener("click", scorePoint);
+   colorCodeYes.removeEventListener("click", incorrect);
+   colorCodeNo.removeEventListener("click", scorePoint);
+   colorCodeNo.removeEventListener("click", incorrect);
+   newProblem();
+    
+  }
+
+	let timeremaining = 10;
+  	let countdown = function(){
+    	timeremaining -= 1;
+      	colorCodeTimer.textContent = timeremaining;
+        if (timeremaining == 0){
+          colorCodeTimer.textContent = "Time's Up";
+          clearInterval(timer);
+          colorCodeYes.removeEventListener("click", scorePoint);
+  		  colorCodeYes.removeEventListener("click", incorrect);
+   	      colorCodeNo.removeEventListener("click", scorePoint);
+          colorCodeNo.removeEventListener("click", incorrect);
+    }
+    }
+  let timer = setInterval(countdown, 1000);
+  
+
+  
+  newProblem();
+
+}</script><tw-passagedata pid="1" name="Intro" tags="" position="325,225" size="100,100">Intro Screen Here
 
 [[Menu]]</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="100,150" size="100,100">/* Initialize Gamewide Variables */
 
@@ -288,7 +421,8 @@ spork
 
 </tw-passagedata><tw-passagedata pid="9" name="ToDoList" tags="" position="100,775" size="100,100"></tw-passagedata><tw-passagedata pid="10" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
 
-Mood = $mood</tw-passagedata><tw-passagedata pid="11" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]</tw-passagedata><tw-passagedata pid="12" name="SleepIn" tags="" position="325,750" size="100,100">You&#39;re not ready to face the world yet.  You roll over and doze off.
+Mood = $mood</tw-passagedata><tw-passagedata pid="11" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
+&lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="SleepIn" tags="" position="325,750" size="100,100">You&#39;re not ready to face the world yet.  You roll over and doze off.
 
 &lt;&lt;set $time = $time+30&gt;&gt;
 
