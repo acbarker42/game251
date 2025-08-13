@@ -63,8 +63,8 @@ window.launchHovered = function(){
 	infoscreenEl.append(levelinfo, button1El, button2El);
 	hoveredMenu.append(p1,p2,p3,hr1,p4,p5,p6,p7,hr2,p8);
 
-	document.body.style.filter = "blur(4px)";
-	gameWrapper.style.filter = "none";
+	//document.body.style.filter = "blur(4px)";
+	//gameWrapper.style.filter = "none";
 
 
 //this function returns a random number between the two arguments passed to it
@@ -217,24 +217,24 @@ function random(min,max) {
 			clearInterval(bombMover); 	
 			clearInterval(timer);  //clears the timer so it doesn't keep counting down below zero
 			infoscreenEl.style.display = "block";  //pops up the infoscreen
-			if(main.levelScore >= levels[main.level-1].minScore){  //determines if enough points were scored to go to the next level
-				button2El.style.display = "initial";
-				if(main.level >= levels.length){  //determines if there are more levels
-					infoscreenEl.style.backgroundColor = "green";
-					button2El.textContent = "Restart Game";
-					button2El.addEventListener("click", restart, false); 		
-				}
-				else{
-					button2El.addEventListener("click", levelUp, false);
-				}					
-			}
-			
-			button1El.textContent = "Replay Level";
-			button1El.addEventListener("click", startlevel, false);
+			levelinfo.textContent = "You're score is:" + score;			
+			button2El.style.display = "initial";
+			button2El.textContent = "Close";
+			button2El.addEventListener("click", closeGame, false);
+			button1El.style.display = "none";
 					
 	}
 	
-	//this section implements the countdown timer
+//this section implements the game close out
+
+	let closeGame = function(){
+		window.score = main.score;
+		gameWrapper.remove();
+		return(window.score);
+
+	}
+
+//this section implements the countdown timer
 	
 	var timeremaining = levels[main.level-1].duration;	
 	var countdown = function(){
