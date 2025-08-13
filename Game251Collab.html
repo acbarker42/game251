@@ -195,8 +195,7 @@ body {
     transform: scale(1.25);
     position:relative;
     z-index:5;
-  }
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
+  }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
 importScripts(
   ["js/taskDB.js", "js/hoveredGame.js"]
 ).then (function(){
@@ -576,7 +575,7 @@ And set a 45 minute timer for the banana bread.I&#39;ve been here three years...
       &lt;&lt;/link&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
-&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Intro" tags="" position="325,225" size="100,100">Intro Screen Here
+&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Intro" tags="hideFooter" position="325,225" size="100,100">Intro Screen Here
 
 
 
@@ -604,7 +603,8 @@ And set a 45 minute timer for the banana bread.I&#39;ve been here three years...
 {}
 ]&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="6" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;br&gt;
+</tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="6" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;&lt;if tags().includes(&quot;hideFooter&quot;)&gt;&gt;&lt;&lt;else&gt;&gt;
+&lt;br&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;h2&gt; Tasks: $toDoList.length &lt;/h2&gt;
 &lt;&lt;if $toDoList.length &gt; 0&gt;&gt;
@@ -625,7 +625,7 @@ And set a 45 minute timer for the banana bread.I&#39;ve been here three years...
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;print State.variables.score&gt;&gt;
-</tw-passagedata><tw-passagedata pid="7" name="Idea Placeholder" tags="" position="100,25" size="100,100">Locations:
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="Idea Placeholder" tags="" position="100,25" size="100,100">Locations:
 Beach
 Your room
 Shop
