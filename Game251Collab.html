@@ -184,10 +184,8 @@ importScripts(
 
 /*Grab task from taskDB to add to todo list using the passage name*/
 window.addTask = function(taskDB, todoList, passageName) {
-  //if (!todoList.find(task => task.name === passageName)){
     var taskToAdd = taskDB.find(task => task.name === passageName);
-    todoList.push(taskToAdd) ;
-    //{
+    todoList.push(taskToAdd);  
 };
 /*Grab task from taskDB using the passage name and return*/
 window.getTask = function(taskDB, passageName) {
@@ -195,7 +193,6 @@ window.getTask = function(taskDB, passageName) {
   return taskToGet;
 };
 
-<<<<<<< HEAD
 </script><tw-passagedata pid="1" name="Intro" tags="" position="325,225" size="100,100">Intro Screen Here
 =======
 /*Starts and Runs the Color Code Minigame*/
@@ -664,7 +661,8 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="15" name="StoryMenu" tags="" p
 &lt;&lt;set $time = $time+30&gt;&gt;
 
 
-After x time, you get up and get &lt;&lt;link &quot;moving.&quot; &quot;Breakfast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="MakeBreakfast" tags="" position="625,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="TakeOutTrash" tags="" position="500,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Start" tags="" position="475,375" size="100,100">&lt;&lt;set $passages = $taskDB.randomMany(2)&gt;&gt;
+After x time, you get up and get &lt;&lt;link &quot;moving.&quot; &quot;Breakfast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="MakeBreakfast" tags="" position="625,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="TakeOutTrash" tags="" position="500,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Start" tags="" position="475,375" size="100,100">&lt;&lt;if $taskDB.length &gt;1&gt;&gt;
+&lt;&lt;set $passages = $taskDB.randomMany(2)&gt;&gt;
 $passages[0].storyText but...
 $passages[1].stimText
 &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
@@ -673,8 +671,7 @@ $passages[1].stimText
 &lt;&lt;link $passages[1].text $passages[1].name&gt;&gt;
 &lt;&lt;= addTask($taskDB, $toDoList, $passages[0].name);&gt;&gt;
 &lt;&lt;/link&gt;&gt;
-
-
+&lt;&lt;/if&gt;&gt;
 
 </tw-passagedata><tw-passagedata pid="20" name="FeedCats" tags="" position="750,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="CallMum" tags="" position="875,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="DoDishes" tags="" position="600,200" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="FillDishSoap" tags="" position="725,200" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="GetGroceries" tags="" position="850,200" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Icon" tags="" position="800,400" size="100,100">Ok, today we are switching from learning about ML to Icon.  Maybe this language will be easier.  I got this.
 &lt;scribbling sound&gt; 
