@@ -166,7 +166,7 @@ body {
     padding:.25em;
     margin-top: 0;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-     transform: rotate(-6deg);
+    transform: rotate(-6deg);
     transition: transform .15s linear;
 
   }
@@ -178,24 +178,24 @@ body {
   position:relative;
   top:5px;
   background:#FBD8DD;
-}
-ul li:nth-child(3n) a{
-  transform:rotate(-3deg);
-  position:relative;
-  top:-5px;
-  background:#C4F8FB;
-}
-ul li:nth-child(5n) a{
-  transform:rotate(5deg);
-  position:relative;
-  top:-10px;
-}
-  ul li a:hover,ul li a:focus{
-  box-shadow:10px 10px 7px rgba(0,0,0,.7);
-  transform: scale(1.25);
-  position:relative;
-  z-index:5;
-}
+  }
+  ul li:nth-child(3n) a{
+    transform:rotate(-3deg);
+    position:relative;
+    top:-5px;
+    background:#C4F8FB;
+  }
+  ul li:nth-child(5n) a{
+    transform:rotate(5deg);
+    position:relative;
+    top:-10px;
+  }
+    ul li a:hover,ul li a:focus{
+    box-shadow:10px 10px 7px rgba(0,0,0,.7);
+    transform: scale(1.25);
+    position:relative;
+    z-index:5;
+  }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
 importScripts(
   "js/taskDB.js"
@@ -206,12 +206,21 @@ importScripts(
   console.log(err);
 });
 
+/* Call to mini game */
+window.launchGame = function(toDoList, text, time){
+  alert('Instead Make Call to Mini Game');
+ //launch game with time varible to determine difficulty
+  //var filtered = toDoList.filter(obj => obj.text !== text);
+  //toDoList = filtered;
+  
+  
+}
 
 /*Grab task from taskDB to add to todo list using the passage name*/
-window.addTask = function(taskDB, todoList, passageName) {
-  	if(!todoList.some(task => task.name === passageName)){
+window.addTask = function(taskDB, toDoList, passageName) {
+  	if(!toDoList.some(task => task.name === passageName)){
     	var taskToAdd = taskDB.find(task => task.name === passageName);
-    	todoList.push(taskToAdd);
+    	toDoList.push(taskToAdd);
 	}
 };
 /*Grab task from taskDB using the passage name and return*/
@@ -593,14 +602,14 @@ And set a 45 minute timer for the banana bread.I&#39;ve been here three years...
 </tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageHeader" tags="" position="100,525" size="100,100">
 </tw-passagedata><tw-passagedata pid="6" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;br&gt;
 &lt;&lt;nobr&gt;&gt;
-Tasks: $toDoList.length
+&lt;h2&gt; Tasks: $toDoList.length &lt;/h2&gt;
 &lt;&lt;if $toDoList.length &gt; 0&gt;&gt;
 &lt;div class=&quot;post-it&quot;&gt;
 &lt;ul&gt;
 &lt;&lt;for _i to 0; _i lt $toDoList.length; _i++&gt;&gt; 
 &lt;&lt;set _item = $toDoList[_i]&gt;&gt;
   &lt;li&gt;
-    &lt;a href=&quot;#&quot;&gt;
+    &lt;a href=&quot;#&quot; onClick=&quot;launchGame($toDoList, _item[&#39;text&#39;], _item[&#39;time&#39;])&quot;&gt;
       &lt;h2&gt; _item[&quot;text&quot;]&lt;/h2&gt;
       &lt;p&gt; _item[&quot;time&quot;] min&lt;/p&gt;
     &lt;/a&gt;
