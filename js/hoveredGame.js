@@ -105,7 +105,7 @@ function random(min,max) {
 	
 //use the constructor function to create all the levels
 //Values are (level number, duration, min score, targets, bombs, bomb move timer, desc)
-	var level1 = new Level(1,10,10,1,0,1, "Move the mouse over as many targets as you can before time runs out.");
+	var level1 = new Level(1,5,10,1,0,1, "Move the mouse over as many targets as you can before time runs out.");
 		
 //create an empty array to hold the target objects	
 	var targetEls = [];
@@ -217,7 +217,7 @@ function random(min,max) {
 			clearInterval(bombMover); 	
 			clearInterval(timer);  //clears the timer so it doesn't keep counting down below zero
 			infoscreenEl.style.display = "block";  //pops up the infoscreen
-			levelinfo.textContent = "You're score is:" + score;			
+			levelinfo.textContent = "You're score is: " + score;			
 			button2El.style.display = "initial";
 			button2El.textContent = "Close";
 			button2El.addEventListener("click", closeGame, false);
@@ -230,7 +230,8 @@ function random(min,max) {
 	let closeGame = function(){
 		window.score = main.score;
 		gameWrapper.remove();
-		return(window.score);
+		alert("score " +score);
+		return window.score;
 
 	}
 
