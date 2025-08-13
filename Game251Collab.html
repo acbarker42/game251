@@ -198,7 +198,7 @@ body {
   }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
 importScripts(
-  ["js/taskDB.js", "js/hoveredGame.js"]
+  ["js/taskDB.js", "js/test.js"]
 ).then (function(){
   console.log(window.taskDBImport);
 })
@@ -207,11 +207,16 @@ importScripts(
 });
 
 /* Call to mini game */
-window.launchGame = function(){
+window.launchGame = function(task){
+  //launch game with time varible to determine difficulty
   window.launchHovered();
- //launch game with time varible to determine difficulty
-  //var filtered = toDoList.filter(obj => obj.text !== text);
-  //toDoList = filtered;
+  console.log(window.score);
+  console.log(State.variables);
+  State.variables.score = window.score;
+  var task = State.variables.currentTask;
+  var filtered = State.variables.toDoList.filter(obj => obj.text !== task.text);
+   State.variables.toDoList = filtered;
+  
   
 }
 
@@ -581,10 +586,11 @@ And set a 45 minute timer for the banana bread.I&#39;ve been here three years...
 &lt;&lt;set $stress = 50&gt;&gt;
 &lt;&lt;set $day = 1&gt;&gt;
 &lt;&lt;set $time = &quot;0800&quot;&gt;&gt;
+&lt;&lt;set $score = 0&gt;&gt;
 
 
 &lt;&lt;set $toDoList = [ 
-{name:&quot;CallMom&quot;, text: &quot;Call Your Mum&quot;, time: 20}, 
+{name:&quot;ClickMe&quot;, text: &quot;Click On Me&quot;, time: 5}, 
 ]&gt;&gt;
 
 /*set up taskDB from import*/
@@ -598,26 +604,28 @@ And set a 45 minute timer for the banana bread.I&#39;ve been here three years...
 {}
 ]&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageHeader" tags="" position="100,525" size="100,100">
-</tw-passagedata><tw-passagedata pid="6" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;br&gt;
+</tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="6" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;br&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;h2&gt; Tasks: $toDoList.length &lt;/h2&gt;
 &lt;&lt;if $toDoList.length &gt; 0&gt;&gt;
 &lt;div class=&quot;post-it&quot;&gt;
 &lt;ul&gt;
 &lt;&lt;for _i to 0; _i lt $toDoList.length; _i++&gt;&gt; 
-&lt;&lt;set $item = $toDoList[_i]&gt;&gt;
+&lt;&lt;set State.variables.currentTask = $toDoList[_i]&gt;&gt;
+&lt;&lt;set $task = $toDoList[_i]&gt;&gt;
   &lt;li&gt;
-    &lt;a href=&quot;#&quot; onClick=&quot;launchGame()&quot;&gt;
-      &lt;h2&gt; $item[&quot;text&quot;]&lt;/h2&gt;
-      &lt;p&gt; $item[&quot;time&quot;] min&lt;/p&gt;
+    &lt;a href=&quot;#&quot; onClick=&quot;launchGame( )&quot;&gt;
+      &lt;h2&gt; $task[&quot;text&quot;]&lt;/h2&gt;
+      &lt;p&gt; $task[&quot;time&quot;] min&lt;/p&gt;
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;&lt;/for&gt;&gt; 
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="Idea Placeholder" tags="" position="100,25" size="100,100">Locations:
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;print State.variables.score&gt;&gt;
+</tw-passagedata><tw-passagedata pid="7" name="Idea Placeholder" tags="" position="100,25" size="100,100">Locations:
 Beach
 Your room
 Shop
@@ -687,7 +695,8 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="12" name="StoryMenu" tags="" p
 &lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="SleepIn" tags="" position="325,750" size="100,100">You&#39;re not ready to face the world yet.  You roll over and doze off.
 =======
 -Have a way to track whether its already visited or not.  possibly a tag or clone the task db and then pop them off or delete them as they get used.</tw-passagedata><tw-passagedata pid="14" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
-Mood = $mood</tw-passagedata><tw-passagedata pid="15" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
+Mood = $mood
+Latest Score = $score</tw-passagedata><tw-passagedata pid="15" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
 </tw-passagedata><tw-passagedata pid="16" name="SleepIn" tags="" position="325,750" size="100,100">You&#39;re not ready to face the world yet.  You roll over and doze off.
 
 
