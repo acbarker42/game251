@@ -184,8 +184,10 @@ importScripts(
 
 /*Grab task from taskDB to add to todo list using the passage name*/
 window.addTask = function(taskDB, todoList, passageName) {
-    var taskToAdd = taskDB.find(task => task.name === passageName);
-    todoList.push(taskToAdd);  
+  	if(!todoList.some(task => task.name === passageName)){
+    	var taskToAdd = taskDB.find(task => task.name === passageName);
+    	todoList.push(taskToAdd);
+	}
 };
 /*Grab task from taskDB using the passage name and return*/
 window.getTask = function(taskDB, passageName) {
@@ -549,7 +551,7 @@ And set a 45 minute timer for the banana bread.I&#39;ve been here three years...
 
 
 &lt;&lt;set $toDoList = [ 
-{name:&quot;callMom&quot;, text: &quot;Call Your Mum&quot;, time: 20}, 
+{name:&quot;CallMom&quot;, text: &quot;Call Your Mum&quot;, time: 20}, 
 ]&gt;&gt;
 
 /*set up taskDB from import*/
@@ -645,8 +647,6 @@ spork
 
 </tw-passagedata><tw-passagedata pid="10" name="ToDoList" tags="" position="100,775" size="100,100">-Add node to the task objects so that if you want to force a specific vs random next passage you can place it there.  Will need a check to see if its empty and if not use the random one
 
--Check for duplicates in todo list before adding
-
 -Have a way to track whether its already visited or not.  possibly a tag or clone the task db and then pop them off or delete them as they get used.
 
 -add logic that once your todo list is full it points to a memory.</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
@@ -739,6 +739,7 @@ Hey Siri, set an alarm for tomorow at 8:00am
 And set a 45 minute timer for the banana bread.</tw-passagedata><tw-passagedata pid="33" name="Imposter" tags="" position="925,650" size="100,100">I&#39;ve been here three years...is today the day they will figure out that I have no idea what I&#39;m doing?</tw-passagedata><tw-passagedata pid="34" name="choicesWidget" tags="widget" position="375,50" size="100,100">&lt;&lt;widget &quot;choices&quot;&gt;&gt;
       &lt;&lt;set $currentPassage = getTask($taskDB, passage())&gt;&gt;
       &lt;&lt;if $currentPassage.visited is true&gt;&gt;
+            call to play game
             $currentPassage.resolutionText
             [[Continue|Start]]
       &lt;&lt;else&gt;&gt;
@@ -748,8 +749,6 @@ And set a 45 minute timer for the banana bread.</tw-passagedata><tw-passagedata 
       $optionPassage.stimText
       &lt;&lt;link $currentPassage.text $currentPassage.name&gt;&gt;
       &lt;&lt;= addTask($taskDB, $toDoList, $optionPassage.name);&gt;&gt;
-      play game
-      
       &lt;&lt;/link&gt;&gt;
       &lt;&lt;link $optionPassage.text $optionPassage.name&gt;&gt;
       &lt;&lt;= addTask($taskDB, $toDoList, $currentPassage.name);&gt;&gt;
