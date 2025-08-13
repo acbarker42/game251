@@ -5,7 +5,7 @@ window.launchHovered = function(){
 //link external css sheet
 	const cssLink = document.createElement('link');
 	cssLink.rel = 'stylesheet';
-    cssLink.href = '../css/hovered.css';
+    cssLink.href = 'css/hovered.css';
     document.head.appendChild(cssLink);
 
 
@@ -174,7 +174,7 @@ function random(min,max) {
 			target = targetEls[i]; 
 			target = document.createElement("div");
 			gameboardEl.appendChild(target);
-			target.style.backgroundImage = "url('../media/target.png')";
+			target.style.backgroundImage = "url('media/target.png')";
 			target.style.width = 30 + "px";
 			target.style.height = 30 + "px";
 			target.className = "target";
@@ -193,7 +193,7 @@ function random(min,max) {
 			target = targetEls[i]; 
 			target = document.createElement("div");
 			gameboardEl.appendChild(target);
-			target.style.backgroundImage = "url('../media/bombs.png')";
+			target.style.backgroundImage = "url('media/bombs.png')";
 			target.style.width = 50 + "px";
 			target.style.height = 50 + "px";
 			target.className = "target bomb";
