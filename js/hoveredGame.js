@@ -1,8 +1,13 @@
-//this function returns a random number between the two arguments passed to it
-function random(min,max) {
-  let num = Math.floor(Math.random()*(max-min)) + min;
-  return num;
-}
+//HTML Game - Hovered - originally created ~2016 by Luke Barker 
+
+window.launchHovered = function(){
+
+//link external css sheet
+	const cssLink = document.createElement('link');
+	cssLink.rel = 'stylesheet';
+    cssLink.href = '../css/hovered.css';
+    document.head.appendChild(cssLink);
+
 
 //build game board
 	const gameWrapper = document.createElement('div');
@@ -60,7 +65,11 @@ function random(min,max) {
 	hoveredMenu.append(p1,p2,p3,hr1,p4,p5,p6,p7,hr2,p8);
 
 
-//get id's for the commonly used elements
+//this function returns a random number between the two arguments passed to it
+function random(min,max) {
+  	let num = Math.floor(Math.random()*(max-min)) + min;
+  return num;
+}
 
 	var game = function (){
 //create a main object to track high level info
@@ -246,3 +255,4 @@ button1El.addEventListener("click", startlevel, false);
 		
 }
 game();
+}

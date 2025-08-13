@@ -1,0 +1,94 @@
+html {
+		box-sizing: border-box;
+	}
+	*, *:before,
+	*:after {
+    box-sizing: inherit;
+	}
+	#wrapper{
+		background-image: url("pointer-bg.png");
+		background-color: #CCCCCC;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+	}
+
+	#gamewrapper {
+ 	    position: absolute;
+		background-color: black;
+		top: 25px;
+		width: 950px;
+		min-width: 950px;
+		height: 900px;
+		padding: 20px;
+		margin: auto;
+		position: absolute;
+		left: 100px;
+		z-index: 1000;
+	}
+
+	
+	#gameboard {	
+		width: 750px;
+		height: 750px;
+		background-color: gray;
+		position: absolute;
+		top: 110px;
+		margin: 0px;
+
+	}
+	
+	#infoscreen {
+		width: 500px;
+		height: 500px;
+		position: relative;
+		top: 125px;
+		left: 125px;
+		background-color: white;
+		text-align: center;
+	}
+
+	#levelinfo {
+		padding: 25px;
+	}
+	
+	#button1, #button2{
+		width: 120px;
+		height: 50px;
+		position: relative;
+		top: 300px;
+	}
+	
+	#button2 {
+		display: none;
+	}
+	
+	#hoveredMenu {
+		width: 155px;
+		height: 750px;
+		padding: 10px;
+		background-color: black;
+		position: absolute;
+		top: 110px;
+		left: 780px;
+		margin: 0px;
+	}
+
+	#hoveredMenu p {
+		color: white;
+	}
+	
+	
+	#score, #timer {
+		width: 100%;
+		font-size: 300%;
+		padding: 1px;
+		margin: 0px;
+		text-align: center;
+		}
+	
+	h1 {
+		text-align: center;
+		color: white;
+		
+	}
