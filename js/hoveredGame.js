@@ -1,5 +1,4 @@
 //HTML Game - Hovered - originally created ~2016 by Luke Barker 
-
 window.launchHovered = function(){
 
 //link external css sheet
@@ -64,6 +63,9 @@ window.launchHovered = function(){
 	infoscreenEl.append(levelinfo, button1El, button2El);
 	hoveredMenu.append(p1,p2,p3,hr1,p4,p5,p6,p7,hr2,p8);
 
+	document.body.style.filter = "blur(4px)";
+	gameWrapper.style.filter = "none";
+
 
 //this function returns a random number between the two arguments passed to it
 function random(min,max) {
@@ -80,6 +82,7 @@ function random(min,max) {
 			update: function(){
 				p3.textContent = "Level:  " + main.level;
 				p2.textContent = main.score;
+				score = main.score;
 				p4.textContent = "Level Score: " + main.levelScore;
 				p5.textContent = "Required Score: " + levels[main.level-1].minScore;
 			}
@@ -103,10 +106,7 @@ function random(min,max) {
 //use the constructor function to create all the levels
 //Values are (level number, duration, min score, targets, bombs, bomb move timer, desc)
 	var level1 = new Level(1,10,10,1,0,1, "Move the mouse over as many targets as you can before time runs out.");
-	var level2 = new Level(2,30,45,5,5,1, "Getting tougher...catch those targets");
-	var level3 = new Level(3,10,15,2,4,3, "Getting tougher...catch those targets");
-	var level4 = new Level(4,10,10,3,5,2, "Getting tougher...catch those targets");
-	var level5 = new Level(5,10,10,4,4,.5, "Getting tougher...catch those targets");	
+		
 //create an empty array to hold the target objects	
 	var targetEls = [];
 			
@@ -242,6 +242,7 @@ function random(min,max) {
 		var timerEl = document.querySelector("#timer");
 		timerEl.textContent = timeremaining;
 		if (timeremaining == 0){
+			window.score = main.score;
 			endlevel();
 			
 		}			
