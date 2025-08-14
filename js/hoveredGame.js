@@ -6,7 +6,7 @@ window.launchHovered = function () {
 	cssLink.rel = 'stylesheet';
 	cssLink.href = 'css/hovered.css';
 	document.head.appendChild(cssLink);
-
+	
 	//build game board
 	const gameWrapper = document.createElement('div');
 	gameWrapper.id = "gamewrapper";
@@ -37,23 +37,11 @@ window.launchHovered = function () {
 	button1El.id = "button1";
 	button1El.textContent = "Play!";
 
-	const button2El = document.createElement('button');
-	button2El.id = "button2";
-	button2El.textContent = "Close!";
-
-	//hMenuInstruct.append(pInstruct,button1El, button2El);
 	document.body.appendChild(gameWrapper);
 	gameWrapper.append(hoveredMenu, gameboardEl);
-	hoveredMenu.append(divMenuUpper, button1El, button2El, pInstruct)
+	hoveredMenu.append(divMenuUpper, button1El, pInstruct)
 	divMenuUpper.append(hoveredTitle, pTotal, pScore, pTimeLeft, pTimer);
 	
-	
-	
-	
-
-	//document.body.style.filter = "blur(4px)";
-	//gameWrapper.style.filter = "none";
-
 	//this function returns a random number between the two arguments passed to it
 	function random(min, max) {
 		let num = Math.floor(Math.random() * (max - min)) + min;
@@ -73,8 +61,8 @@ window.launchHovered = function () {
 		};
 
 		//get size of gameboard
-		let wSize = gameboardEl.offsetWidth - 100;
-		console.log(wSize);
+		let wSize = gameboardEl.offsetWidth;
+		let hSize = gameboardEl.offsetHeight;
 
 		//create an empty array to hold each level object
 		var levels = [];
@@ -116,7 +104,7 @@ window.launchHovered = function () {
 			main.score += 1;
 			main.levelScore += 1;
 			main.update();
-			e.target.style.top = random(0, wSize - targetSize) + "px";
+			e.target.style.top = random(0, hSize - targetSize) + "px";
 			e.target.style.left = random(0, wSize - targetSize) + "px";
 		}
 
@@ -125,7 +113,7 @@ window.launchHovered = function () {
 			main.score -= 2;
 			main.levelScore -= 2;
 			main.update();
-			e.target.style.top = random(0, wSize - bombSize) + "px";
+			e.target.style.top = random(0, hSize - bombSize) + "px";
 			e.target.style.left = random(0, wSize - bombSize) + "px";
 		}
 
@@ -133,7 +121,7 @@ window.launchHovered = function () {
 		var bombsMove = function () {
 			var bombsEl = document.querySelectorAll(".bomb");
 			for (var i = 0; i < bombsEl.length; i++) {
-				bombsEl[i].style.top = random(0, wSize - bombSize) + "px";
+				bombsEl[i].style.top = random(0, hSize - bombSize) + "px";
 				bombsEl[i].style.left = random(0, wSize - bombSize) + "px";
 			}
 		}
@@ -157,7 +145,9 @@ window.launchHovered = function () {
 				target.style.float = "left";
 				target.style.margin = 0;
 				target.style.padding = 0;
-				target.style.top = random(0, wSize - targetSize) + "px";
+				wSize = gameboardEl.offsetWidth;
+				hSize = gameboardEl.offsetHeight;
+				target.style.top = random(0, hSize - targetSize) + "px";
 				target.style.left = random(0, wSize - targetSize) + "px";
 				target.addEventListener("mouseover", hover, false);
 			}
@@ -176,7 +166,7 @@ window.launchHovered = function () {
 				target.style.float = "left";
 				target.style.margin = 0;
 				target.style.padding = 0;
-				target.style.top = random(0, wSize - bombSize) + "px";
+				target.style.top = random(0, hSize - bombSize) + "px";
 				target.style.left = random(0, wSize - bombSize) + "px";
 				target.addEventListener("mouseover", bombhover, false);
 			}
@@ -185,25 +175,27 @@ window.launchHovered = function () {
 
 			//this functions executes at the end of a level		
 			var endlevel = function () {
+				button1El.removeEventListener('click', startlevel);
+
 				var toRemove = gameboardEl.querySelectorAll(".target");  //removes all the target and bomb elements
 				for (var j = 0; j < toRemove.length; j++) {
 					gameboardEl.removeChild(toRemove[j]);
 				}
 				clearInterval(bombMover);
 				clearInterval(timer);  //clears the timer so it doesn't keep counting down below zero
-				button2El.style.display = "initial";
-				button2El.textContent = "Close";
-				button2El.addEventListener("click", closeGame, false);
-				button1El.style.display = "none";
+				//button1El.style.display = "initial";
+				button1El.textContent = "Close";
+				button1El.addEventListener("click", closeGame, false);
 				return window.score;
 			}
 
 			//this section implements the game close out
 
 			let closeGame = function () {
+				button1El.removeEventListener('click', closeGame);
 				window.score = score;
+				//alert("score " + window.score);
 				gameWrapper.remove();
-				alert("score " + window.score);
 				return window.score;
 			}
 
