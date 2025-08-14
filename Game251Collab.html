@@ -232,7 +232,15 @@ window.getTask = function(taskDB, passageName) {
   return taskToGet;
 };
 
-</script><tw-passagedata pid="1" name="Intro" tags="hideFooter" position="325,225" size="100,100">Intro Screen Here
+</script><tw-passagedata pid="1" name="Intro" tags="hideFooter hideSidebar" position="325,225" size="100,100">&lt;&lt;if tags().includes(&quot;hideSidebar&quot;)&gt;&gt;  
+&lt;&lt;script&gt;&gt;
+	const sidebarEl = document.body.querySelector(&#39;#ui-bar&#39;);
+    sidebarEl.style.display = &quot;none&quot;;
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+
+Intro Screen Here
 
 
 
