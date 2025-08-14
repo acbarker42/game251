@@ -17,8 +17,12 @@ window.launchHovered = function () {
 
 	const hoveredTitle = document.createElement('h1');
 	hoveredTitle.textContent = "Hovered";
+	const divMenuUpper = document.createElement('div');
+	divMenuUpper.id = 'divMenuUpper';
+
 	const pInstruct = document.createElement('p');
 	pInstruct.textContent = "Hover over the targets to score points";
+	pInstruct.id = "pInstruct";
 	const pTotal = document.createElement('p');
 	pTotal.textContent = "Total:";
 	const pScore = document.createElement('p');
@@ -40,7 +44,8 @@ window.launchHovered = function () {
 	//hMenuInstruct.append(pInstruct,button1El, button2El);
 	document.body.appendChild(gameWrapper);
 	gameWrapper.append(hoveredMenu, gameboardEl);
-	hoveredMenu.append(hoveredTitle, pTotal, pScore, pTimeLeft, pTimer, pInstruct,button1El, button2El);
+	hoveredMenu.append(divMenuUpper, button1El, button2El, pInstruct)
+	divMenuUpper.append(hoveredTitle, pTotal, pScore, pTimeLeft, pTimer);
 	
 	
 	
