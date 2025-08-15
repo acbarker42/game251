@@ -126,15 +126,18 @@ body {
 .italics {
   font-style: italic;
 }
+ul{
+  width: 0px;
+}
 
-.post-it{
-  max-width: 90%;
+ .post-it{
+  position: absolute;
   margin: auto;
-  border: 2px solid white;
-  margin:auto;
-  background:#CECECE;
-  color:#fff;
-   
+  height:10em;
+  width:10em;
+  border: 1;
+  z-index: 500;  
+
   *{
     margin:0;
     padding:0;
@@ -164,8 +167,8 @@ body {
     background:#ffc;
     display:block;
     font-family: 'caveat';
-    height:5em;
-    width:5em;
+    height:10em;
+    width:10em;
     padding:.25em;
     margin-top: 0;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
@@ -198,7 +201,8 @@ body {
     transform: scale(1.25);
     position:relative;
     z-index:5;
-  }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
+  }
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
 importScripts(
   ["js/taskDB.js", "js/hoveredGame.js"]
 ).then (function(){
@@ -277,23 +281,30 @@ window.getTask = function(taskDB, passageName) {
 &lt;&lt;nobr&gt;&gt;
 &lt;h2&gt; Tasks: $toDoList.length &lt;/h2&gt;
 &lt;&lt;if $toDoList.length &gt; 0&gt;&gt;
-&lt;div class=&quot;post-it&quot;&gt;
 &lt;ul&gt;
 &lt;&lt;for _i to 0; _i lt $toDoList.length; _i++&gt;&gt; 
 &lt;&lt;set State.variables.currentTask = $toDoList[_i]&gt;&gt;
 &lt;&lt;set $task = $toDoList[_i]&gt;&gt;
-  &lt;li&gt;
+   &lt;&lt;set $random1 to random(0,700)&gt;&gt;
+   &lt;&lt;set $random2 to random(0,700)&gt;&gt;
+   &lt;&lt;set $style = &quot;top: &quot;+$random1+&quot;px; left: &quot;+$random2+&quot;px&quot;&gt;&gt;
+  &lt;div class=&quot;post-it&quot; @style=$style&gt;
+  &lt;ul&gt;
+  &lt;li class&gt;
     &lt;a href=&quot;#&quot; onClick=&quot;launchGame( )&quot;&gt;
       &lt;h2&gt; $task[&quot;text&quot;]&lt;/h2&gt;
       &lt;p&gt; $task[&quot;time&quot;] min&lt;/p&gt;
     &lt;/a&gt;
   &lt;/li&gt;
-&lt;&lt;/for&gt;&gt; 
+  &lt;/ul&gt;
+  	&lt;&lt;set $randomnumber to random(0,500)&gt;&gt;
+    
+  &lt;/div&gt;
+  
+&lt;&lt;/for&gt;&gt;
 &lt;/ul&gt;
-&lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;print State.variables.score&gt;&gt;
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Idea Placeholder" tags="" position="100,775" size="100,100">Locations:
 Beach
 Your room
