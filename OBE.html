@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="OBE" startnode="1" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="78CD0189-FA91-48BF-A708-3B61D9CCB46B" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*Post it css taken from: https://webdesign.tutsplus.com/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934t 
+	<tw-storydata name="OBE" startnode="1" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="78CD0189-FA91-48BF-A708-3B61D9CCB46B" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*foundation of Post it css taken from: https://webdesign.tutsplus.com/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934t 
 */
 @font-face {
     font-family: 'caveat';    
@@ -171,7 +171,7 @@ ul{
   ul li a{
     text-decoration:none;
     color:#000;
-    background:#ffc;
+    /*background:#ffc; transform: rotate(-6deg);*/
     display:block;
     font-family: 'caveat';
     height:10em;
@@ -179,30 +179,34 @@ ul{
     padding:.25em;
     margin-top: 0;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-    transform: rotate(-6deg);
+    
     transition: transform .15s linear;
 
   }
   ul li{
     margin: .5em;
   }
+  /*
   ul li:nth-child(even) a{
   transform:rotate(4deg);
+   background:#FBD8DD;
+    
   position:relative;
   top:5px;
-  background:#FBD8DD;
+ 
   }
   ul li:nth-child(3n) a{
-    transform:rotate(-3deg);
+
     position:relative;
     top:-5px;
-    background:#C4F8FB;
+
   }
   ul li:nth-child(5n) a{
-    transform:rotate(5deg);
+
     position:relative;
     top:-10px;
-  }
+  }*/
+  
     ul li a:hover,ul li a:focus{
     box-shadow:10px 10px 7px rgba(0,0,0,.7);
     transform: scale(1.25);
@@ -236,6 +240,12 @@ window.launchGame = function(task){
 window.addTask = function(taskDB, toDoList, passageName) {
   	if(!toDoList.some(task => task.name === passageName)){
     	var taskToAdd = taskDB.find(task => task.name === passageName);
+        //Randomize post-it position, rotation, color
+        taskToAdd.xPos = window.random(0,500);
+      	taskToAdd.yPos = window.random(0,500);
+      	taskToAdd.deg = window.random(-5,5);
+        taskToAdd.color = window.getColor();
+      	console.log(taskToAdd);
     	toDoList.push(taskToAdd);
 	}
 };
@@ -245,7 +255,33 @@ window.getTask = function(taskDB, passageName) {
   return taskToGet;
 };
 
-</script><tw-passagedata pid="1" name="Intro" tags="hideFooter" position="225,250" size="100,100">Intro Screen Here
+/* create div style */
+window.getStyleText = function(task){
+ let styleText = 
+     "top: "+ task.yPos +
+     "px; left: "+ task.xPos +
+     "px;";
+ return styleText;
+}
+
+/* create list item style */
+window.getListStyleText = function(task){
+ let lStyleText = 
+     "background: " + task.color +
+     "; transform:rotate(" + task.deg +
+     "deg);";
+ return lStyleText;
+}
+
+window.getColor = function(){
+  let colors = ['#ffc', '#FBD8DD', '#C4F8FB', '#ccf'];
+  let color = colors[Math.floor(Math.random() * colors.length)];
+  return color;
+}
+window.random = function(min, max) {
+    let num = Math.floor(Math.random() * (max - min)) + min;
+    return num;
+}</script><tw-passagedata pid="1" name="Intro" tags="hideFooter" position="225,250" size="100,100">Intro Screen Here
 
 
 
@@ -259,7 +295,7 @@ window.getTask = function(taskDB, passageName) {
 &lt;&lt;set $memoryTimer = 5&gt;&gt;
 
 &lt;&lt;set $toDoList = [ 
-{name:&quot;ClickMe&quot;, text: &quot;Click On Me&quot;, time: 5}, 
+{name:&quot;ClickMe&quot;, text: &quot;Click On Me&quot;, time: 5, color: &quot;#ffc&quot;}, 
 ]&gt;&gt;
 
 /*set up taskDB from import*/
@@ -290,22 +326,18 @@ window.getTask = function(taskDB, passageName) {
 &lt;&lt;for _i to 0; _i lt $toDoList.length; _i++&gt;&gt; 
 &lt;&lt;set State.variables.currentTask = $toDoList[_i]&gt;&gt;
 &lt;&lt;set $task = $toDoList[_i]&gt;&gt;
-   &lt;&lt;set $random1 to random(0,700)&gt;&gt;
-   &lt;&lt;set $random2 to random(0,700)&gt;&gt;
-   &lt;&lt;set $style = &quot;top: &quot;+$random1+&quot;px; left: &quot;+$random2+&quot;px&quot;&gt;&gt;
+   &lt;&lt;set $style = getStyleText($task)&gt;&gt;
   &lt;div class=&quot;post-it&quot; @style=$style&gt;
   &lt;ul&gt;
-  &lt;li class&gt;
-    &lt;a href=&quot;#&quot; onClick=&quot;launchGame( )&quot;&gt;
+  &lt;&lt;set $listStyle = getListStyleText($task)&gt;&gt;
+  &lt;li &gt;
+    &lt;a href=&quot;#&quot; @style=$listStyle onClick=&quot;launchGame( )&quot;&gt;
       &lt;h2&gt; $task[&quot;text&quot;]&lt;/h2&gt;
       &lt;p&gt; $task[&quot;time&quot;] min&lt;/p&gt;
     &lt;/a&gt;
   &lt;/li&gt;
   &lt;/ul&gt;
-  	&lt;&lt;set $randomnumber to random(0,500)&gt;&gt;
-    
   &lt;/div&gt;
-  
 &lt;&lt;/for&gt;&gt;
 &lt;/ul&gt;
 &lt;&lt;/if&gt;&gt;
@@ -483,7 +515,6 @@ And Hey Siri set a 45 minute timer for the banana bread.
                 &lt;&lt;set $optionPassage = $taskDB.random()&gt;&gt;
             &lt;&lt;/if&gt;&gt;
            	&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
-
             $currentPassage.storyText but... &lt;br&gt;
             $optionPassage.stimText &lt;br&gt;&lt;br&gt;
             &lt;&lt;link $currentPassage.text $currentPassage.name&gt;&gt;
