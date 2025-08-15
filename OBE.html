@@ -219,7 +219,6 @@ window.launchGame = function(task){
   var filtered = State.variables.toDoList.filter(obj => obj.text !== task.text);
    State.variables.toDoList = filtered;
   
-  
 }
 
 /*Grab task from taskDB to add to todo list using the passage name*/
@@ -235,19 +234,19 @@ window.getTask = function(taskDB, passageName) {
   return taskToGet;
 };
 
-</script><tw-passagedata pid="1" name="Intro" tags="hideFooter" position="325,225" size="100,100">Intro Screen Here
+</script><tw-passagedata pid="1" name="Intro" tags="hideFooter" position="225,250" size="100,100">Intro Screen Here
 
 
 
 [[Menu]]</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="100,150" size="100,100">/* Initialize Gamewide Variables */
 
-
 &lt;&lt;set $stress = 50&gt;&gt;
 &lt;&lt;set $day = 1&gt;&gt;
 &lt;&lt;set $time = &quot;0800&quot;&gt;&gt;
 &lt;&lt;set $score = 0&gt;&gt;
-
+&lt;&lt;set $choicesPresented = 0&gt;&gt;
 &lt;&lt;set $memoryTimer = 5&gt;&gt;
+
 &lt;&lt;set $toDoList = [ 
 {name:&quot;ClickMe&quot;, text: &quot;Click On Me&quot;, time: 5}, 
 ]&gt;&gt;
@@ -256,21 +255,21 @@ window.getTask = function(taskDB, passageName) {
 &lt;&lt;set $taskDB = window.taskDBImport &gt;&gt; 
 
 
-&lt;&lt;set $interruptions = [ 
+&lt;&lt;set $events = [ 
 {}
 ]&gt;&gt;
 
 &lt;&lt;set $memories = [ 
+&quot;Bus&quot;,
 &quot;Tired&quot;,
 &quot;Questions&quot;,
 &quot;Icon&quot;,
-&quot;TurnedOutOk&quot;,
-&quot;Bus&quot;,
 &quot;Late&quot;,
 &quot;Siri&quot;,
 &quot;Tires&quot;,
 &quot;Whiteboard&quot;,
-&quot;Imposter&quot;
+&quot;Imposter&quot;,
+&quot;TurnedOk&quot;,
 ]&gt;&gt;
 </tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;&lt;if tags().includes(&quot;hideFooter&quot;)&gt;&gt;&lt;&lt;else&gt;&gt;
 &lt;br&gt;
@@ -294,91 +293,56 @@ window.getTask = function(taskDB, passageName) {
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;print State.variables.score&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Idea Placeholder" tags="" position="100,775" size="100,100">Locations:
-Beach
-Your room
-Shop
-Park
-
-What things effect mood and outlook:
-Weather
-Time of Day
-Rest Quality
-
-Use a color overlay to show the current attitude (black and white for pessimist, overly colorful for optimistic)
-
-Mini games that determine outcomes.
-
-Conveyor belt of sushi
-
-Inside a brain - certain pathways fade, need to grow pathways 
-
-
-SearchEngine...allow users to type whatever they want, but only have certain outcomes
-
-
-We&#39;re a brain...trying to process &quot;good&quot; thoughts (positive, but not solely positive....accurate without biases).  Doing well improves your neural pathways to make certain thoughts easier to process.
-
-Game about motherless daughters
-
-Game about circadium rythym and budgeting hours for tasks for the day like you would budget income and expenses financially. 
-
-Game about zealotry.  Maybe using an influence stat to guide others to your point of view, while having to make choices that align with the group.  Every so often there are purges, you lose if you don&#39;t make the cut.  If you win you&#39;re the only one left.  For an even crazier twist, it could start out trying to purge the zealots.  
-Main messages, intolerance leads to isolationism and noone is ever pure enough for the increasingly strict standards of a zealot.  Could you approach it from a mathematical or genetic angle?
-
-Attention Please?  Burn Baby Burn?  
-ADHD overwhelmed, burnout...task switching, object permanence, one thing-lead to another to another, ad infinitum (gotta loop back to see the string of uncompleted things), hobbies, multi-tasking (spork reference), doing time critical tasks while others are on countdown (like boiling rice)
-To do list, leads to feeling overwhelmed, ultimately burnout.  If you don&#39;t put things on the list, then they don&#39;t get done (faded from memory)
-Shopping for dishsoap...if going shopping i should make a full grocery list, but i need to meal plan first, i&#39;ll look up recipes, 
-deciding to go to the store immediately means that meal planning and the full list get put on the todo list
-hyper-focus (show the positives) 
-time blindness
-Story driver - invalidation of non-diagnosis
-Trying to remember someone&#39;s name
-Story about sleep where the to-do list just cycles endlessly 
-Positive outcome - get diagnosed
-Hyperfocus state - when doing tasks that are interesting, time blindness occurs and new tasks are added
-the longer a task is on the list, the color changes to red
-You get a bunch of scrambled words....rescramble to complete task, specific to task...which task led you to the task, so the puzzle becomes even more challenging.  
-work in &quot;if we weren&#39;t all crazy, we would go insane&quot;
-feeling like you&#39;re finally get caught up, and things are getting better...there&#39;s a light at the end of the tunnel!!!  cue train sound
-*squirrel*
-
-spork
-</tw-passagedata><tw-passagedata pid="7" name="Menu" tags="" position="325,375" size="100,100">[[Start Game|Start]] 
-</tw-passagedata><tw-passagedata pid="8" name="StoryStart" tags="" position="325,600" size="100,100">&lt;&lt;set $wakeUpOptions = [&quot;You slept great and wake feeling refreshed.&quot;, 
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Menu" tags="" position="225,400" size="100,100">[[Start Game|Start]] 
+</tw-passagedata><tw-passagedata pid="7" name="StoryStart_old" tags="" position="225,600" size="100,100">&lt;&lt;set $wakeUpOptions = [&quot;You slept great and wake feeling refreshed.&quot;, 
 &quot;You wake feeling rested and ready to face the day.&quot;,
 &quot;You wake feeling tired and groggy.  It&#39;s hard to get out of bed.  You wish you could just go back to bed.&quot;]&gt;&gt;
 
-&lt;&lt;print either($wakeUpOptions)&gt;&gt;
-
-&lt;&lt;link &quot;Make Breakfast&quot; &quot;MakeBreakfast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;  &amp;emsp;&amp;emsp;  [[SleepIn]]
 
 
-</tw-passagedata><tw-passagedata pid="9" name="ToDoList" tags="" position="100,25" size="100,100">-Add node to the task objects so that if you want to force a specific vs random next passage you can place it there.  Will need a check to see if its empty and if not use the random one
+</tw-passagedata><tw-passagedata pid="8" name="ToDoList" tags="" position="100,25" size="100,100">-Change sticky note placement
+-Launch level based on task duration 
+- Add check that score is positive to display close button
+-Add removal of completed postit
 
--Have a way to track whether its already visited or not.  possibly a tag or clone the task db and then pop them off or delete them as they get used.
+-Check that new task option isn&#39;t the same as current task
 
--create tutorial and levels for the mini game
+-create tutorial
+  --how to play hovered
+  --why using post its
+  --click on post it to clear play game and clear it
+
+-fix &quot;TurnedOk&quot; passage.  not recognizing it
 
 -build out tasks
--finish memories
--add interruptions?</tw-passagedata><tw-passagedata pid="10" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
-Mood = $mood</tw-passagedata><tw-passagedata pid="11" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
-&lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="SleepIn" tags="" position="325,750" size="100,100">You&#39;re not ready to face the world yet.  You roll over and doze off.
-=======
--Have a way to track whether its already visited or not.  possibly a tag or clone the task db and then pop them off or delete them as they get used.</tw-passagedata><tw-passagedata pid="13" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
+-finish memories, add color, italics, etc to fonts to highlight who&#39;s speaking etc.
+-add Events
+-add more burnout options.
+
+-add audio
+  -icon memory
+  
+-add artwork
+Remember to edit:
+-memory timer interval
+-random to pluck?
+
+Nice to have:
+-Mini game
+    -flip squirel randomly
+    - various squirel colors 
+    - various post it note colors
+    - in game direction on which colors post it to click
+    - Text at end of game that talks to their score, relates to task quality and how well it was completed
+ -Add node to the task objects so that if you want to force a specific vs random next passage you can place it there.  Will need a check to see if its empty and if not use the random one
+ </tw-passagedata><tw-passagedata pid="9" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
+Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
+&lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
 Mood = $mood
-Latest Score = $score</tw-passagedata><tw-passagedata pid="14" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
-</tw-passagedata><tw-passagedata pid="15" name="SleepIn" tags="" position="325,750" size="100,100">You&#39;re not ready to face the world yet.  You roll over and doze off.
-
-
-&lt;&lt;set $time = $time+30&gt;&gt;
-
-
-After x time, you get up and get &lt;&lt;link &quot;moving.&quot; &quot;Breakfast&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="MakeBreakfast" tags="" position="625,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="TakeOutTrash" tags="" position="500,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="Start" tags="" position="475,375" size="100,100">
-&lt;&lt;if $taskDB.length &gt;1&gt;&gt;
+Latest Score = $score</tw-passagedata><tw-passagedata pid="12" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
+</tw-passagedata><tw-passagedata pid="13" name="MakeBreakfast" tags="" position="500,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="TakeOutTrash" tags="" position="500,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;if $taskDB.length &gt;1&gt;&gt;
 &lt;&lt;set $passages = $taskDB.randomMany(2)&gt;&gt;
+&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
 $passages[0].storyText but...
 $passages[1].stimText
 &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
@@ -389,16 +353,16 @@ $passages[1].stimText
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="19" name="FeedCats" tags="" position="750,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="CallMum" tags="" position="875,50" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="DoDishes" tags="" position="600,200" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="FillDishSoap" tags="" position="725,200" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="GetGroceries" tags="" position="850,200" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="Icon" tags="" position="800,400" size="100,100">Ok, today we are switching from learning about ML to Icon.  Maybe this language will be easier.  I got this.
-&lt;scribbling sound&gt; 
+</tw-passagedata><tw-passagedata pid="16" name="FeedCats" tags="" position="600,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="CallMum" tags="" position="600,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="DoDishes" tags="" position="700,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="FillDishSoap" tags="" position="700,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="GetGroceries" tags="" position="800,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="Icon" tags="" position="500,600" size="100,100">Ok, today we are switching from learning about ML to Icon.  Maybe this language will be easier.  I got this.
+...scribbling sound...
 Icon programming language, developed at the University of Arizona by Ralph Griswold...
 Well, that&#39;s neat that I&#39;m studying a language here that was developed here.  I should check what other classes I can take.  I noticed the other day that they offer underwater basket weaving classes at the gym.  I should try to fit the gym in before my last class.  Did I finish all my homework for that class?  
 
 UGH!  I did it again.  Damnit pay attention.
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="25" name="Questions" tags="" position="675,400" size="100,100">I did it again.  I didn&#39;t hear anything he just said for the last 10 minutes.  What was I even thinking about?  I&#39;m so going to fail this class.  I can&#39;t ask the professor a question about it because they will certainly know by my question that I wasn&#39;t paying attention.  What is wrong with me?
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="22" name="Questions" tags="" position="600,600" size="100,100">I did it again.  I didn&#39;t hear anything he just said for the last 10 minutes.  What was I even thinking about?  I&#39;m so going to fail this class.  I can&#39;t ask the professor a question about it because they will certainly know by my question that I wasn&#39;t paying attention.  What is wrong with me?
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="26" name="Bus" tags="" position="675,525" size="100,100">Parent:  It&#39;s time to get ready for the bus.  It will be here in 2 min and you need to be outside waiting for it so they aren&#39;t waiting for you...again.
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="23" name="Bus" tags="" position="500,500" size="100,100">Parent:  It&#39;s time to get ready for the bus.  It will be here in 2 min and you need to be outside waiting for it so they aren&#39;t waiting for you...again.
 
 ...
 
@@ -412,7 +376,7 @@ Parent:  You&#39;re going to be late for the bus.  If you miss the bus I will ma
 
 Parent:  GET OUTSIDE THE BUS IS HERE!!!
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="27" name="Late" tags="" position="800,525" size="100,100">Ok...I&#39;m ready to go... just have 15 min till I need to leave for the appt.
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="24" name="Late" tags="" position="700,600" size="100,100">Ok...I&#39;m ready to go... just have 15 min till I need to leave for the appt.
 I guess I&#39;ll...put away the game I left out...I don&#39;t want the cats dragging the pieces away.
 
 Alright 10 min to go... I can load the dishwasher quick and kick it off...
@@ -421,37 +385,45 @@ Alright 10 min to go... I can load the dishwasher quick and kick it off...
 
 Damnit!  I was supposed to leave 10 min ago.  Where are my keys?
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="28" name="Tires" tags="" position="675,650" size="100,100">&lt;Get&#39;s in the car&gt;
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="25" name="Tires" tags="" position="500,800" size="100,100">...Get&#39;s in the car...
+&lt;span class=&quot;italics&quot;&gt;
 Oh! I need to remember to make an appt to change the tires.
-&lt;Leaves the car, car ceases to exist&gt;
+&lt;/span&gt;
+...Leaves the car, car ceases to exist...
 
 Next day...
-&lt;Get&#39;s in the car&gt;
+...Get&#39;s in the car...
+&lt;span class=&quot;italics&quot;&gt;
 Ugh! I need to remember to make an appt to change the tires.
-&lt;Leaves the car, car ceases to exist&gt;
+&lt;/span&gt;
+...Leaves the car, car ceases to exist...
 
 Following day...
-&lt;Get&#39;s in the car&gt;
+...Get&#39;s in the car...
+&lt;span class=&quot;italics&quot;&gt;
 Damnit! I need to remember to make an appt to change the tires!
-&lt;Leaves the car, car ceases to exist&gt;
+&lt;/span&gt;
+...Leaves the car, car ceases to exist...
 
 Every day after...
-&lt;Get&#39;s in the car&gt;
+...Get&#39;s in the car...
+&lt;span class=&quot;italics&quot;&gt;
 FFS! I need to remember to make an appt to change the tires!
-&lt;Leaves the car, car ceases to exist&gt;
+&lt;/span&gt;
+...Leaves the car, car ceases to exist...
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="29" name="Whiteboard" tags="" position="800,650" size="100,100">Hey What&#39;s up?
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="26" name="Whiteboard" tags="" position="600,800" size="100,100">Hey What&#39;s up?
 
 They want us to implement a new change to this version to include cross WAN replication.  If we override the mapMerge method ....... the timestamp.....then hazelcast will ........ and it will replicate between the primary.....the only problem comes when ................ with the redundant component where......... and if it&#39;s being written to at the same time.  But if we use 
 
 WAIT!!
 
-&lt;Grabs dry erase marker&gt;
+...Grabs dry erase marker...
 Can we start from the beginning so I can draw it?
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="30" name="TurnedOutOK" tags="" position="925,400" size="100,100">I was worried about you when you were a kid, off in your own world all of the time.  But you seem to have figured things out.
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="27" name="TurnedOK" tags="" position="700,700" size="100,100">I was worried about you when you were a kid, off in your own world all of the time.  But you seem to have figured things out.
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="31" name="Siri" tags="" position="925,525" size="100,100">I finally scheduled that doctor&#39;s appt and reaaaally can&#39;t forget it this time.
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="28" name="Siri" tags="" position="500,700" size="100,100">I finally scheduled that doctor&#39;s appt and reaaaally can&#39;t forget it this time.
 
 Hey Siri, add doctor appt to the calendar for tomorrow at 10am with a reminder at the time of the event.
 
@@ -467,13 +439,16 @@ Hey Siri, set an alarm for tomorow at 8:00am
 
 And Hey Siri set a 45 minute timer for the banana bread.
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="32" name="Imposter" tags="" position="925,650" size="100,100">I&#39;ve been here three years...is today the day they will figure out that I have no idea what I&#39;m doing?
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="29" name="Imposter" tags="" position="700,800" size="100,100">I&#39;ve been here three years...is today the day they will figure out that I have no idea what I&#39;m doing?
 
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="33" name="choicesWidget" tags="widget" position="375,50" size="100,100">&lt;&lt;widget &quot;choices&quot;&gt;&gt;
-      &lt;&lt;if $toDoList.length &gt;$memoryTimer&gt;&gt; 
-      		&lt;&lt;set $memoryTime = $memoryTimer + 2&gt;&gt;
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="30" name="choicesWidget" tags="widget" position="400,50" size="100,100">&lt;&lt;widget &quot;choices&quot;&gt;&gt;
+      &lt;&lt;print $choicesPresented&gt;&gt;
+      &lt;&lt;print $memoryTimer&gt;&gt;
+      &lt;&lt;if $choicesPresented &gt; $memoryTimer&gt;&gt; 
+      		&lt;&lt;set $memoryTimer = $memoryTimer + random(2, 4)&gt;&gt;
       		&lt;&lt;goto Memories&gt;&gt;
        &lt;&lt;/if&gt;&gt;
+      &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
       &lt;&lt;set $currentPassage = getTask($taskDB, passage())&gt;&gt;
       &lt;&lt;if $currentPassage.visited is true&gt;&gt;
             call to play game
@@ -492,15 +467,14 @@ And Hey Siri set a 45 minute timer for the banana bread.
       &lt;&lt;/link&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
-</tw-passagedata><tw-passagedata pid="34" name="PickUpTrash" tags="" position="975,200" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="Memories" tags="" position="550,525" size="100,100">&lt;&lt;set $burnoutOptions = [
+</tw-passagedata><tw-passagedata pid="31" name="PickUpTrash" tags="" position="800,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Memories" tags="" position="375,600" size="100,100">&lt;&lt;set $burnoutOptions = [
 &quot;You&#39;re over loaded and overwhelmed.  You realized you&#39;re burnt out.  A feeling of despair settles over you.  Why am I so exhausted?  A memory pops into your head...&quot;,
 &quot;You Feel like a heavy wet blanket has settled over your brain.  Everything feels like it takes so. much. energy.  Why can&#39;t I just get stuff done?  You&#39;re reminded of another time and place...&quot;]&gt;&gt;
 
 &lt;&lt;print either($burnoutOptions)&gt;&gt;
-
 &lt;&lt;set $memory = $memories.shift()&gt;&gt;
-
-&lt;&lt;link &quot;Continue&quot; $memory&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Tired" tags="" position="1050,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;print $memory&gt;&gt;
+&lt;&lt;link &quot;Continue&quot; $memory&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Tired" tags="" position="600,700" size="100,100">&lt;&lt;nobr&gt;&gt;
 Like so many nights before you&#39;re laying in bed trying to fall asleep...
 &lt;span class=&quot;italics&quot;&gt;
 I&#39;m so tired.  I NEED to go to sleep.  Tomorrow, I can&#39;t forget that I have to 
@@ -512,6 +486,7 @@ and a whole host of other things.  Maybe if I
 _tasks[0].text first, I can wait to _tasks[1].text.  Or maybe I should consider working on _tasks[2].text before tackling  _tasks[3].text.  But if I wait to _tasks[1].text I could miss my chance to _tasks[2].text.  I hate having to _tasks[4].text but I can&#39;t avoid it forever.  Where do I even start?
 I mean I guess I don&#39;t mind _tasks[3].text so maybe I&#39;ll do that first.  Or maybe I should eat the frog and tackle the hardest one first.  I think that&#39;s what that means.  I wonder how that phrase came about?  Phrases...they&#39;re so funny how they have words and letters and stuff
 ...
+[[Continue|Start]]
 &lt;/span&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
