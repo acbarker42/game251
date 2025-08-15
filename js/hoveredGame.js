@@ -132,6 +132,7 @@ window.launchHovered = function () {
 
 		//defines a function that executes at the beginning of a level
 		var startlevel = function () {
+			button1El.removeEventListener('click', startlevel);
 			var targetEls = [];
 			main.levelScore = 0;
 			main.update();
@@ -179,7 +180,6 @@ window.launchHovered = function () {
 
 			//this functions executes at the end of a level		
 			var endlevel = function () {
-				button1El.removeEventListener('click', startlevel);
 
 				var toRemove = gameboardEl.querySelectorAll(".target");  //removes all the target and bomb elements
 				for (var j = 0; j < toRemove.length; j++) {
