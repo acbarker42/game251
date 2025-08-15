@@ -1,5 +1,5 @@
 //HTML Game - Hovered - originally created ~2016 by Luke Barker 
-window.launchHovered = function () {
+window.launchHovered = function (taskTime) {
 
 	//link external css sheet
 	const cssLink = document.createElement('link');
@@ -52,7 +52,6 @@ window.launchHovered = function () {
 		//create a main object to track high level info
 		var main = {
 			score: 0,
-			level: 1,
 			levelScore: 0,
 			update: function () {
 				pScore.textContent = main.score;
@@ -65,41 +64,35 @@ window.launchHovered = function () {
 		let hSize = gameboardEl.offsetHeight;
 
 		//create an empty array to hold each level object
-		var levels = [];
+		//var levels = [];
+		var levels = [
+			{ name: "5minLevel", time: 5, duration: 5, minScore: 0, targets: 2, bombs: 5, bombRespawn: 1.5, description: "Move the mouse over as many targets as you can before time runs out."},
+			{ name: "20minLevel", time: 20, duration: 8, minScore: 0, targets: 2, bombs: 7, bombRespawn: 1, description: "Move the mouse over as many targets as you can before time runs out."},
+			{ name: "60minLevel", time: 60, duration: 10, minScore: 0, targets: 3, bombs: 10, bombRespawn: .8, description: "Move the mouse over as many targets as you can before time runs out."},
+		];
 
-		//create a constructor function to create each level object and push it to the levels array
-		var Level = function (lvl, dur, min, tar, bomb, bombRespawn, desc) {
-			this.level = lvl;
-			this.duration = dur;
-			this.minScore = min;
-			this.targets = tar;
-			this.bombs = bomb;
-			this.bombRespawn = bombRespawn;
-			this.description = desc;
-			levels.push(this);
-		}
+		//constructor function to create each level object and push it to the levels array
+		// var Level = function (dur, min, tar, bomb, bombRespawn, desc) {
+		// 	this.duration = dur;
+		// 	this.minScore = min;
+		// 	this.targets = tar;
+		// 	this.bombs = bomb;
+		// 	this.bombRespawn = bombRespawn;
+		// 	this.description = desc;
+		// 	levels.push(this);
+		// }
 
-		//use the constructor function to create all the levels
+		//use the constructor function 
 		//Values are (level number, duration, min score, targets, bombs, bomb move timer, desc)
-		var level1 = new Level(1, 5, 10, 2, 5, 1.5, "Move the mouse over as many targets as you can before time runs out.");
-		//var level2 = new Level(1, 8, 10, 2, 7, 1, "Move the mouse over as many targets as you can before time runs out.");
-		//var level3 = new Level(1, 10, 10, 3, 10, .8, "Move the mouse over as many targets as you can before time runs out.");
-
-
+		var level = levels.find(opts => opts.time == taskTime);
+		console.log(level);
+	
 
 		//create an empty array to hold the target objects	
 		var targetEls = [];
 
 		//update the main side bar info
 		main.update();
-
-		// //defines a function that updates the info when going to the next level	
-		// var levelUp = function () {
-		// 	main.level += 1;
-		// 	startlevel();
-		// 	button2El.style.display = "none";
-		// 	button2El.removeEventListener("click", levelUp, false);
-		// }
 
 		//define the hover over function that moves the block and updates the score
 		let bombSize = 50;
@@ -137,7 +130,7 @@ window.launchHovered = function () {
 			main.levelScore = 0;
 			main.update();
 			//create the targets
-			for (var i = 0; i < levels[main.level - 1].targets; i++) {
+			for (var i = 0; i < level.targets; i++) {
 				targetEls[i] = "targetEl" + i;
 				target = targetEls[i];
 				target = document.createElement("div");
@@ -158,7 +151,7 @@ window.launchHovered = function () {
 			}
 
 			//create the bombs
-			for (var i = 0; i < levels[main.level - 1].bombs; i++) {
+			for (var i = 0; i < level.bombs; i++) {
 				targetEls[i] = "targetEl" + i;
 				target = targetEls[i];
 				target = document.createElement("div");
@@ -175,7 +168,7 @@ window.launchHovered = function () {
 				target.style.left = random(0, wSize - bombSize) + "px";
 				target.addEventListener("mouseover", bombhover, false);
 			}
-			var bombTimer = (levels[main.level - 1].bombRespawn) * 1000;
+			var bombTimer = (level.bombRespawn) * 1000;
 			var bombMover = setInterval(bombsMove, bombTimer);
 
 			//this functions executes at the end of a level		
@@ -205,7 +198,7 @@ window.launchHovered = function () {
 
 			//this section implements the countdown timer
 
-			var timeremaining = levels[main.level - 1].duration;
+			var timeremaining = level.duration;
 			var countdown = function () {
 				timeremaining -= 1;
 				var timerEl = document.querySelector("#timer");

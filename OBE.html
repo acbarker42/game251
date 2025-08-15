@@ -226,10 +226,12 @@ importScripts(
 /* Call to mini game */
 window.launchGame = function(task){
   //launch game with time varible to determine difficulty
-  window.launchHovered();
+  console.log(task);
+  window.launchHovered(State.variables.currentTask.time);
   console.log(window.score);
   console.log(State.variables);
   State.variables.score = window.score;
+  //remove task from the todo list
   var task = State.variables.currentTask;
   var filtered = State.variables.toDoList.filter(obj => obj.text !== task.text);
    State.variables.toDoList = filtered;
@@ -295,7 +297,21 @@ window.random = function(min, max) {
 &lt;&lt;set $memoryTimer = 5&gt;&gt;
 
 &lt;&lt;set $toDoList = [ 
-{name:&quot;ClickMe&quot;, text: &quot;Click On Me&quot;, time: 5, color: &quot;#ffc&quot;}, 
+{ 
+        name: &quot;ClickMe&quot;,
+        text: &quot;Click On Me&quot;,
+        time: 5,
+        timeLeft: 5,
+        visited: true,
+        status: &quot;incomplete&quot;,
+        stimText: &quot;You know you click this post-it&quot;,
+        resolutionText: &quot;The post-it was so happy to get clicked.&quot;,
+        storyText: &quot;You click the post-it&quot;,
+        xPos: 100,
+        yPos: 100,
+        deg: 2,
+        color: &quot;#ffc&quot;
+        }
 ]&gt;&gt;
 
 /*set up taskDB from import*/
@@ -331,7 +347,7 @@ window.random = function(min, max) {
   &lt;ul&gt;
   &lt;&lt;set $listStyle = getListStyleText($task)&gt;&gt;
   &lt;li &gt;
-    &lt;a href=&quot;#&quot; @style=$listStyle onClick=&quot;launchGame( )&quot;&gt;
+    &lt;a href=&quot;#&quot; @style=$listStyle onClick=&quot;launchGame()&quot;&gt;
       &lt;h2&gt; $task[&quot;text&quot;]&lt;/h2&gt;
       &lt;p&gt; $task[&quot;time&quot;] min&lt;/p&gt;
     &lt;/a&gt;
@@ -349,11 +365,9 @@ window.random = function(min, max) {
 
 
 
-</tw-passagedata><tw-passagedata pid="8" name="ToDoList" tags="" position="100,25" size="100,100">-Change sticky note placement
-
-- Launch level based on task duration 
+</tw-passagedata><tw-passagedata pid="8" name="ToDoList" tags="" position="100,25" size="100,100">- Launch level based on task duration 
 - Add check that score is positive to display close button
--Add removal of completed postit
+
 
 -Check that new task option isn&#39;t the same as current task
 
