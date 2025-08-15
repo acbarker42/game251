@@ -126,6 +126,13 @@ body {
 .italics {
   font-style: italic;
 }
+
+#passages{
+  position: fixed;
+  left: 350px;
+  text-align: left;
+}
+
 ul{
   width: 0px;
 }
@@ -278,7 +285,6 @@ window.getTask = function(taskDB, passageName) {
 </tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;&lt;if tags().includes(&quot;hideFooter&quot;)&gt;&gt;&lt;&lt;else&gt;&gt;
 &lt;br&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;h2&gt; Tasks: $toDoList.length &lt;/h2&gt;
 &lt;&lt;if $toDoList.length &gt; 0&gt;&gt;
 &lt;ul&gt;
 &lt;&lt;for _i to 0; _i lt $toDoList.length; _i++&gt;&gt; 
@@ -304,7 +310,6 @@ window.getTask = function(taskDB, passageName) {
 &lt;/ul&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;print State.variables.score&gt;&gt;
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Menu" tags="" position="225,400" size="100,100">[[Start Game|Start]] 
 </tw-passagedata><tw-passagedata pid="7" name="StoryStart_old" tags="" position="225,600" size="100,100">&lt;&lt;set $wakeUpOptions = [&quot;You slept great and wake feeling refreshed.&quot;, 
 &quot;You wake feeling rested and ready to face the day.&quot;,
