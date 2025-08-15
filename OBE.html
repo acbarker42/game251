@@ -301,7 +301,8 @@ window.getTask = function(taskDB, passageName) {
 
 
 </tw-passagedata><tw-passagedata pid="8" name="ToDoList" tags="" position="100,25" size="100,100">-Change sticky note placement
--Launch level based on task duration 
+
+- Launch level based on task duration 
 - Add check that score is positive to display close button
 -Add removal of completed postit
 
@@ -340,19 +341,20 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" p
 &lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
 Mood = $mood
 Latest Score = $score</tw-passagedata><tw-passagedata pid="12" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
-</tw-passagedata><tw-passagedata pid="13" name="MakeBreakfast" tags="" position="500,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="TakeOutTrash" tags="" position="500,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;if $taskDB.length &gt;1&gt;&gt;
+</tw-passagedata><tw-passagedata pid="13" name="MakeBreakfast" tags="" position="500,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="TakeOutTrash" tags="" position="500,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if $taskDB.length &gt;1&gt;&gt;
 &lt;&lt;set $passages = $taskDB.randomMany(2)&gt;&gt;
 &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
-$passages[0].storyText but...
-$passages[1].stimText
+$passages[0].storyText but... &lt;br&gt;
+$passages[1].stimText &lt;br&gt; &lt;br&gt;
 &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
 &lt;&lt;= addTask($taskDB, $toDoList, $passages[1].name);&gt;&gt;
-&lt;&lt;/link&gt;&gt;
+&lt;&lt;/link&gt;&gt;&lt;br&gt;
 &lt;&lt;link $passages[1].text $passages[1].name&gt;&gt;
 &lt;&lt;= addTask($taskDB, $toDoList, $passages[0].name);&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-
+&lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="16" name="FeedCats" tags="" position="600,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="CallMum" tags="" position="600,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="DoDishes" tags="" position="700,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="FillDishSoap" tags="" position="700,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="GetGroceries" tags="" position="800,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="Icon" tags="" position="500,600" size="100,100">Ok, today we are switching from learning about ML to Icon.  Maybe this language will be easier.  I got this.
 ...scribbling sound...
 Icon programming language, developed at the University of Arizona by Ralph Griswold...
@@ -442,30 +444,39 @@ And Hey Siri set a 45 minute timer for the banana bread.
 [[Continue|Start]]</tw-passagedata><tw-passagedata pid="29" name="Imposter" tags="" position="700,800" size="100,100">I&#39;ve been here three years...is today the day they will figure out that I have no idea what I&#39;m doing?
 
 [[Continue|Start]]</tw-passagedata><tw-passagedata pid="30" name="choicesWidget" tags="widget" position="400,50" size="100,100">&lt;&lt;widget &quot;choices&quot;&gt;&gt;
-      &lt;&lt;print $choicesPresented&gt;&gt;
-      &lt;&lt;print $memoryTimer&gt;&gt;
-      &lt;&lt;if $choicesPresented &gt; $memoryTimer&gt;&gt; 
+	&lt;&lt;nobr&gt;&gt;
+    	&lt;!-- Check for whether a memory should occur--&gt;
+     	&lt;&lt;if $choicesPresented &gt; $memoryTimer&gt;&gt; 
       		&lt;&lt;set $memoryTimer = $memoryTimer + random(2, 4)&gt;&gt;
       		&lt;&lt;goto Memories&gt;&gt;
-       &lt;&lt;/if&gt;&gt;
-      &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
-      &lt;&lt;set $currentPassage = getTask($taskDB, passage())&gt;&gt;
-      &lt;&lt;if $currentPassage.visited is true&gt;&gt;
-            call to play game
-            $currentPassage.resolutionText
+      	&lt;&lt;/if&gt;&gt;
+       
+      	&lt;!--Get current task--&gt;
+      	&lt;&lt;set $currentPassage = getTask($taskDB, passage())&gt;&gt;
+      	&lt;!-- Check if visited to print current task resolution--&gt;
+      	&lt;&lt;if $currentPassage.visited is true&gt;&gt;
+        	$currentPassage.resolutionText &lt;br&gt;
             [[Continue|Start]]
-      &lt;&lt;else&gt;&gt;
-      &lt;&lt;set $optionPassage = $taskDB.random()&gt;&gt;
-     &lt;&lt;set $currentPassage.visited = true &gt;&gt;
-      $currentPassage.storyText but...
-      $optionPassage.stimText
-      &lt;&lt;link $currentPassage.text $currentPassage.name&gt;&gt;
-      &lt;&lt;= addTask($taskDB, $toDoList, $optionPassage.name);&gt;&gt;
-      &lt;&lt;/link&gt;&gt;
-      &lt;&lt;link $optionPassage.text $optionPassage.name&gt;&gt;
-      &lt;&lt;= addTask($taskDB, $toDoList, $currentPassage.name);&gt;&gt;
-      &lt;&lt;/link&gt;&gt;
+      	&lt;&lt;else&gt;&gt;
+            &lt;!-- Otherwise provide new option--&gt;
+            &lt;&lt;set $currentPassage.visited = true &gt;&gt;
+            &lt;&lt;set $optionPassage = $taskDB.random()&gt;&gt;
+            &lt;&lt;if $optionPassage.name = $currentPassage.name&gt;&gt;
+             	&lt;!-- This is hack and is supposing the random function wont give me the same passage twice in a row.  Fix later--&gt;
+                &lt;&lt;set $optionPassage = $taskDB.random()&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+           	&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
+
+            $currentPassage.storyText but... &lt;br&gt;
+            $optionPassage.stimText &lt;br&gt;&lt;br&gt;
+            &lt;&lt;link $currentPassage.text $currentPassage.name&gt;&gt;
+            	&lt;&lt;= addTask($taskDB, $toDoList, $optionPassage.name);&gt;&gt;
+            &lt;&lt;/link&gt;&gt; &lt;br&gt;
+            &lt;&lt;link $optionPassage.text $optionPassage.name&gt;&gt;
+            	&lt;&lt;= addTask($taskDB, $toDoList, $currentPassage.name);&gt;&gt;
+            &lt;&lt;/link&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
+        &lt;&lt;/nobr&gt;&gt;  
 &lt;&lt;/widget&gt;&gt;
 </tw-passagedata><tw-passagedata pid="31" name="PickUpTrash" tags="" position="800,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Memories" tags="" position="375,600" size="100,100">&lt;&lt;set $burnoutOptions = [
 &quot;You&#39;re over loaded and overwhelmed.  You realized you&#39;re burnt out.  A feeling of despair settles over you.  Why am I so exhausted?  A memory pops into your head...&quot;,
