@@ -112,13 +112,14 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
       url('fonts/caveat/caveat-regular.ttf') format('truetype');
 }
 @font-face {
-    font-family: 'nanum';    
+    font-family: 'fira';    
     src: 
-      url('fonts/nanum-brush-script/NanumBrushScript-Regular.ttf') format('truetype');
+      url('fonts/fira-sans/FiraSans-Light.otf') format('opentype');
 }
 
 
 body {
+  font-family: fira;
   background-color: lightblue;
   color: black;
 }
@@ -126,40 +127,50 @@ body {
 .italics {
   font-style: italic;
 }
+#ui-bar-body{
+  font-family: caveat;
+  font-size: 120%;
+  color: lightblue;
 
+}
+#story-title{
+	font-size:300%;
+    color: #ffc;
+}
 #passages{
   position: fixed;
   left: 350px;
   text-align: left;
 }
 
+
 ul{
   width: 0px;
 }
 
- .post-it{
+.post-it{
   position: absolute;
   margin: auto;
   height:10em;
   width:10em;
   border: 1;
   z-index: 500;  
-
   *{
     margin:0;
     padding:0;
   }
   h2 {
     font-weight: bold;
-    font-size: .95rem;
+    font-size: 2rem;
+    text-align: center;
   }
   p {
-    font-size: .85rem;
+  font-size: 2rem;
     font-weight: normal;
+    text-align: center;
   }
   ul,li{
     list-style:none;
- 
   }
   ul{
     display: flex;
@@ -171,7 +182,6 @@ ul{
   ul li a{
     text-decoration:none;
     color:#000;
-    /*background:#ffc; transform: rotate(-6deg);*/
     display:block;
     font-family: 'caveat';
     height:10em;
@@ -179,39 +189,16 @@ ul{
     padding:.25em;
     margin-top: 0;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-    
     transition: transform .15s linear;
-
   }
   ul li{
     margin: .5em;
   }
-  /*
-  ul li:nth-child(even) a{
-  transform:rotate(4deg);
-   background:#FBD8DD;
-    
-  position:relative;
-  top:5px;
- 
-  }
-  ul li:nth-child(3n) a{
-
-    position:relative;
-    top:-5px;
-
-  }
-  ul li:nth-child(5n) a{
-
-    position:relative;
-    top:-10px;
-  }*/
-  
-    ul li a:hover, ul li a:focus{
-    box-shadow:10px 10px 7px rgba(0,0,0,.7);
-    transform: scale(1.25) !important;
-    position: relative;
-    z-index:505;
+  ul li a:hover, ul li a:focus{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  transform: scale(1.25) !important;
+  position: relative;
+  z-index:505;
   }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
 importScripts(
@@ -401,9 +388,7 @@ Nice to have:
  -Add node to the task objects so that if you want to force a specific vs random next passage you can place it there.  Will need a check to see if its empty and if not use the random one
  </tw-passagedata><tw-passagedata pid="9" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
 Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
-&lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
-Mood = $mood
-Latest Score = $score</tw-passagedata><tw-passagedata pid="12" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
+&lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="100,275" size="100,100">OVERCOME BY EVENTS</tw-passagedata><tw-passagedata pid="12" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
 </tw-passagedata><tw-passagedata pid="13" name="MakeBreakfast" tags="" position="500,75" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="TakeOutTrash" tags="" position="500,25" size="100,100">&lt;&lt;choices&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $taskDB.length &gt;1&gt;&gt;
 &lt;&lt;set $passages = $taskDB.randomMany(2)&gt;&gt;
