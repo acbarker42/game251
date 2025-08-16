@@ -287,6 +287,12 @@ window.removeTask = function(passageName){
    State.variables.toDoList = filtered;
 }
 
+/* update task*/
+window.updateVisited = function(passageName){
+  var taskToUpdate = State.variables.taskDB.find(task => task.name === passageName);
+  taskToUpdate.visited = true;
+}
+
 /* create div style */
 window.getStyleText = function(task){
  let styleText = 
@@ -498,10 +504,13 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" p
 </tw-passagedata><tw-passagedata pid="13" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $conTasks.length &gt;1&gt;&gt;
         &lt;&lt;set $passages = $conTasks.pluckMany(2)&gt;&gt;
-        &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
+        &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt;
+       &lt;&lt;=updateVisited($passages[0].name)&gt;&gt;
+        &lt;&lt;=updateVisited($passages[1].name)&gt;&gt;
         $passages[0].storyText but... &lt;br&gt;
         $passages[1].stimText... &lt;br&gt; &lt;br&gt;
         &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
+        			
         		&lt;&lt;= addTask($passages[1].name);&gt;&gt;
         &lt;&lt;/link&gt;&gt;&lt;br&gt;
         &lt;&lt;link $passages[1].text $passages[1].name&gt;&gt;
@@ -610,6 +619,7 @@ And Hey Siri set a 45 minute timer for the banana bread.
       	&lt;!--Get current task--&gt;
       	&lt;&lt;set $currentPassage = getTask(passage())&gt;&gt;
         &lt;&lt;set State.variables.currentTask = $currentPassage&gt;&gt;
+        
       	&lt;!-- Check if visited to print current task resolution--&gt;
       	&lt;&lt;if $currentPassage.visited is true&gt;&gt;
         	$currentPassage.resolutionText &lt;br&gt;
@@ -618,6 +628,7 @@ And Hey Siri set a 45 minute timer for the banana bread.
             &lt;!-- Otherwise provide new option--&gt;
             &lt;&lt;set $currentPassage.visited = true &gt;&gt;
             &lt;&lt;set $optionPassage = $conTasks.pluck()&gt;&gt;
+            &lt;&lt;=updateVisited($optionPassage.name)&gt;&gt;
            	&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
             $currentPassage.storyText but... &lt;br&gt;
             $optionPassage.stimText &lt;br&gt;&lt;br&gt;
