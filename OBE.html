@@ -378,7 +378,14 @@ window.random = function(min, max) {
 &quot;Imposter&quot;,
 &quot;TurnedOk&quot;,
 ]&gt;&gt;
-</tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;&lt;if tags().includes(&quot;menu&quot;)&gt;&gt;
+
+&lt;&lt;cacheaudio &quot;track1&quot; &quot;media/heart-of-the-dream.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;track2&quot; &quot;media/distraido.mp3&quot;&gt;&gt;
+
+&lt;&lt;createplaylist &quot;obe&quot;&gt;&gt;
+	&lt;&lt;track &quot;track2&quot; volume .05&gt;&gt;
+    &lt;&lt;track &quot;track1&quot; volume .5&gt;&gt;
+&lt;&lt;/createplaylist&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;&lt;if tags().includes(&quot;menu&quot;)&gt;&gt;
 &lt;ul&gt;
             &lt;&lt;set State.variables.currentTask = $toDoList[1]&gt;&gt;
        		&lt;&lt;set $task = $toDoList[1]&gt;&gt;
