@@ -256,25 +256,27 @@ window.launchGame = function(){
 
   //remove task from the todo list
   window.removeTask(State.variables.currentTask.name);
+  Engine.show();
 }
 
 /*Grab task from taskDB to add to todo list using the passage name  add random values for positioning and color when rendered*/
-window.addTask = function(taskDB, toDoList, passageName) {
-  if(!toDoList.some(task => task.name === passageName)){
-    var taskToAdd = taskDB.find(task => task.name === passageName);
+window.addTask = function(passageName) {
+  
+  if(!State.variables.toDoList.some(task => task.name === passageName)){
+    var taskToAdd = State.variables.taskDB.find(task => task.name === passageName);
     //Randomize post-it position, rotation, color
     taskToAdd.xPos = window.random(0,500);
     taskToAdd.yPos = window.random(0,500);
     taskToAdd.deg = window.random(-5,5);
     taskToAdd.color = window.getColor();
     console.log(taskToAdd);
-    toDoList.push(taskToAdd);
+    State.variables.toDoList.push(taskToAdd);
 	}
 };
 
 /*Grab task from taskDB using the passage name and return*/
-window.getTask = function(taskDB, passageName) {
-  var taskToGet = taskDB.find(task => task.name === passageName);
+window.getTask = function(passageName) {
+  var taskToGet = State.variables.taskDB.find(task => task.name === passageName);
   return taskToGet;
 };
 
@@ -358,8 +360,9 @@ window.random = function(min, max) {
     }
 ]&gt;&gt;
 
-/*set up taskDB from import*/
+/*set up reference taskDB and consummable taskDB from import*/
 &lt;&lt;set $taskDB = window.taskDBImport &gt;&gt; 
+&lt;&lt;set $conTasks = window.taskDBImport &gt;&gt; 
 
 
 &lt;&lt;set $events = [ 
@@ -378,16 +381,8 @@ window.random = function(min, max) {
 &quot;Imposter&quot;,
 &quot;TurnedOk&quot;,
 ]&gt;&gt;
-
-&lt;&lt;cacheaudio &quot;track1&quot; &quot;media/heart-of-the-dream.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;track2&quot; &quot;media/distraido.mp3&quot;&gt;&gt;
-
-&lt;&lt;createplaylist &quot;obe&quot;&gt;&gt;
-	&lt;&lt;track &quot;track2&quot; volume .05&gt;&gt;
-    &lt;&lt;track &quot;track1&quot; volume .5&gt;&gt;
-&lt;&lt;/createplaylist&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;&lt;if tags().includes(&quot;menu&quot;)&gt;&gt;
+</tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;&lt;if tags().includes(&quot;menu&quot;)&gt;&gt;
 &lt;ul&gt;
-            &lt;&lt;set State.variables.currentTask = $toDoList[1]&gt;&gt;
        		&lt;&lt;set $task = $toDoList[1]&gt;&gt;
        		&lt;&lt;set $style = getStyleText($task)&gt;&gt;
       		&lt;div class=&quot;post-it&quot; @style=$style&gt;
@@ -405,7 +400,6 @@ window.random = function(min, max) {
 &lt;&lt;/if&gt;&gt;    
 &lt;&lt;if tags().includes(&quot;title&quot;)&gt;&gt;
     &lt;ul&gt;
-            &lt;&lt;set State.variables.currentTask = $toDoList[0]&gt;&gt;
     		&lt;&lt;set $task = $toDoList[0]&gt;&gt;
        		&lt;&lt;set $style = getStyleText($task)&gt;&gt;
       		&lt;div class=&quot;post-it&quot; @style=$style&gt;
@@ -426,7 +420,6 @@ window.random = function(min, max) {
 &lt;&lt;if $toDoList.length &gt; 0&gt;&gt;
     &lt;ul&gt;
         &lt;&lt;for _i to 0; _i lt $toDoList.length; _i++&gt;&gt; 
-            &lt;&lt;set State.variables.currentTask = $toDoList[_i]&gt;&gt;
             &lt;&lt;set $task = $toDoList[_i]&gt;&gt;
              &lt;&lt;set $style = getStyleText($task)&gt;&gt;
               &lt;div class=&quot;post-it&quot; @style=$style&gt;
@@ -460,6 +453,10 @@ Sticky Colors
 - Purple: #C3BBD2
 Ground color:
 -blue (for links) #1A547A
+
+-Fix having to click twice to do the choice
+-fix onclick unaware of current task
+-add resolution text to sticky note completion
 
 -Add 2 more stickies, one for credits and one for the tutorial.
 - Add check that score is positive to display close button
@@ -498,17 +495,19 @@ Nice to have:
 Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
 &lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="100,275" size="100,100">OVERCOME BY EVENTS</tw-passagedata><tw-passagedata pid="12" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
 </tw-passagedata><tw-passagedata pid="13" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;&lt;if $taskDB.length &gt;1&gt;&gt;
-&lt;&lt;set $passages = $taskDB.randomMany(2)&gt;&gt;
-&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
-$passages[0].storyText but... &lt;br&gt;
-$passages[1].stimText &lt;br&gt; &lt;br&gt;
-&lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
-&lt;&lt;= addTask($taskDB, $toDoList, $passages[1].name);&gt;&gt;
-&lt;&lt;/link&gt;&gt;&lt;br&gt;
-&lt;&lt;link $passages[1].text $passages[1].name&gt;&gt;
-&lt;&lt;= addTask($taskDB, $toDoList, $passages[0].name);&gt;&gt;
-&lt;&lt;/link&gt;&gt;
+&lt;&lt;if $conTasks.length &gt;1&gt;&gt;
+        &lt;&lt;set $passages = $conTasks.pluckMany(2)&gt;&gt;
+        &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
+        $passages[0].storyText but... &lt;br&gt;
+        $passages[1].stimText... &lt;br&gt; &lt;br&gt;
+        &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
+        		&lt;&lt;= addTask($passages[1].name);&gt;&gt;
+        &lt;&lt;/link&gt;&gt;&lt;br&gt;
+        &lt;&lt;link $passages[1].text $passages[1].name&gt;&gt;
+        		&lt;&lt;= addTask($passages[0].name);&gt;&gt;
+        &lt;&lt;/link&gt;&gt;
+&lt;&lt;else&gt;&gt;
+		&lt;&lt;set $conTasks = $taskDB&gt;&gt;        
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="14" name="Icon" tags="" position="550,400" size="100,100">Ok, today we are switching from learning about ML to Icon.  Maybe this language will be easier.  I got this.
@@ -608,7 +607,8 @@ And Hey Siri set a 45 minute timer for the banana bread.
       	&lt;&lt;/if&gt;&gt;
        
       	&lt;!--Get current task--&gt;
-      	&lt;&lt;set $currentPassage = getTask($taskDB, passage())&gt;&gt;
+      	&lt;&lt;set $currentPassage = getTask(passage())&gt;&gt;
+        &lt;&lt;set State.variables.currentTask = $currentPassage&gt;&gt;
       	&lt;!-- Check if visited to print current task resolution--&gt;
       	&lt;&lt;if $currentPassage.visited is true&gt;&gt;
         	$currentPassage.resolutionText &lt;br&gt;
@@ -616,19 +616,15 @@ And Hey Siri set a 45 minute timer for the banana bread.
       	&lt;&lt;else&gt;&gt;
             &lt;!-- Otherwise provide new option--&gt;
             &lt;&lt;set $currentPassage.visited = true &gt;&gt;
-            &lt;&lt;set $optionPassage = $taskDB.random()&gt;&gt;
-            &lt;&lt;if $optionPassage.name = $currentPassage.name&gt;&gt;
-             	&lt;!-- This is hack and is supposing the random function wont give me the same passage twice in a row.  Fix later--&gt;
-                &lt;&lt;set $optionPassage = $taskDB.random()&gt;&gt;
-            &lt;&lt;/if&gt;&gt;
+            &lt;&lt;set $optionPassage = $conTasks.pluck()&gt;&gt;
            	&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
             $currentPassage.storyText but... &lt;br&gt;
             $optionPassage.stimText &lt;br&gt;&lt;br&gt;
             &lt;&lt;link $currentPassage.text $currentPassage.name&gt;&gt;
-            	&lt;&lt;= addTask($taskDB, $toDoList, $optionPassage.name);&gt;&gt;
+            	&lt;&lt;= addTask($optionPassage.name);&gt;&gt;
             &lt;&lt;/link&gt;&gt; &lt;br&gt;
             &lt;&lt;link $optionPassage.text $optionPassage.name&gt;&gt;
-            	&lt;&lt;= addTask($taskDB, $toDoList, $currentPassage.name);&gt;&gt;
+            	&lt;&lt;= addTask( $currentPassage.name);&gt;&gt;
             &lt;&lt;/link&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
         &lt;&lt;/nobr&gt;&gt;  

@@ -21,7 +21,7 @@ window.launchHovered = function (taskTime) {
 	divMenuUpper.id = 'divMenuUpper';
 
 	const pInstruct = document.createElement('p');
-	pInstruct.textContent = "Hover over the targets to score points";
+	pInstruct.textContent = "Hover over the targets to score points.  Avoid Squirrels!";
 	pInstruct.id = "pInstruct";
 	const pTotal = document.createElement('p');
 	pTotal.textContent = "Total:";
@@ -52,7 +52,6 @@ window.launchHovered = function (taskTime) {
 		//create a main object to track high level info
 		var main = {
 			score: 0,
-			levelScore: 0,
 			update: function () {
 				pScore.textContent = main.score;
 				score = main.score;
@@ -66,27 +65,19 @@ window.launchHovered = function (taskTime) {
 		//create an empty array to hold each level object
 		//var levels = [];
 		var levels = [
-			{ name: "5minLevel", time: 5, duration: 5, minScore: 0, targets: 2, bombs: 5, bombRespawn: 1.5, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
-			{ name: "20minLevel", time: 20, duration: 8, minScore: 0, targets: 2, bombs: 7, bombRespawn: 1, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
-			{ name: "60minLevel", time: 60, duration: 10, minScore: 0, targets: 3, bombs: 10, bombRespawn: .8, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
+			{ name: "5minLevel", time: 5, duration: 5, minScore: 1, targets: 2, bombs: 5, bombRespawn: 1.5, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
+			{ name: "10minLevel", time: 10, duration: 7, minScore: 1, targets: 2, bombs: 6, bombRespawn: 1.2, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
+			{ name: "20minLevel", time: 20, duration: 8, minScore: 1, targets: 3, bombs: 7, bombRespawn: .9, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
+			{ name: "60minLevel", time: 60, duration: 10, minScore: 1, targets: 3, bombs: 10, bombRespawn: .7, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
 		];
-
-		//constructor function to create each level object and push it to the levels array
-		// var Level = function (dur, min, tar, bomb, bombRespawn, desc) {
-		// 	this.duration = dur;
-		// 	this.minScore = min;
-		// 	this.targets = tar;
-		// 	this.bombs = bomb;
-		// 	this.bombRespawn = bombRespawn;
-		// 	this.description = desc;
-		// 	levels.push(this);
-		// }
 
 		//use the constructor function 
 		//Values are (level number, duration, min score, targets, bombs, bomb move timer, desc)
 		var level = levels.find(opts => opts.time == taskTime);
-		console.log(level);
-	
+		if (level === undefined) {
+  			console.log("level is undefined");
+			level = levels[0];
+		}
 
 		//create an empty array to hold the target objects	
 		var targetEls = [];
@@ -99,7 +90,6 @@ window.launchHovered = function (taskTime) {
 		let targetSize = 40;
 		var hover = function (e) {
 			main.score += 1;
-			main.levelScore += 1;
 			main.update();
 			e.target.style.top = random(0, hSize - targetSize) + "px";
 			e.target.style.left = random(0, wSize - targetSize) + "px";
@@ -108,7 +98,6 @@ window.launchHovered = function (taskTime) {
 		//define the hover over function that moves the bombs and updates the score		
 		var bombhover = function (e) {
 			main.score -= 2;
-			main.levelScore -= 2;
 			main.update();
 			e.target.style.top = random(0, hSize - bombSize) + "px";
 			e.target.style.left = random(0, wSize - bombSize) + "px";
@@ -127,7 +116,6 @@ window.launchHovered = function (taskTime) {
 		var startlevel = function () {
 			button1El.removeEventListener('click', startlevel);
 			var targetEls = [];
-			main.levelScore = 0;
 			main.update();
 			//create the targets
 			for (var i = 0; i < level.targets; i++) {
@@ -187,7 +175,6 @@ window.launchHovered = function (taskTime) {
 			}
 
 			//this section implements the game close out
-
 			let closeGame = function () {
 				button1El.removeEventListener('click', closeGame);
 				window.score = score;
@@ -197,7 +184,6 @@ window.launchHovered = function (taskTime) {
 			}
 
 			//this section implements the countdown timer
-
 			var timeremaining = level.duration;
 			var countdown = function () {
 				timeremaining -= 1;
@@ -206,18 +192,13 @@ window.launchHovered = function (taskTime) {
 				if (timeremaining == 0) {
 					window.score = score;
 					endlevel();
-
 				}
 			}
-
 			var timer = setInterval(countdown, 1000);
 		}
 		button1El.addEventListener("click", startlevel, false);
-
-
 	}
-	game();
-	
+	game();	
 }
 
 
