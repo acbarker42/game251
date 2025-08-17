@@ -80,10 +80,11 @@ window.launchHovered = function (task) {
 		//create an empty array to hold each level object
 		//var levels = [];
 		var levels = [
-			{ name: "5minLevel", time: 5, duration: 5, minScore: 1, targets: 2, bombs: 5, bombRespawn: 1.5, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
-			{ name: "10minLevel", time: 10, duration: 7, minScore: 1, targets: 2, bombs: 6, bombRespawn: 1.2, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
-			{ name: "20minLevel", time: 20, duration: 8, minScore: 1, targets: 3, bombs: 7, bombRespawn: .9, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
-			{ name: "60minLevel", time: 60, duration: 10, minScore: 1, targets: 3, bombs: 10, bombRespawn: .7, description: "Move the mouse over as many targets as you can before time runs out.  Avoid Squirrels!"},
+			{ name: "tutorial", time: 1, duration: 6, minScore: 1, targets: 1, bombs: 2, bombRespawn: 2},
+			{ name: "5minLevel", time: 5, duration: 5, minScore: 1, targets: 2, bombs: 5, bombRespawn: 1.5},
+			{ name: "10minLevel", time: 10, duration: 7, minScore: 1, targets: 2, bombs: 6, bombRespawn: 1.2},
+			{ name: "20minLevel", time: 20, duration: 8, minScore: 1, targets: 3, bombs: 7, bombRespawn: .9},
+			{ name: "60minLevel", time: 60, duration: 10, minScore: 1, targets: 3, bombs: 10, bombRespawn: .7}
 		];
 
 		//use the constructor function 

@@ -223,7 +223,7 @@ ul{
   }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
 importScripts(
-  ["js/taskDB.js", "js/hoveredGame.js"]
+  ["js/initList.js","js/taskDB.js", "js/hoveredGame.js"]
 ).then (function(){
   console.log(window.taskDBImport);
 })
@@ -343,71 +343,7 @@ window.random = function(min, max) {
 &lt;&lt;set $taskDB = window.taskDBImport &gt;&gt; 
 &lt;&lt;set $conTasks = window.taskDBImport &gt;&gt; 
 
-&lt;&lt;set $initList = [ 
-	{ 
-        name: &quot;ClickMe&quot;,
-        text: &quot;Click On Me&quot;,
-        time: 5,
-        timeLeft: 5,
-        visited: true,
-        status: &quot;incomplete&quot;,
-        stimText: &quot;You know you click this post-it&quot;,
-        resolutionText: &quot;The post-it was so happy to get clicked.&quot;,
-        storyText: &quot;You click the post-it&quot;,
-        xPos: 350,
-        yPos: 150,
-        deg: 2,
-        color: &quot;#F7EC75&quot;
-     },
-     { 
-        name: &quot;StartGame&quot;,
-        text: &quot;Start Game&quot;,
-        time: 20,
-        timeLeft: 20,
-        visited: true,
-        status: &quot;incomplete&quot;,
-        stimText: &quot;You know you click this post-it&quot;,
-        resolutionText: &quot;The post-it was so happy to get clicked.&quot;,
-        storyText: &quot;You click the post-it&quot;,
-        xPos: 0,
-        yPos: 80,
-        deg: -3,
-        color: &quot;#F7EC75&quot;
-    },
-    	{ 
-        name: &quot;PlayTutorial&quot;,
-        text: &quot;Play Tutorial&quot;,
-        time: 5,
-        timeLeft: 5,
-        visited: true,
-        status: &quot;incomplete&quot;,
-        stimText: &quot;You know you click this post-it&quot;,
-        resolutionText: &quot;The post-it was so happy to get clicked.&quot;,
-        storyText: &quot;You click the post-it&quot;,
-        xPos: 380,
-        yPos: 150,
-        deg: 4,
-        color: &quot;#BFD8A4&quot;
-     },
-     { 
-        name: &quot;Credits&quot;,
-        text: &quot;Credits&quot;,
-        time: 5,
-        timeLeft: 5,
-        visited: true,
-        status: &quot;incomplete&quot;,
-        stimText: &quot;You know you click this post-it&quot;,
-        resolutionText: &quot;The post-it was so happy to get clicked.&quot;,
-        storyText: &quot;You click the post-it&quot;,
-        xPos: 200,
-        yPos: 300,
-        deg: -1,
-        color: &quot;#C3BBD2&quot;
-    }
-]&gt;&gt;
-
-
-
+&lt;&lt;set $initList = window.initListImport &gt;&gt; 
 
 &lt;&lt;set $events = [ 
 {}

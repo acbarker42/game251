@@ -1,0 +1,62 @@
+window.initListImport = [
+{ 
+        name: "ClickMe",
+        text: "Click On Me",
+        time: 5,
+        timeLeft: 5,
+        visited: true,
+        status: "incomplete",
+        stimText: "",
+        resolutionText: "",
+        storyText: "",
+        xPos: 350,
+        yPos: 150,
+        deg: 2,
+        color: "#F7EC75"
+     },
+     { 
+        name: "StartGame",
+        text: "Start Game",
+        time: 20,
+        timeLeft: 20,
+        visited: true,
+        status: "incomplete",
+        stimText: "",
+        resolutionText: "",
+        storyText: "",
+        xPos: 0,
+        yPos: 80,
+        deg: -3,
+        color: "#F7EC75"
+    },
+    	{ 
+        name: "PlayTutorial",
+        text: "Play Tutorial",
+        time: 1,
+        timeLeft: 1,
+        visited: true,
+        status: "incomplete",
+        stimText: "Hover over the Sticky Notes to score points. Avoid the Squirrels or you lose points!",
+        resolutionText: "The sticky note was so happy to get caught.",
+        storyText: "You click the sticky note",
+        xPos: 380,
+        yPos: 150,
+        deg: 4,
+        color: "#BFD8A4"
+     },
+     { 
+        name: "Credits",
+        text: "Credits",
+        time: 5,
+        timeLeft: 5,
+        visited: true,
+        status: "incomplete",
+        stimText: "",
+        resolutionText: "",
+        storyText: "",
+        xPos: 200,
+        yPos: 300,
+        deg: -1,
+        color: "#C3BBD2"
+    }
+]
