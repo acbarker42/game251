@@ -289,6 +289,7 @@ window.removeTask = function(passageName){
 
 /* update task*/
 window.updateVisited = function(passageName){
+  console.log(passageName);
   var taskToUpdate = State.variables.taskDB.find(task => task.name === passageName);
   taskToUpdate.visited = true;
 }
@@ -324,8 +325,7 @@ window.random = function(min, max) {
 &lt;div class=&quot;title&quot;&gt;
 &lt;h1&gt;Overcome By Events&lt;/h1&gt;
 &lt;img src=&quot;media\OBE_title_800.png&quot; alt=&quot;Overcome By Events Title Image.  A person getting buried by sticky notes.&quot;&gt;
-&lt;/div&gt;
-[[Menu]]</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="100,150" size="100,100">/* Initialize Gamewide Variables */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="100,150" size="100,100">/* Initialize Gamewide Variables */
 
 &lt;&lt;set $stress = 50&gt;&gt;
 &lt;&lt;set $day = 1&gt;&gt;
@@ -460,7 +460,8 @@ window.random = function(min, max) {
 
 
 
-</tw-passagedata><tw-passagedata pid="8" name="ToDo" tags="" position="100,25" size="100,100">ToDo
+</tw-passagedata><tw-passagedata pid="8" name="ToDo" tags="" position="100,25" size="100,100">ToDo:
+Framework:
 	 -Add/fix 2 more stickies, one for credits and one for the tutorial.
     -create tutorial
           --how to play hovered
@@ -470,18 +471,18 @@ window.random = function(min, max) {
      -add resolution text to sticky note completion (possibly in hovered?)   
   	
      - (hovered) Add check that score is positive to display close button
- 
-    -build out tasks
-  	-finish memories, add color, italics, etc to fonts to highlight who&#39;s speaking etc
-  	-add Events
-  	-add more burnout options.	
+
+Story
+      -build out tasks
+      -finish memories, add color, italics, etc to fonts to highlight who&#39;s speaking etc
+      -add Events
+      -add more burnout options.	
 
 Pre-ship items
 	Remember to update:
         -memory timer interval
         
 Bugs
-    -[undefined][undefined]
     -fix onclick unaware of current task
     -fix &quot;TurnedOk&quot; passage.  not recognizing it
     -title border banner showing behind sidebar on menu passage
@@ -502,6 +503,7 @@ Nice to have:
 	-add music menu
     
     -sound effects for memories
+    		-change sound
     		-icon memory
             
    -add artwork
@@ -513,8 +515,10 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" p
 &lt;&lt;if $conTasks.length &gt;1&gt;&gt;
         &lt;&lt;set $passages = $conTasks.pluckMany(2)&gt;&gt;
         &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt;
-       &lt;&lt;=updateVisited($passages[0].name)&gt;&gt;
-        &lt;&lt;=updateVisited($passages[1].name)&gt;&gt;
+        &lt;&lt;silent&gt;&gt;
+           	&lt;&lt;=updateVisited($passages[0].name)&gt;&gt;
+         	&lt;&lt;=updateVisited($passages[1].name)&gt;&gt;
+       &lt;&lt;/silent&gt;&gt;
         $passages[0].storyText but... &lt;br&gt;
         $passages[1].stimText... &lt;br&gt; &lt;br&gt;
         &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
