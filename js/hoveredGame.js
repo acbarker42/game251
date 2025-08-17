@@ -1,5 +1,5 @@
 //HTML Game - Hovered - originally created ~2016 by Luke Barker 
-window.launchHovered = function (taskTime) {
+window.launchHovered = function (task) {
 
 	//link external css sheet
 	const cssLink = document.createElement('link');
@@ -73,7 +73,7 @@ window.launchHovered = function (taskTime) {
 
 		//use the constructor function 
 		//Values are (level number, duration, min score, targets, bombs, bomb move timer, desc)
-		var level = levels.find(opts => opts.time == taskTime);
+		var level = levels.find(opts => opts.time == task.time);
 		if (level === undefined) {
   			console.log("level is undefined");
 			level = levels[0];

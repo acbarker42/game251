@@ -250,12 +250,14 @@ window.createPassage =  function (task){
 }
 
 /* Call to mini game */
-window.launchGame = function(){
+window.launchGame = function(passageName){
+  console.log(passageName);
+  let task = window.getTask(passageName);
   //launch game with time varible to determine difficulty
-  window.launchHovered(State.variables.currentTask.time);
+  window.launchHovered(task);
 
   //remove task from the todo list
-  window.removeTask(State.variables.currentTask.name);
+  window.removeTask(passageName);
   Engine.show();
 }
 
@@ -269,7 +271,6 @@ window.addTask = function(passageName) {
     taskToAdd.yPos = window.random(0,500);
     taskToAdd.deg = window.random(-5,5);
     taskToAdd.color = window.getColor();
-    console.log(taskToAdd);
     State.variables.toDoList.push(taskToAdd);
 	}
 };
@@ -442,7 +443,7 @@ window.random = function(min, max) {
                   &lt;ul&gt;
                       &lt;&lt;set $listStyle = getListStyleText($task)&gt;&gt;
                       &lt;li &gt;
-                            &lt;a href=&quot;#&quot; @style=$listStyle onClick=&quot;launchGame()&quot;&gt;
+                            &lt;a @id=$task.name href=&quot;#&quot; @style=$listStyle onClick=&quot;launchGame(id)&quot;&gt;
                                   &lt;h2&gt; $task[&quot;text&quot;]&lt;/h2&gt;
                                   &lt;p&gt; $task[&quot;time&quot;] min&lt;/p&gt;
                             &lt;/a&gt;
@@ -483,7 +484,6 @@ Pre-ship items
         -memory timer interval
         
 Bugs
-    -fix onclick unaware of current task
     -fix &quot;TurnedOk&quot; passage.  not recognizing it
     -title border banner showing behind sidebar on menu passage
     -sidebar button divs have weird sizing and left border
