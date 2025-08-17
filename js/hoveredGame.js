@@ -47,6 +47,12 @@ window.launchHovered = function (task) {
 
 	taskTitleEl.textContent = task.text;
 
+	const targetsFiles = ['media/targets/sticky_note_blue.png','media/targets/sticky_note_green.png','media/targets/sticky_note_pink.png','media/targets/sticky_note_purple.png'];
+	const bombFiles = ['media/bombs/squirrel_blue.png','media/bombs/squirrel_gray.png','media/bombs/squirrel_green.png','media/bombs/squirrel_pink.png'];
+
+
+
+
 	const interruptions = ["Right in the middle of your work, you get a call from your distant cousin.  It was great catching up and hearing about his plans to become a professional taxidermist, but you'll have to restart your task.",
 							"You start working on the task, but a knock at the door interrupted your progress.",
 							"You tried to complete the task, but all you could think about was the Pistachio Cheesecake flavored ice cream in the freezer.  After a quick break, it's time to start again."];
@@ -134,7 +140,7 @@ window.launchHovered = function (task) {
 				target = targetEls[i];
 				target = document.createElement("div");
 				gameboardEl.appendChild(target);
-				target.style.backgroundImage = "url('media/sticky_note.png')";
+				target.style.backgroundImage = "url("+ targetsFiles[Math.floor(Math.random() * targetsFiles.length)] + ")";
 				target.style.width = targetSize + "px";
 				target.style.height = targetSize + "px";
 				target.className = "target";
@@ -156,7 +162,7 @@ window.launchHovered = function (task) {
 				target = targetEls[i];
 				target = document.createElement("div");
 				gameboardEl.appendChild(target);
-				target.style.backgroundImage = "url('media/squirrel.png')";
+				target.style.backgroundImage = "url("+ bombFiles[Math.floor(Math.random() * bombFiles.length)] + ")";
 				target.style.width = bombSize + "px";
 				target.style.height = bombSize + "px";
 				target.className = "target bomb";
