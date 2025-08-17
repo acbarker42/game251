@@ -320,7 +320,7 @@ window.random = function(min, max) {
     let num = Math.floor(Math.random() * (max - min)) + min;
     return num;
 }</script><tw-passagedata pid="1" name="Intro" tags="title" position="225,250" size="100,100">&lt;&lt;run UIBar.stow()&gt;&gt;
-&lt;&lt;playlist &quot;obe&quot; play&gt;&gt;
+&lt;&lt;playlist &quot;obe&quot; loop play&gt;&gt;
 &lt;div class=&quot;title&quot;&gt;
 &lt;h1&gt;Overcome By Events&lt;/h1&gt;
 &lt;img src=&quot;media\OBE_title_800.png&quot; alt=&quot;Overcome By Events Title Image.  A person getting buried by sticky notes.&quot;&gt;
@@ -391,10 +391,11 @@ window.random = function(min, max) {
 
 &lt;&lt;cacheaudio &quot;track1&quot; &quot;media/distraido.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;track2&quot; &quot;media/heart-of-the-dream.mp3&quot;&gt;&gt;
+&lt;&lt;waitforaudio&gt;&gt;
 
 &lt;&lt;createplaylist &quot;obe&quot;&gt;&gt;
 	&lt;&lt;track &quot;track1&quot;    volume 0.05&gt;&gt;
-	&lt;&lt;track &quot;track2&quot; volume 0.45&gt;&gt;
+	&lt;&lt;track &quot;track2&quot; volume 0.35&gt;&gt;
 &lt;&lt;/createplaylist&gt;&gt;
 </tw-passagedata><tw-passagedata pid="3" name="PassageHeader" tags="" position="100,400" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="PassageHeader" tags="" position="100,525" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="PassageFooter" tags="" position="100,650" size="100,100">&lt;&lt;if tags().includes(&quot;menu&quot;)&gt;&gt;
 &lt;ul&gt;
@@ -489,8 +490,8 @@ Ground color:
 -add Events
 -add more burnout options.
 
--add audio
-  -icon memory
+-fix audio looping
+-icon memory
   
 -add artwork
 Remember to edit:
@@ -506,7 +507,7 @@ Nice to have:
     - Text at end of game that talks to their score, relates to task quality and how well it was completed
  -Add node to the task objects so that if you want to force a specific vs random next passage you can place it there.  Will need a check to see if its empty and if not use the random one
 -screen darkens or some way to show you are starting to burn out
-</tw-passagedata><tw-passagedata pid="9" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
+-add music menu</tw-passagedata><tw-passagedata pid="9" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
 Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
 &lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="100,275" size="100,100">OVERCOME BY EVENTS</tw-passagedata><tw-passagedata pid="12" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
 </tw-passagedata><tw-passagedata pid="13" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;nobr&gt;&gt;
