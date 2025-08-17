@@ -1,4 +1,4 @@
-let light = function(){
+window.getLight = function(){
 	const background = document.createElement('div');
     background.style.display = "flex";
     background.style.margin = "0%";
@@ -12,7 +12,6 @@ let light = function(){
     background.appendChild(circleEl);
 
 
-
     circleEl.style.position = "fixed";
     circleEl.style.top = "50%";
     circleEl.style.left = "50%";
@@ -24,11 +23,6 @@ let light = function(){
     circleEl.style.transformOrigin = "center";
     circleEl.style.background = "white";
     
-    
-
-
     circleEl.addEventListener("mouseover", function(){circleEl.style.transform = "scale(100)";})
    
-    
-
 }
