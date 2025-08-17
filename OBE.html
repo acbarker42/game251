@@ -474,13 +474,6 @@ Twine:
   
 Hovered:  
      -change name
-     -add resolution text to sticky note completion (possibly in hovered?)   
-     - Add check that score is positive to display close button
-     -Update yellow background color
-     -Update post-it colors and not use yellow
-     -flip squirel randomly
-     - various squirel colors 
-     - various post it note colors
      - don&#39;t allow clicking off screen 
      - create tutorial level of 1 minute.
      
@@ -522,14 +515,14 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" p
 &lt;&lt;if $conTasks.length &gt;1&gt;&gt;
         &lt;&lt;set $passages = $conTasks.pluckMany(2)&gt;&gt;
         &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt;
-        &lt;&lt;silent&gt;&gt;
+       &lt;!--
+       &lt;&lt;silent&gt;&gt;
            	&lt;&lt;=updateVisited($passages[0].name)&gt;&gt;
          	&lt;&lt;=updateVisited($passages[1].name)&gt;&gt;
-       &lt;&lt;/silent&gt;&gt;
-        $passages[0].storyText but... &lt;br&gt;
+       &lt;&lt;/silent&gt;&gt;--&gt;
+        $passages[0].stimText but... &lt;br&gt;
         $passages[1].stimText... &lt;br&gt; &lt;br&gt;
         &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
-        			
         		&lt;&lt;= addTask($passages[1].name);&gt;&gt;
         &lt;&lt;/link&gt;&gt;&lt;br&gt;
         &lt;&lt;link $passages[1].text $passages[1].name&gt;&gt;
@@ -647,7 +640,7 @@ And Hey Siri set a 45 minute timer for the banana bread.
             &lt;!-- Otherwise provide new option--&gt;
             &lt;&lt;set $currentPassage.visited = true &gt;&gt;
             &lt;&lt;set $optionPassage = $conTasks.pluck()&gt;&gt;
-            &lt;&lt;=updateVisited($optionPassage.name)&gt;&gt;
+            &lt;&lt;silent&gt;&gt; &lt;&lt;=updateVisited($optionPassage.name)&gt;&gt; &lt;&lt;/silent&gt;&gt;
            	&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
             $currentPassage.storyText but... &lt;br&gt;
             $optionPassage.stimText &lt;br&gt;&lt;br&gt;
@@ -667,7 +660,6 @@ And Hey Siri set a 45 minute timer for the banana bread.
 
 &lt;&lt;print either($burnoutOptions)&gt;&gt;
 &lt;&lt;set $memory = $memories.shift()&gt;&gt;
-&lt;&lt;print $memory&gt;&gt;
 &lt;&lt;link &quot;Continue&quot; $memory&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Tired" tags="" position="650,500" size="100,100">&lt;&lt;nobr&gt;&gt;
 Like so many nights before you&#39;re laying in bed trying to fall asleep...
 &lt;span class=&quot;italics&quot;&gt;
