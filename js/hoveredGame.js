@@ -55,7 +55,8 @@ window.launchHovered = function (task) {
 
 	const interruptions = ["Right in the middle of your work, you get a call from your distant cousin.  It was great catching up and hearing about his plans to become a professional taxidermist, but you'll have to restart your task.",
 							"You start working on the task, but a knock at the door interrupted your progress.",
-							"You tried to complete the task, but all you could think about was the Pistachio Cheesecake flavored ice cream in the freezer.  After a quick break, it's time to start again."];
+							"You tried to complete the task, but all you could think about was the Pistachio Cheesecake flavored ice cream in the freezer.  After a quick break, it's time to start again.",
+							"You were going to work on the task when your cat plopped down in front of you for belly rubs.  Since you're obliged to stop for her, you never started on the task."];
 
 	//this function returns a random number between the two arguments passed to it
 	function random(min, max) {
