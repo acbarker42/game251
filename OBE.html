@@ -140,6 +140,10 @@ a {
 	font-size:300%;
     color: #F7EC75;
 }
+#story-caption{
+	margin-top: 0px !important;
+}
+
 #passages{
   position: fixed;
   left: 350px;
@@ -165,9 +169,6 @@ a {
 	
 }
 
-ul{
-  width: 0px;
-}
 
 .post-it{
   position: absolute;
@@ -331,6 +332,7 @@ window.random = function(min, max) {
 }
 
 Config.history.controls = false;
+
 </script><tw-passagedata pid="1" name="Intro" tags="intro noFooter" position="225,250" size="100,100">&lt;&lt;run UIBar.stow()&gt;&gt;
 &lt;&lt;playlist &quot;obe&quot; loop play&gt;&gt;
 &lt;div class=&quot;title&quot;&gt;
@@ -411,10 +413,7 @@ Config.history.controls = false;
 Hovered:  
      -change name
      - don&#39;t allow clicking off screen 
-     
-- Investigate Save Button
-- Disable Back/Forward Buttons
-     
+          
 Story
       -build out tasks
       -finish memories, add color, italics, etc to fonts to highlight who&#39;s speaking etc
@@ -450,7 +449,7 @@ Nice to have:
 			</tw-passagedata><tw-passagedata pid="9" name="StoryCaption" tags="" position="100,275" size="100,100">Day $day, $time
 Mood = $mood</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
 &lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="100,275" size="100,100">OVERCOME BY EVENTS</tw-passagedata><tw-passagedata pid="12" name="StoryMenu" tags="" position="100,400" size="100,100">[[Menu]]
-</tw-passagedata><tw-passagedata pid="13" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;link &quot;Back&quot;&gt;&gt;&lt;&lt;run Engine.backward()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="Start" tags="" position="350,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $conTasks.length &gt;1&gt;&gt;
         &lt;&lt;set $passages = $conTasks.pluckMany(2)&gt;&gt;
         &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt;
