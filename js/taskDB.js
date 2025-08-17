@@ -494,4 +494,19 @@ window.taskDBImport = [
         deg: 0,
         color: "#ffc"
     },
+    {
+        name: "Listen",
+        text: "Listen to Jimmy Buffett",
+        time: 5,
+        timeLeft: 5,
+        visited: false,
+        status: "incomplete",
+        stimText: "You're in the mood for a Jimmy Buffett song",
+        resolutionText: "You sing along with one of your favorite lyrics 'If we weren't all crazy, we would go insane!'.",
+        storyText: "You open your music app",
+        xPos: 0,
+        yPos: 0,
+        deg: 0,
+        color: "#ffc"
+    },
 ]
