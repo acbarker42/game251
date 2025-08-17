@@ -1,4 +1,4 @@
-//HTML Game - Hovered - originally created ~2016 by Luke Barker 
+//HTML Game - Hovered - originally created ~2017 by Luke Barker 
 window.launchHovered = function (task) {
 
 	//link external css sheet
@@ -14,6 +14,9 @@ window.launchHovered = function (task) {
 	gameboardEl.id = "gameboard";
 	const hoveredMenu = document.createElement('div');
 	hoveredMenu.id = "hoveredMenu";
+	const taskTitleEl = document.createElement('h2');
+	taskTitleEl.id = "taskTitle";
+
 
 	const hoveredTitle = document.createElement('h1');
 	hoveredTitle.textContent = "Hovered";
@@ -21,7 +24,7 @@ window.launchHovered = function (task) {
 	divMenuUpper.id = 'divMenuUpper';
 
 	const pInstruct = document.createElement('p');
-	pInstruct.textContent = "Hover over the targets to score points.  Avoid Squirrels!";
+	pInstruct.textContent = "Catch those sticky notes!  Avoid squirrel distractions!";
 	pInstruct.id = "pInstruct";
 	const pTotal = document.createElement('p');
 	pTotal.textContent = "Total:";
@@ -38,10 +41,16 @@ window.launchHovered = function (task) {
 	button1El.textContent = "Play!";
 
 	document.body.appendChild(gameWrapper);
-	gameWrapper.append(hoveredMenu, gameboardEl);
+	gameWrapper.append(hoveredMenu, taskTitleEl,gameboardEl);
 	hoveredMenu.append(divMenuUpper, button1El, pInstruct)
 	divMenuUpper.append(hoveredTitle, pTotal, pScore, pTimeLeft, pTimer);
-	
+
+	taskTitleEl.textContent = task.text;
+
+	const interruptions = ["Right in the middle of your work, you get a call from your distant cousin.  It was great catching up and hearing about his plans to become a professional taxidermist, but you'll have to restart your task.",
+							"You start working on the task, but a knock at the door interrupted your progress.",
+							"You tried to complete the task, but all you could think about was the Pistachio Cheesecake flavored ice cream in the freezer.  After a quick break, it's time to start again."];
+
 	//this function returns a random number between the two arguments passed to it
 	function random(min, max) {
 		let num = Math.floor(Math.random() * (max - min)) + min;
@@ -114,6 +123,8 @@ window.launchHovered = function (task) {
 
 		//defines a function that executes at the beginning of a level
 		var startlevel = function () {
+			gameboardEl.textContent="";
+			main.score = 0;
 			button1El.removeEventListener('click', startlevel);
 			var targetEls = [];
 			main.update();
@@ -131,6 +142,7 @@ window.launchHovered = function (task) {
 				target.style.float = "left";
 				target.style.margin = 0;
 				target.style.padding = 0;
+				target.style.zIndex = 1002;
 				wSize = gameboardEl.offsetWidth;
 				hSize = gameboardEl.offsetHeight;
 				target.style.top = random(0, hSize - targetSize) + "px";
@@ -152,6 +164,7 @@ window.launchHovered = function (task) {
 				target.style.float = "left";
 				target.style.margin = 0;
 				target.style.padding = 0;
+				target.style.zIndex = 1002;
 				target.style.top = random(0, hSize - bombSize) + "px";
 				target.style.left = random(0, wSize - bombSize) + "px";
 				target.addEventListener("mouseover", bombhover, false);
@@ -168,10 +181,16 @@ window.launchHovered = function (task) {
 				}
 				clearInterval(bombMover);
 				clearInterval(timer);  //clears the timer so it doesn't keep counting down below zero
-				//button1El.style.display = "initial";
-				button1El.textContent = "Close";
-				button1El.addEventListener("click", closeGame, false);
-				return window.score;
+				if (score > 0){
+					gameboardEl.textContent = task.resolutionText;
+					button1El.textContent = "Close";
+					button1El.addEventListener("click", closeGame, false);
+				}
+				else {
+					gameboardEl.textContent = interruptions[Math.floor(Math.random() * interruptions.length)];
+					button1El.textContent = "Restart";
+					button1El.addEventListener("click", startlevel, false);
+				}
 			}
 
 			//this section implements the game close out
