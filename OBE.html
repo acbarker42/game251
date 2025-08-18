@@ -404,6 +404,7 @@ Config.history.controls = false;
 
 &lt;&lt;cacheaudio &quot;track1&quot; &quot;media/distraido.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;track2&quot; &quot;media/heart-of-the-dream.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;horn&quot; &quot;media/horn.wav&quot;&gt;&gt;
 &lt;&lt;waitforaudio&gt;&gt;
 
 &lt;&lt;createplaylist &quot;obe&quot;&gt;&gt;
@@ -769,7 +770,11 @@ And in the immortal words of Jimmy Buffett...
     circleEl.style.transformOrigin = &quot;center&quot;;
     circleEl.style.background = &quot;white&quot;;
     
-    circleEl.addEventListener(&quot;mouseover&quot;, function(){circleEl.style.transform = &quot;scale(100)&quot;;})
+    circleEl.addEventListener(&quot;mouseover&quot;, function(){
+    circleEl.style.transform = &quot;scale(100)&quot;;
+    var horn = new Audio(&quot;audio/horn.wav&quot;);
+	horn.play();
+    })
    &lt;&lt;/script&gt;&gt;
 </tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
