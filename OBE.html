@@ -255,7 +255,31 @@ a {
   position: relative;
   z-index:505;
   }
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
+}
+
+
+    /* The element with the memory-like outline */
+   .memory #passages {
+      padding: 20px 40px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      position: absolute;
+      z-index: 1;
+      animation: pulse 4s infinite;
+    }
+
+    /* Pulsating outline effect */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 40px 4px rgba(229, 229, 229, 0.8);
+      }
+      50% {
+        box-shadow: 0 0 80px 16px rgba(255, 255, 255, 0.4);
+      }
+      100% {
+        box-shadow: 0 0 40px 4px rgba(229, 229, 229, 0.8);
+      }
+    }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
 importScripts(
   ["js/initList.js","js/taskDB.js", "js/hoveredGame.js"]
 ).then (function(){
@@ -619,7 +643,7 @@ And Hey Siri set a 45 minute timer for the banana bread.
 		&lt;&lt;/if&gt;&gt;
         &lt;&lt;/nobr&gt;&gt;  
 &lt;&lt;/widget&gt;&gt;
-</tw-passagedata><tw-passagedata pid="21" name="Memories" tags="noFooter" position="450,275" size="100,100">&lt;&lt;set $burnoutOptions = [
+</tw-passagedata><tw-passagedata pid="21" name="Memories" tags="noFooter memory" position="450,275" size="100,100">&lt;&lt;set $burnoutOptions = [
 &quot;You&#39;re feeling overloaded and overwhelmed.  You realized you&#39;re burnt out.  A feeling of despair settles over you.  Why am I so exhausted?  A memory pops into your head...&quot;,
 &quot;A wet heavy blanket has settled over your brain.  Everything takes so. much. energy.  Why can&#39;t I just get stuff done?   You&#39;re reminded of another time and place...&quot;]&gt;&gt;
 
@@ -778,10 +802,17 @@ And in the immortal words of Jimmy Buffett...
     circleEl.style.background = &quot;white&quot;
     circleEl.style.zIndex = &#39;1001&#39;;
     
+  	function waitTimer(duration) {
+  	return new Promise(resolve =&gt; setTimeout(resolve, duration/1000));
+	}
+    
     var horn = new Audio(&quot;media/horn.wav&quot;);
     let onHover = function(){circleEl.style.transform = &quot;scale(100)&quot;;
 	horn.play();
  	circleEl.removeEventListener(&quot;mouseover&quot;, onHover);
+    async function execute(){
+        await waitTimer(7);
+        }
  	}
     
     circleEl.addEventListener(&quot;mouseover&quot;, onHover);
