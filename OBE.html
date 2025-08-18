@@ -268,7 +268,6 @@ importScripts(
 /* Generate choice passages from taskDB import*/
 $(document).on(':passagerender', function (ev) {
     let taskDB = State.variables.taskDB;
-    console.log(taskDB);
 	taskDB.forEach(task => window.createPassage(task));
 });
 
@@ -292,7 +291,6 @@ window.launchTutorial = function(passageName){
 
 /* Call to mini game */
 window.launchGame = function(passageName){
-  console.log(passageName);
   let task = window.getTask(passageName);
   //launch game with time varible to determine difficulty
   window.launchHovered(task);
@@ -304,7 +302,6 @@ window.launchGame = function(passageName){
 
 /*Grab task from taskDB to add to todo list using the passage name  add random values for positioning and color when rendered*/
 window.addTask = function(passageName) {
-  
   if(!State.variables.toDoList.some(task => task.name === passageName)){
     var taskToAdd = State.variables.taskDB.find(task => task.name === passageName);
     //Randomize post-it position, rotation, color
@@ -314,6 +311,7 @@ window.addTask = function(passageName) {
     taskToAdd.color = window.getColor();
     State.variables.toDoList.push(taskToAdd);
 	}
+    console.log(State.variables.toDoList);
 };
 
 /*Grab task from taskDB using the passage name and return*/
@@ -326,14 +324,14 @@ window.getTask = function(passageName) {
 window.removeTask = function(passageName){
   var task = State.variables.currentTask;
   var filtered = State.variables.toDoList.filter(obj => obj.name !== passageName);
-   State.variables.toDoList = filtered;
+   State.variables.toDoList = filtered;  
 }
 
 /* update task*/
 window.updateVisited = function(passageName){
-  console.log(passageName);
   var taskToUpdate = State.variables.taskDB.find(task => task.name === passageName);
   taskToUpdate.visited = true;
+  console.log(taskToUpdate);
 }
 
 /* create div style */
@@ -374,7 +372,7 @@ Config.history.controls = false;
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="25,150" size="100,100">/* Initialize Gamewide Variables */
 
 &lt;&lt;set $toDoList = []&gt;&gt;
-&lt;&lt;set $memoryTimer = 5&gt;&gt;
+&lt;&lt;set $memoryTimer = 4&gt;&gt;
 &lt;&lt;set $choicesPresented = 0&gt;&gt;
 
 /*set up reference taskDB and consummable taskDB from import*/
@@ -590,7 +588,7 @@ And Hey Siri set a 45 minute timer for the banana bread.
 	&lt;&lt;nobr&gt;&gt;
     	&lt;!-- Check for whether a memory should occur--&gt;
      	&lt;&lt;if $choicesPresented &gt; $memoryTimer&gt;&gt; 
-      		&lt;&lt;set $memoryTimer = $memoryTimer + random(2, 4)&gt;&gt;
+      		&lt;&lt;set $memoryTimer = $memoryTimer + random(2, 3)&gt;&gt;
       		&lt;&lt;goto Memories&gt;&gt;
       	&lt;&lt;/if&gt;&gt;
        
@@ -605,6 +603,9 @@ And Hey Siri set a 45 minute timer for the banana bread.
       	&lt;&lt;else&gt;&gt;
             &lt;!-- Otherwise provide new option--&gt;
             &lt;&lt;set $currentPassage.visited = true &gt;&gt;
+            &lt;&lt;if $conTasks.length == 0&gt;&gt;
+                  &lt;&lt;set $conTasks = $taskDB&gt;&gt;
+            &lt;&lt;/if&gt;&gt;     
             &lt;&lt;set $optionPassage = $conTasks.pluck()&gt;&gt;
             &lt;&lt;silent&gt;&gt; &lt;&lt;=updateVisited($optionPassage.name)&gt;&gt; &lt;&lt;/silent&gt;&gt;
            	&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
