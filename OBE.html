@@ -302,15 +302,16 @@ window.launchGame = function(passageName){
 
 /*Grab task from taskDB to add to todo list using the passage name  add random values for positioning and color when rendered*/
 window.addTask = function(passageName) {
-  if(!State.variables.toDoList.some(task => task.name === passageName)){
+ // if(!State.variables.toDoList.some(task => task.name === passageName)){
     var taskToAdd = State.variables.taskDB.find(task => task.name === passageName);
+  console.log(taskToAdd);
     //Randomize post-it position, rotation, color
     taskToAdd.xPos = window.random(0,500);
     taskToAdd.yPos = window.random(0,500);
     taskToAdd.deg = window.random(-5,5);
     taskToAdd.color = window.getColor();
     State.variables.toDoList.push(taskToAdd);
-	}
+	//}
     console.log(State.variables.toDoList);
 };
 
@@ -329,9 +330,10 @@ window.removeTask = function(passageName){
 
 /* update task*/
 window.updateVisited = function(passageName){
+    console.log(passageName);
   var taskToUpdate = State.variables.taskDB.find(task => task.name === passageName);
   taskToUpdate.visited = true;
-  console.log(taskToUpdate);
+
 }
 
 /* create div style */
@@ -445,22 +447,20 @@ Config.history.controls = false;
 Hovered:  
      -change name
      - don&#39;t allow clicking off screen 
-          
 Story
-      -finish memories, add color, italics, etc to fonts to highlight who&#39;s speaking etc
       -add more burnout options.	
 	  - add more back at it options.     
-      -screen darkens or blurs or some way to show you are starting to burn out
-	-back at it &#39;first person&#39;  so much I want to do
-    to do fix &quot;clean bathroom&quot;
 
+Twine
+      -the way it circles back around when its done with presenting an array of tasks is hacky.  need to make this better.
+        
 Pre-ship items
 	Remember to update:
         -memory timer interval
         -try out on mac and with different browsers.
         
 Bugs
-    -sidebar button divs have weird sizing and left border
+
 
 Nice to have:
 	-Mini game
@@ -486,14 +486,9 @@ Nice to have:
 Mood = $mood</tw-passagedata><tw-passagedata pid="8" name="StoryMenu" tags="" position="25,400" size="100,100">[[Menu]]
 &lt;&lt;link &quot;Play Color Code&quot;&gt;&gt;&lt;&lt;= colorCode();&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="StoryCaption" tags="" position="25,275" size="100,100">OVERCOME BY EVENTS</tw-passagedata><tw-passagedata pid="10" name="StoryMenu" tags="" position="25,400" size="100,100">[[Menu]]
 &lt;&lt;link &quot;Back&quot;&gt;&gt;&lt;&lt;run Engine.backward()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Start" tags="" position="450,400" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;&lt;if $conTasks.length &gt;1&gt;&gt;
+&lt;&lt;if $conTasks.length &gt;2&gt;&gt;
         &lt;&lt;set $passages = $conTasks.pluckMany(2)&gt;&gt;
         &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt;
-       &lt;!--
-       &lt;&lt;silent&gt;&gt;
-           	&lt;&lt;=updateVisited($passages[0].name)&gt;&gt;
-         	&lt;&lt;=updateVisited($passages[1].name)&gt;&gt;
-       &lt;&lt;/silent&gt;&gt;--&gt;
         $passages[0].stimText but... &lt;br&gt;
         $passages[1].stimText... &lt;br&gt; &lt;br&gt;
         &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
@@ -503,7 +498,7 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="8" name="StoryMenu" tags="" po
         		&lt;&lt;= addTask($passages[0].name);&gt;&gt;
         &lt;&lt;/link&gt;&gt;
 &lt;&lt;else&gt;&gt;
-		&lt;&lt;set $conTasks = $taskDB&gt;&gt;        
+		&lt;&lt;set $conTasks = window.taskDBImport&gt;&gt;        
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="12" name="Icon" tags="noFooter" position="750,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;Ok, today we are switching from learning about ML to Icon.  Maybe this language will be easier.  I got this. &lt;/span&gt;
@@ -582,7 +577,7 @@ Hey Siri, set an alarm for tomorow at 8:00am
 
 And Hey Siri set a 45 minute timer for the banana bread.
 
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="19" name="Imposter" tags="noFooter" position="1050,400" size="100,100">&lt;span class=&quot;italics&quot;&gt;I&#39;ve been here &lt;span class=&quot;bold&quot;&gt;six years&lt;/span&gt;...is today the day they will figure out that&lt;span class=&quot;bold&quot;&gt; I have no idea what I&#39;m doing&lt;/span&gt;? &lt;/span&gt;
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="19" name="Imposter" tags="noFooter" position="1025,400" size="100,100">&lt;span class=&quot;italics&quot;&gt;I&#39;ve been here &lt;span class=&quot;bold&quot;&gt;six years&lt;/span&gt;...is today the day they will figure out that&lt;span class=&quot;bold&quot;&gt; I have no idea what I&#39;m doing&lt;/span&gt;? &lt;/span&gt;
 
 [[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="20" name="choicesWidget" tags="widget" position="450,525" size="100,100">&lt;&lt;widget &quot;choices&quot;&gt;&gt;
 	&lt;&lt;nobr&gt;&gt;
@@ -603,8 +598,8 @@ And Hey Siri set a 45 minute timer for the banana bread.
       	&lt;&lt;else&gt;&gt;
             &lt;!-- Otherwise provide new option--&gt;
             &lt;&lt;set $currentPassage.visited = true &gt;&gt;
-            &lt;&lt;if $conTasks.length == 0&gt;&gt;
-                  &lt;&lt;set $conTasks = $taskDB&gt;&gt;
+            &lt;&lt;if $conTasks.length &lt; 2&gt;&gt;
+                  &lt;&lt;set $conTasks = window.taskDBImport&gt;&gt;
             &lt;&lt;/if&gt;&gt;     
             &lt;&lt;set $optionPassage = $conTasks.pluck()&gt;&gt;
             &lt;&lt;silent&gt;&gt; &lt;&lt;=updateVisited($optionPassage.name)&gt;&gt; &lt;&lt;/silent&gt;&gt;
@@ -719,10 +714,10 @@ At least there’s a light at the end of the tunnel.
 At least it&#39;s the weekend so I can catch up on some things I need to get done...
 &lt;/span&gt;
 [[Continue|Start]]</tw-passagedata><tw-passagedata pid="28" name="BackAtIt" tags="noFooter" position="575,275" size="100,100">&lt;&lt;set $backAtItOptions = [
-&quot;You pick yourself up off the floor and get back to it...&quot;,
-&quot;You realize you don&#39;t have time for reflecting and look at your to-do list...&quot;,
-&quot;There’s so much you want to do, but never enough time.  I&#39;d better keep at it...&quot;,
-&quot;You take a deep breath as you stare out the window…you keep thinking about all the things that you need to do, and you have a little time now.  Must keep going...&quot;
+&quot;I pick myself up off the floor and get back to it...&quot;,
+&quot;I realize I don&#39;t have time for reflecting and look at my to-do list...&quot;,
+&quot;There’s so much I want to do, but never enough time.  I&#39;d better keep at it...&quot;,
+&quot;I take a deep breath as I stare out the window…I keep thinking about all the things that I need to do, and I have a little time now.  Must keep going...&quot;
 ]&gt;&gt;
 
 &lt;&lt;print either($backAtItOptions)&gt;&gt;
@@ -733,7 +728,7 @@ I swipe to the next reel, titled “Cutest Cat Ever”, which is a ridiculously 
 
 Thank you all for coming today.  I&#39;m not one for public speaking but I do want to say one thing.  A boss I once worked for once welcomed me to a team by telling me this:
 &quot;Every now and then, you will happen across a team...&quot;centers of excellence&quot; as I&#39;d like to call them.  A group of people who work hard, work together, and are passionate about doing the job well.  When you come across them it&#39;s like a patch of brightly colored flowers in an otherwise dull landscape.&quot;  
-Well I consider this team one of those centers of excellence, and I am proud ot have been a part of it and thankful I had the opportunity to work with you all.
+Well I consider this team one of those centers of excellence, and I am proud to have been a part of it and thankful I had the opportunity to work with you all.
 
 And in the immortal words of Jimmy Buffett...
 &quot;After 43 years of perpetual motion...some of it&#39;s magic, some of it&#39;s tragic, but I had a good life all the way.&quot;
