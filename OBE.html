@@ -467,11 +467,15 @@ Nice to have:
           - add better clarification text
           - in game direction on which colors post it to click
           - Text at end of game that talks to their score, relates to task quality and how 					well it was completed
+          - make score matter more (maybe track it over the long run)
 	-format credits
+    -end of game screen
 
 	 -Add node to the task objects so that if you want to force a specific vs random 			next passage you can place it there.  Will need a check to see if its empty and if 			not use the random one
 
 	-screen darkens or blurs or some way to show you are starting to burn out
+
+	- make internal dialogue a certain color and external speakers a different color
 
 	-add music menu
     -sound effects for memories
@@ -501,7 +505,7 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="8" name="StoryMenu" tags="" po
 		&lt;&lt;set $conTasks = window.taskDBImport&gt;&gt;        
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="12" name="Icon" tags="noFooter" position="750,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;Ok, today we are switching from learning about ML to Icon.  Maybe this language will be easier.  I got this. &lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="12" name="Icon" tags="noFooter memory" position="750,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;Ok, today we are switching from learning about ML to Icon.  Maybe this language will be easier.  I got this. &lt;/span&gt;
 ...
 Icon programming language, developed at the University of Arizona by Ralph Griswold...
 &lt;span class=&quot;italics&quot;&gt;
@@ -509,9 +513,9 @@ Well, that&#39;s neat that I&#39;m studying a language here that was developed h
 ...
 &lt;span class=&quot;bold&quot;&gt;Crap what was he saying?&lt;/span&gt; UGH, I did it again.  Damnit pay attention.
 &lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="13" name="Questions" tags="noFooter" position="875,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;I did it again.  I didn&#39;t hear anything he just said for the last 10 minutes.  What was I even thinking about?  I&#39;m so going to fail this class.  If I ask the professor a question they will certainly know by my question that &lt;span class=&quot;bold&quot;&gt; I wasn&#39;t paying attention. &lt;/span&gt;  What is wrong with me?
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="13" name="Questions" tags="noFooter memory" position="875,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;I did it again.  I didn&#39;t hear anything he just said for the last 10 minutes.  What was I even thinking about?  I&#39;m so going to fail this class.  If I ask the professor a question they will certainly know by my question that &lt;span class=&quot;bold&quot;&gt; I wasn&#39;t paying attention. &lt;/span&gt;  What is wrong with me?
 &lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="14" name="Bus" tags="noFooter" position="625,150" size="100,100">&lt;span class=&quot;bold&quot;&gt;It&#39;s time to get ready for the bus.  It will be here in 2 min and you need to be outside waiting for it so they aren&#39;t waiting for you...again.
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="14" name="Bus" tags="noFooter memory" position="625,150" size="100,100">&lt;span class=&quot;bold&quot;&gt;It&#39;s time to get ready for the bus.  It will be here in 2 min and you need to be outside waiting for it so they aren&#39;t waiting for you...again.
 &lt;/span&gt;
 ...
 &lt;span class=&quot;bold&quot;&gt;
@@ -525,7 +529,7 @@ You&#39;re going to be late for the bus.  If you miss the bus I will make you wa
 &lt;span class=&quot;bold&quot;&gt;
 GET OUTSIDE THE BUS IS HERE!!!
 &lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="15" name="Late" tags="noFooter" position="1000,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;Ok...I&#39;m ready to go... just have 15 min till I need to leave for the appt.
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="15" name="Late" tags="noFooter memory" position="1000,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;Ok...I&#39;m ready to go... just have 15 min till I need to leave for the appt.
 I guess I&#39;ll...put away the game I left out...I don&#39;t want the cats dragging the pieces away.
 
 Alright 10 min to go... I can load the dishwasher quick and kick it off...
@@ -534,7 +538,7 @@ Alright 10 min to go... I can load the dishwasher quick and kick it off...
 
 Damnit!  I was supposed to leave 10 min ago.  &lt;span class=&quot;bold&quot;&gt;Where are my keys?&lt;/span&gt;
 &lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="16" name="Tires" tags="noFooter" position="825,275" size="100,100">...Get&#39;s in the car...
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="16" name="Tires" tags="noFooter memory" position="825,275" size="100,100">...Get&#39;s in the car...
 &lt;span class=&quot;italics&quot;&gt;Oh! I need to remember to make an appt to change the tires&lt;/span&gt;
 ...Leaves the car, car ceases to exist...
 
@@ -553,7 +557,7 @@ Every day after...
 &lt;span class=&quot;italics&quot;&gt;FFS! I need to remember to make an appt to change the tires&lt;/span&gt;
 ...Leaves the car, car ceases to exist...
 
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="17" name="Whiteboard" tags="noFooter" position="750,400" size="100,100">Hey What&#39;s up?
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="17" name="Whiteboard" tags="noFooter memory" position="750,400" size="100,100">Hey What&#39;s up?
 &lt;span class=&quot;bold&quot;&gt;
 Hey, I just talked to the lead.  They want us to implement a new change to this version to include cross WAN replication.  If we override the mapMerge method ....... the timestamp.....then hazelcast will ........ and it will replicate between the primary.....the only problem comes when ................ with the redundant component where......... and if it&#39;s being written to at the same time.  But if we use 
 &lt;/span&gt;
@@ -562,7 +566,7 @@ Hey, I just talked to the lead.  They want us to implement a new change to this 
 &lt;span class=&quot;italics&quot;&gt;...Grab dry erase marker...&lt;/span&gt;
 Can we start from the beginning so I can draw it out?
 
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="18" name="Siri" tags="noFooter" position="700,275" size="100,100">&lt;span class=&quot;italics&quot;&gt;I finally scheduled that doctor&#39;s appt and reaaaally can&#39;t forget it this time.&lt;/span&gt;
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="18" name="Siri" tags="noFooter memory" position="700,275" size="100,100">&lt;span class=&quot;italics&quot;&gt;I finally scheduled that doctor&#39;s appt and reaaaally can&#39;t forget it this time.&lt;/span&gt;
 
 Hey Siri, add doctor appt to the calendar for tomorrow at 10am with a reminder at the time of the event.
 
@@ -577,7 +581,7 @@ Hey Siri, set an alarm for tomorow at 8:00am
 
 And Hey Siri set a 45 minute timer for the banana bread.
 
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="19" name="Imposter" tags="noFooter" position="1025,400" size="100,100">&lt;span class=&quot;italics&quot;&gt;I&#39;ve been here &lt;span class=&quot;bold&quot;&gt;six years&lt;/span&gt;...is today the day they will figure out that&lt;span class=&quot;bold&quot;&gt; I have no idea what I&#39;m doing&lt;/span&gt;? &lt;/span&gt;
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="19" name="Imposter" tags="noFooter memory" position="1025,400" size="100,100">&lt;span class=&quot;italics&quot;&gt;I&#39;ve been here &lt;span class=&quot;bold&quot;&gt;six years&lt;/span&gt;...is today the day they will figure out that&lt;span class=&quot;bold&quot;&gt; I have no idea what I&#39;m doing&lt;/span&gt;? &lt;/span&gt;
 
 [[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="20" name="choicesWidget" tags="widget" position="450,525" size="100,100">&lt;&lt;widget &quot;choices&quot;&gt;&gt;
 	&lt;&lt;nobr&gt;&gt;
@@ -625,7 +629,7 @@ And Hey Siri set a 45 minute timer for the banana bread.
 		&lt;&lt;link &quot;Continue&quot; $memory&gt;&gt;&lt;&lt;/link&gt;&gt;
  &lt;&lt;else&gt;&gt;
 		&lt;&lt;goto Retirement&gt;&gt;
- &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Tired" tags="noFooter" position="900,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+ &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Tired" tags="noFooter memory" position="900,400" size="100,100">&lt;&lt;nobr&gt;&gt;
 Like so many nights before I&#39;m laying in bed trying to fall asleep... &lt;br&gt;
 &lt;span class=&quot;italics&quot;&gt;
 I&#39;m so tired.  I &lt;span class=&quot;bold&quot;&gt; NEED &lt;/span&gt;to go to sleep.  Tomorrow, I can&#39;t forget that I have to 
@@ -701,19 +705,19 @@ https://webdesign.tutsplus.com/create-a-sticky-note-effect-in-5-easy-steps-with-
     &lt;/div&gt;
 &lt;/ul&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="GrewUpOk" tags="noFooter" position="950,275" size="100,100">&lt;span class=&quot;bold&quot;&gt;I was worried about you when you were a kid, off in your own world all of the time.  But you seem to have figured things out.
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="GrewUpOk" tags="noFooter memory" position="950,275" size="100,100">&lt;span class=&quot;bold&quot;&gt;I was worried about you when you were a kid, off in your own world all of the time.  But you seem to have figured things out.
 &lt;/span&gt;
 &lt;span class=&quot;italics&quot;&gt;
 Um...thanks?
 &lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="27" name="Beginning" tags="noFooter" position="325,400" size="100,100">42.  That&#39;s it!  I only have to hang on for 42 more days and it will all change.  Things will be better.  I&#39;ll have time for the things that matter.  
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="27" name="Beginning" tags="noFooter memory" position="325,400" size="100,100">42.  That&#39;s it!  I only have to hang on for 42 more days and it will all change.  Things will be better.  I&#39;ll have time for the things that matter.  
 
 I don&#39;t know how long I&#39;ve gone on, completing the same mundane tasks, over, and over again…just kinda existing until the next big milestone.  But this is it.  If I can just make it through this, then things will settle down.
 &lt;span class=&quot;italics&quot;&gt;
 At least there’s a light at the end of the tunnel.  
 At least it&#39;s the weekend so I can catch up on some things I need to get done...
 &lt;/span&gt;
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="28" name="BackAtIt" tags="noFooter" position="575,275" size="100,100">&lt;&lt;set $backAtItOptions = [
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="28" name="BackAtIt" tags="noFooter memory" position="575,275" size="100,100">&lt;&lt;set $backAtItOptions = [
 &quot;I pick myself up off the floor and get back to it...&quot;,
 &quot;I realize I don&#39;t have time for reflecting and look at my to-do list...&quot;,
 &quot;There’s so much I want to do, but never enough time.  I&#39;d better keep at it...&quot;,
@@ -721,9 +725,9 @@ At least it&#39;s the weekend so I can catch up on some things I need to get don
 ]&gt;&gt;
 
 &lt;&lt;print either($backAtItOptions)&gt;&gt;
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="29" name="CatReel" tags="noFooter" position="625,400" size="100,100">&lt;span class=&quot;italics&quot;&gt;&lt;span class=&quot;bold&quot;&gt;AWE SO CUTE!&lt;/span&gt;&lt;/span&gt;
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="29" name="CatReel" tags="noFooter memory" position="625,400" size="100,100">&lt;span class=&quot;italics&quot;&gt;&lt;span class=&quot;bold&quot;&gt;AWE SO CUTE!&lt;/span&gt;&lt;/span&gt;
 I swipe to the next reel, titled “Cutest Cat Ever”, which is a ridiculously cute tiny gray kitten in a coffee mug.  I hear a noise outside and it distracts me from my phone.  I look at the clock and realize I’ve been scrolling for &lt;span class=&quot;bold&quot;&gt;20 minutes!&lt;/span&gt; In my head I overdramatically narrate that&lt;span class=&quot;italics&quot;&gt; “the undeniable appeal of more adorable animals calls to me like a long lost friend,”&lt;/span&gt; which makes me think, &lt;span class=&quot;italics&quot;&gt;&lt;br&gt;Hey! I should text my bestie because it’s been a bit since we connected.&lt;/span&gt; &lt;br&gt;&lt;br&gt; I turn back to my phone, and see a notification from my Spanish language learning app that I just need to spend 15 minutes practicing to meet my daily goal.  Excited to extend my streak and work towards my goal of learning a second language, I click into the app.  The intro screen greets me with some highly energetic words of encouragement, followed by an exciting announcement of new features.  The app now offers conversation practice with AI for only $5.99 per month.  I&#39;m intrigued at the possibilities…&lt;span class=&quot;italics&quot;&gt;it would be nice to practice talking more and using AI could be a great solution.&lt;/span&gt;  &lt;br&gt;&lt;br&gt;I swipe out of the app to research other, possibly free, options. I do a few searches, read a few articles, before I see a video titled “Top 5 AI language learning tools ranked by PhD polyglot.”  I click on the video and in 7 minutes have learned the pros and cons of various new tools.  The video ends and my feed suggests “Meet Nugget, the most adorbs kitten.”  I reflexively click on it.  &lt;span class=&quot;italics&quot;&gt;Why yes...yes I will.  Hello Nugget!&lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="30" name="Retirement" tags="noFooter" position="650,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Oh god, they are going to expect me to say something.  What should I say?  I&#39;m so nervous.&lt;/span&gt;
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="30" name="Retirement" tags="noFooter memory" position="650,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Oh god, they are going to expect me to say something.  What should I say?  I&#39;m so nervous.&lt;/span&gt;
 &lt;span class=&quot;bold&quot;&gt;Speech Speech Speech!&lt;/span&gt;
 
 Thank you all for coming today.  I&#39;m not one for public speaking but I do want to say one thing.  A boss I once worked for once welcomed me to a team by telling me this:
@@ -737,9 +741,51 @@ And in the immortal words of Jimmy Buffett...
 
 &lt;span class=&quot;italics&quot;&gt;I sure will&lt;/span&gt;
  
- [[Continue|End]]</tw-passagedata><tw-passagedata pid="31" name="End" tags="noFooter" position="775,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Now that I&#39;m retired I&#39;ll surely be able to de-stress, relax a little, and not be overwhelmed by so much to do and keep track of!  &lt;/span&gt;
+ [[Continue|End]]</tw-passagedata><tw-passagedata pid="31" name="End" tags="noFooter memory" position="775,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Now that I&#39;m retired I&#39;ll surely be able to de-stress, relax a little, and not be overwhelmed by so much to do and keep track of!  &lt;/span&gt;
 
-[[Continue|Light]]</tw-passagedata><tw-passagedata pid="32" name="Light" tags="noFooter" position="900,575" size="100,100">
+[[Continue|Light]]</tw-passagedata><tw-passagedata pid="32" name="Light" tags="noFooter memory" position="900,575" size="100,100">&lt;&lt;playlist &quot;obe&quot; fadeout&gt;&gt;
+&lt;&lt;script&gt;&gt;
+	const background = document.createElement(&#39;div&#39;);
+    background.style.position = &quot;absolute&quot;;
+    background.style.top = &quot;0px&quot;;
+    background.style.display = &quot;flex&quot;;
+    background.style.margin = &quot;0%&quot;;
+    background.style.width = &quot;100%&quot;;
+    background.style.height = &quot;100%&quot;;
+    background.style.backgroundColor = &#39;black&#39;;
+    background.style.zIndex = &#39;1000&#39;;
+    background.style.color = &quot;white&quot;;
+    background.style.padding = &quot;30px&quot;;
+    background.style.fontSize = &quot;3rem&quot;;
+    background.style.fontWeight = &quot;bold&quot;;
+	background.style.fontStyle = &quot;italic&quot;;
+    background.textContent = &quot;Finally, the light at the end of the Tunnel&quot;;
+    document.body.appendChild(background);
+
+    const circleEl = document.createElement(&#39;div&#39;);   
+    background.appendChild(circleEl);
+
+
+    circleEl.style.position = &quot;fixed&quot;;
+    circleEl.style.top = &quot;50%&quot;;
+    circleEl.style.left = &quot;50%&quot;;
+    circleEl.style.transform = &quot;translate(-50%, -50%)&quot;;
+    circleEl.style.width = &quot;30px&quot;;
+    circleEl.style.height = &quot;30px&quot;;
+    circleEl.style.borderRadius = &quot;50%&quot;
+    circleEl.style.transition = &quot;transform 3.5s ease-in&quot;;
+    circleEl.style.transformOrigin = &quot;center&quot;;
+    circleEl.style.background = &quot;white&quot;
+    circleEl.style.zIndex = &#39;1001&#39;;
+    
+    var horn = new Audio(&quot;media/horn.wav&quot;);
+    let onHover = function(){circleEl.style.transform = &quot;scale(100)&quot;;
+	horn.play();
+ 	circleEl.removeEventListener(&quot;mouseover&quot;, onHover);
+ 	}
+    
+    circleEl.addEventListener(&quot;mouseover&quot;, onHover);
+   &lt;&lt;/script&gt;&gt;
 
 </tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
