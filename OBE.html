@@ -770,16 +770,17 @@ And in the immortal words of Jimmy Buffett...
      background.appendChild(thanksEl);
      background.appendChild(linkEl);
      linkEl.style.position = &quot;absolute&quot;;
-     linkEl.onclick= function(){Engine.restart();};
+     linkEl.onclick= function(){UI.restart();};
      linkEl.href = &quot;#&quot;;
-     linkEl.textContent=&quot;Return to Menu&quot;;
+     linkEl.textContent=&quot;Restart&quot;;
      thanksEl.textContent = &quot;Thanks for Playing&quot;;
      thanksEl.style.color = &quot;black&quot;;     
      thanksEl.style.position = &quot;absolute&quot;;
      thanksEl.style.zIndex = &#39;1002&#39;;
      linkEl.style.zIndex = &#39;1002&#39;;
-     thanksEl.style.margin = &#39;50px&#39;;
-	linkEl.style.color = &quot;black&quot;;
+     thanksEl.style.margin = &#39;0px&#39;;
+     linkEl.style.margin = &quot;100px&quot;;
+	  linkEl.style.color = &quot;black&quot;;
       thanksEl.style.textAlign = &quot;center&quot;;
       thanksEl.style.display = &quot;none&quot;;
       linkEl.style.display = &quot;none&quot;;
@@ -807,9 +808,8 @@ And in the immortal words of Jimmy Buffett...
 	horn.play();
  	circleEl.removeEventListener(&quot;mouseover&quot;, onHover);
     await new Promise(resolve =&gt; setTimeout(resolve, 7000));
-     thanksEl.style.display = &quot;block&quot;;
-     linkEl.style.display = &quot;block&quot;;
-     background.style.textAlign = &quot;center&quot;;
+     thanksEl.style.display = &quot;flex&quot;;
+     linkEl.style.display = &quot;flex&quot;;
  	}
     
     circleEl.addEventListener(&quot;mouseover&quot;, onHover);
