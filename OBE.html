@@ -315,13 +315,17 @@ window.launchTutorial = function(passageName){
 
 /* Call to mini game */
 window.launchGame = function(passageName){
+  //make current tasks stickies
+  window.addTask(State.variables.option1);
+  window.addTask(State.variables.option2);
+  
   let task = window.getTask(passageName);
   //launch game with time varible to determine difficulty
   window.launchHovered(task);
 
   //remove task from the todo list
   window.removeTask(passageName);
-  Engine.show();
+  Engine.play("Start");
 }
 
 /*Grab task from taskDB to add to todo list using the passage name  add random values for positioning and color when rendered*/
@@ -404,8 +408,10 @@ Config.history.controls = false;
 /*set up reference taskDB and consummable taskDB from import*/
 &lt;&lt;set $taskDB = window.taskDBImport &gt;&gt; 
 &lt;&lt;set $conTasks = window.taskDBImport &gt;&gt; 
-
 &lt;&lt;set $initList = window.initListImport &gt;&gt; 
+
+&lt;&lt;set $option1 = &quot;&quot;&gt;&gt;
+&lt;&lt;set $option2 = &quot;&quot;&gt;&gt;
 
 &lt;&lt;set $events = [ 
 {}
@@ -517,6 +523,8 @@ Mood = $mood</tw-passagedata><tw-passagedata pid="8" name="StoryMenu" tags="" po
 &lt;&lt;if $conTasks.length &gt;2&gt;&gt;
         &lt;&lt;set $passages = $conTasks.pluckMany(2)&gt;&gt;
         &lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt;
+        &lt;&lt;set $option1 = $passages[0].name&gt;&gt;
+        &lt;&lt;set $option2 = $passages[1].name&gt;&gt;        
         $passages[0].stimText but... &lt;br&gt;
         $passages[1].stimText... &lt;br&gt; &lt;br&gt;
         &lt;&lt;link $passages[0].text $passages[0].name&gt;&gt;
@@ -631,7 +639,9 @@ And Hey Siri set a 45 minute timer for the banana bread.
             &lt;&lt;/if&gt;&gt;     
             &lt;&lt;set $optionPassage = $conTasks.pluck()&gt;&gt;
             &lt;&lt;silent&gt;&gt; &lt;&lt;=updateVisited($optionPassage.name)&gt;&gt; &lt;&lt;/silent&gt;&gt;
-           	&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt; 
+           	&lt;&lt;set $choicesPresented = $choicesPresented + 1&gt;&gt;
+            &lt;&lt;set $option1 = $currentPassage.name&gt;&gt;
+        	&lt;&lt;set $option2 = $optionPassage.name&gt;&gt;
             $currentPassage.storyText but... &lt;br&gt;
             $optionPassage.stimText &lt;br&gt;&lt;br&gt;
             &lt;&lt;link $currentPassage.text $currentPassage.name&gt;&gt;
