@@ -284,15 +284,25 @@ a {
 
 
 #passage-results h1{
-	top: 0px;
-  	width: auto%;
+  	position: absolute;	
+    top: 0px;
+  	bottom: 50px;
+  	width: 1000px;
   	font-size: 300%;	
  	font-family: caveat;
     color: #FFFFFF;
 }
+#passage-results h4{
+  	position: absolute;	
+    top: 100px;
+  	width: 300px;
+}
+
 
 .complete h3, .uncomplete h3{
   text-decoration: underline;
+  position: absolute;
+  width: 300px;
   
 }
 
@@ -301,12 +311,14 @@ ul.complete, ul.uncomplete {
   list-style: none;
   margin-left: 0px;
   font-weight: bold;
-  position: absolute;
-  top: 200px;
+  position: relative;
+  top: 150px;
+  bottom: 25px;
+  width: 225px;
 }
 
 ul.uncomplete {
-  position: absolute;
+  position: relative;
   left: 350px;
 
 }
@@ -906,7 +918,7 @@ circleEl.addEventListener(&quot;mouseover&quot;, onHover);
 &lt;&lt;nobr&gt;&gt;
 &lt;div&gt;
 &lt;h1&gt;Thanks for Playing!&lt;/h1&gt;
-&lt;p&gt;Here&#39;s a summary of all the good times you had, so you can put it in a scrapbook!&lt;/p&gt;
+&lt;h4&gt;Here&#39;s a summary of all the good times you had, so you can put it in a scrapbook!&lt;/h4&gt;
 &lt;ul class=&quot;complete&quot;&gt;&lt;h3&gt;Your Completed Tasks&lt;/h3&gt;
 &lt;&lt;for _i to 0; _i lt State.variables.completed.length; _i++&gt;&gt; 
               &lt;&lt;set $task = State.variables.completed[_i]&gt;&gt;
