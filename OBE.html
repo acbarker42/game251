@@ -322,7 +322,8 @@ window.launchGame = function(passageName){
   let task = window.getTask(passageName);
   //launch game with time varible to determine difficulty
   window.launchHovered(task);
-
+  State.variables.completed.push(task);
+  
   //remove task from the todo list
   window.removeTask(passageName);
   Engine.play("Start");
@@ -402,6 +403,7 @@ Config.history.controls = false;
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="25,150" size="100,100">/* Initialize Gamewide Variables */
 
 &lt;&lt;set $toDoList = []&gt;&gt;
+&lt;&lt;set $completed = []&gt;&gt;
 &lt;&lt;set $memoryTimer = 4&gt;&gt;
 &lt;&lt;set $choicesPresented = 0&gt;&gt;
 
@@ -844,6 +846,8 @@ And in the immortal words of Jimmy Buffett...
  	}
     
     circleEl.addEventListener(&quot;mouseover&quot;, onHover);
+    console.log(State.variables.completed);
+    console.log(State.variables.toDoList);
    &lt;&lt;/script&gt;&gt;
 
 </tw-passagedata></tw-storydata>
