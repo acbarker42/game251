@@ -50,7 +50,8 @@ window.launchHovered = function (task) {
 	const targetsFiles = ['media/targets/sticky_note_blue.png','media/targets/sticky_note_green.png','media/targets/sticky_note_pink.png','media/targets/sticky_note_purple.png'];
 	const bombFiles = ['media/bombs/squirrel_blue.png','media/bombs/squirrel_gray.png','media/bombs/squirrel_green.png','media/bombs/squirrel_pink.png'];
 
-
+	let squirrel_count = 0;
+	let sticky_notes_caught = 0;
 
 
 	const interruptions = ["Right in the middle of your work, you get a call from your distant cousin.  It was great catching up and hearing about his plans to become a professional taxidermist, but you'll have to restart your task.",
@@ -107,6 +108,7 @@ window.launchHovered = function (task) {
 		let targetSize = 40;
 		var hover = function (e) {
 			main.score += 1;
+			sticky_notes_caught += 1;
 			main.update();
 			e.target.style.top = random(0, hSize - targetSize) + "px";
 			e.target.style.left = random(0, wSize - targetSize) + "px";
@@ -115,6 +117,7 @@ window.launchHovered = function (task) {
 		//define the hover over function that moves the bombs and updates the score		
 		var bombhover = function (e) {
 			main.score -= 2;
+			squirrel_count += 1;
 			main.update();
 			e.target.style.top = random(0, hSize - bombSize) + "px";
 			e.target.style.left = random(0, wSize - bombSize) + "px";
@@ -204,10 +207,12 @@ window.launchHovered = function (task) {
 			//this section implements the game close out
 			let closeGame = function () {
 				button1El.removeEventListener('click', closeGame);
-				window.score = score;
+				console.log(sticky_notes_caught, squirrel_count);
+				//window.score = score;
+				//console.log(window.score, sticky_notes_caught, squirrel_count);
 				//alert("score " + window.score);
 				gameWrapper.remove();
-				return window.score;
+				return (sticky_notes_caught, squirrel_count);
 			}
 
 			//this section implements the countdown timer
