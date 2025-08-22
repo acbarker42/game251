@@ -58,5 +58,20 @@ window.initListImport = [
         yPos: 300,
         deg: -1,
         color: "#C3BBD2"
+    },
+    { 
+        name: "Menu",
+        text: "Menu",
+        time: 5,
+        timeLeft: 5,
+        visited: true,
+        status: "incomplete",
+        stimText: "",
+        resolutionText: "",
+        storyText: "",
+        xPos: 200,
+        yPos: 300,
+        deg: -1,
+        color: "#C3BBD2"
     }
 ]

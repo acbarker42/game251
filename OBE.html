@@ -283,7 +283,6 @@ a {
 importScripts(
   ["js/initList.js","js/taskDB.js", "js/hoveredGame.js"]
 ).then (function(){
-  console.log(window.taskDBImport);
 })
 .catch(function(err){
   console.log(err);
@@ -341,7 +340,6 @@ window.addTask = function(passageName) {
     taskToAdd.color = window.getColor();
     State.variables.toDoList.push(taskToAdd);
 	//}
-    console.log(State.variables.toDoList);
 };
 
 /*Grab task from taskDB using the passage name and return*/
@@ -460,6 +458,11 @@ Config.history.controls = false;
         &lt;!-- Credits --&gt;
          &lt;&lt;set $task = $initList[3]&gt;&gt;
         &lt;&lt;post-it $task &quot;Credits&quot; &quot;&quot;&gt;&gt;
+&lt;!-- Post-it for Light Screen--&gt;
+&lt;&lt;if tags().includes(&quot;light&quot;)&gt;&gt;
+        &lt;&lt;set $task = $initList[4]&gt;&gt;
+        &lt;&lt;post-it $task &quot;Menu&quot; &quot;&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;         
         
 &lt;&lt;/if&gt;&gt;
 &lt;!-- Post-its for everything else--&gt;
@@ -470,7 +473,8 @@ Config.history.controls = false;
               &lt;&lt;post-it $task &quot;&quot; &quot;launchGame(id)&quot;&gt;&gt;
           &lt;&lt;/for&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
- &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="Menu" tags="menu noFooter" position="200,400" size="100,100">&lt;&lt;run UIBar.unstow()&gt;&gt;
+ &lt;&lt;/if&gt;&gt;
+</tw-passagedata><tw-passagedata pid="5" name="Menu" tags="menu noFooter" position="200,400" size="100,100">&lt;&lt;run UIBar.unstow()&gt;&gt;
 &lt;nobr&gt;
 &lt;div id=&quot;whiteboard&quot;&gt;
 &lt;img id=&quot;to-do_list&quot; src=&quot;media\to-do_list.png&quot;&gt;
@@ -747,7 +751,7 @@ https://webdesign.tutsplus.com/create-a-sticky-note-effect-in-5-easy-steps-with-
 &lt;span class=&quot;italics&quot;&gt;
 Um...thanks?
 &lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="27" name="Beginning" tags="noFooter memory" position="325,400" size="100,100">42.  That&#39;s it!  I only have to hang on for 42 more days and it will all change.  Things will be better.  I&#39;ll have time for the things that matter.  
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="27" name="Beginning" tags="noFooter" position="325,400" size="100,100">42.  That&#39;s it!  I only have to hang on for 42 more days and it will all change.  Things will be better.  I&#39;ll have time for the things that matter.  
 
 I don&#39;t know how long I&#39;ve gone on, completing the same mundane tasks, over, and over again…just kinda existing until the next big milestone.  But this is it.  If I can just make it through this, then things will settle down.
 &lt;span class=&quot;italics&quot;&gt;
@@ -764,7 +768,7 @@ At least it&#39;s the weekend so I can catch up on some things I need to get don
 &lt;&lt;print either($backAtItOptions)&gt;&gt;
 [[Continue|Start]]</tw-passagedata><tw-passagedata pid="29" name="CatReel" tags="noFooter memory" position="625,400" size="100,100">&lt;span class=&quot;italics&quot;&gt;&lt;span class=&quot;bold&quot;&gt;AWE SO CUTE!&lt;/span&gt;&lt;/span&gt;
 I swipe to the next reel, titled “Cutest Cat Ever”, which is a ridiculously cute tiny gray kitten in a coffee mug.  I hear a noise outside and it distracts me from my phone.  I look at the clock and realize I’ve been scrolling for &lt;span class=&quot;bold&quot;&gt;20 minutes!&lt;/span&gt; In my head I overdramatically narrate that&lt;span class=&quot;italics&quot;&gt; “the undeniable appeal of more adorable animals calls to me like a long lost friend,”&lt;/span&gt; which makes me think, &lt;span class=&quot;italics&quot;&gt;&lt;br&gt;Hey! I should text my bestie because it’s been a bit since we connected.&lt;/span&gt; &lt;br&gt;&lt;br&gt; I turn back to my phone, and see a notification from my Spanish language learning app that I just need to spend 15 minutes practicing to meet my daily goal.  Excited to extend my streak and work towards my goal of learning a second language, I click into the app.  The intro screen greets me with some highly energetic words of encouragement, followed by an exciting announcement of new features.  The app now offers conversation practice with AI for only $5.99 per month.  I&#39;m intrigued at the possibilities…&lt;span class=&quot;italics&quot;&gt;it would be nice to practice talking more and using AI could be a great solution.&lt;/span&gt;  &lt;br&gt;&lt;br&gt;I swipe out of the app to research other, possibly free, options. I do a few searches, read a few articles, before I see a video titled “Top 5 AI language learning tools ranked by PhD polyglot.”  I click on the video and in 7 minutes have learned the pros and cons of various new tools.  The video ends and my feed suggests “Meet Nugget, the most adorbs kitten.”  I reflexively click on it.  &lt;span class=&quot;italics&quot;&gt;Why yes...yes I will.  Hello Nugget!&lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="30" name="Retirement" tags="noFooter memory" position="650,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Oh god, they are going to expect me to say something.  What should I say?  I&#39;m so nervous.&lt;/span&gt;
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="30" name="Retirement" tags="noFooter" position="650,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Oh god, they are going to expect me to say something.  What should I say?  I&#39;m so nervous.&lt;/span&gt;
 &lt;span class=&quot;bold&quot;&gt;Speech Speech Speech!&lt;/span&gt;
 
 Thank you all for coming today.  I&#39;m not one for public speaking but I do want to say one thing.  A boss I once worked for once welcomed me to a team by telling me this:
@@ -778,77 +782,80 @@ And in the immortal words of Jimmy Buffett...
 
 &lt;span class=&quot;italics&quot;&gt;I sure will&lt;/span&gt;
  
- [[Continue|End]]</tw-passagedata><tw-passagedata pid="31" name="End" tags="noFooter memory" position="775,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Now that I&#39;m retired I&#39;ll surely be able to de-stress, relax a little, and not be overwhelmed by so much to do and keep track of!  &lt;/span&gt;
+ [[Continue|End]]</tw-passagedata><tw-passagedata pid="31" name="End" tags="noFooter" position="775,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Now that I&#39;m retired I&#39;ll surely be able to de-stress, relax a little, and not be overwhelmed by so much to do and keep track of!  &lt;/span&gt;
 
-[[Continue|Light]]</tw-passagedata><tw-passagedata pid="32" name="Light" tags="noFooter memory" position="900,575" size="100,100">&lt;&lt;playlist &quot;obe&quot; fadeout&gt;&gt;
+[[Continue|Light]]</tw-passagedata><tw-passagedata pid="32" name="Light" tags="noFooter light" position="900,575" size="100,100">&lt;&lt;playlist &quot;obe&quot; fadeout&gt;&gt;
 &lt;&lt;script&gt;&gt;
-	const background = document.createElement(&#39;div&#39;);
-    background.style.position = &quot;absolute&quot;;
-    background.style.top = &quot;0px&quot;;
-    background.style.display = &quot;flex&quot;;
-    background.style.margin = &quot;0%&quot;;
-    background.style.width = &quot;100%&quot;;
-    background.style.height = &quot;100%&quot;;
-    background.style.backgroundColor = &#39;black&#39;;
-    background.style.zIndex = &#39;1000&#39;;
-    background.style.color = &quot;white&quot;;
-    background.style.padding = &quot;30px&quot;;
-    background.style.fontSize = &quot;3rem&quot;;
-    background.style.fontWeight = &quot;bold&quot;;
-	background.style.fontStyle = &quot;italic&quot;;
-    background.textContent = &quot;Finally, the light at the end of the Tunnel&quot;;
-    
-    const thanksEl = document.createElement(&#39;div&#39;);
-     const linkEl = document.createElement(&#39;a&#39;);
-     background.appendChild(thanksEl);
-     background.appendChild(linkEl);
-     linkEl.style.position = &quot;absolute&quot;;
-     linkEl.onclick= function(){Engine.restart();};
-     linkEl.href = &quot;#&quot;;
-     linkEl.textContent=&quot;Return to Menu&quot;;
-     thanksEl.textContent = &quot;Thanks for Playing&quot;;
-     thanksEl.style.color = &quot;black&quot;;     
-     thanksEl.style.position = &quot;absolute&quot;;
-     thanksEl.style.zIndex = &#39;1002&#39;;
-     linkEl.style.zIndex = &#39;1002&#39;;
-     thanksEl.style.margin = &#39;50px&#39;;
-	linkEl.style.color = &quot;black&quot;;
-      thanksEl.style.textAlign = &quot;center&quot;;
-      thanksEl.style.display = &quot;none&quot;;
-      linkEl.style.display = &quot;none&quot;;
+	const background = document.createElement(&quot;div&quot;);
+background.style.position = &quot;absolute&quot;;
+background.style.top = &quot;0px&quot;;
+background.style.display = &quot;flex&quot;;
+background.style.margin = &quot;0%&quot;;
+background.style.width = &quot;100%&quot;;
+background.style.height = &quot;100%&quot;;
+background.style.backgroundColor = &quot;black&quot;;
+background.style.zIndex = &quot;1000&quot;;
+background.style.color = &quot;white&quot;;
+background.style.padding = &quot;30px&quot;;
+background.style.fontSize = &quot;3rem&quot;;
+background.style.fontWeight = &quot;bold&quot;;
+background.style.fontStyle = &quot;italic&quot;;
+background.textContent = &quot;Finally, the light at the end of the Tunnel&quot;;
 
-    document.body.appendChild(background);
+const thanksEl = document.createElement(&quot;div&quot;);
+const linkEl = document.createElement(&quot;a&quot;);
+background.appendChild(thanksEl);
+background.appendChild(linkEl);
+linkEl.style.position = &quot;absolute&quot;;
+linkEl.onclick = function () {
+  Engine.restart();
+};
+linkEl.href = &quot;#&quot;;
+linkEl.textContent = &quot;Return to Menu&quot;;
+thanksEl.textContent = &quot;Thanks for Playing&quot;;
+thanksEl.style.color = &quot;black&quot;;
+thanksEl.style.position = &quot;absolute&quot;;
+thanksEl.style.zIndex = &quot;1002&quot;;
+linkEl.style.zIndex = &quot;1002&quot;;
+thanksEl.style.margin = &quot;50px&quot;;
+linkEl.style.color = &quot;black&quot;;
+thanksEl.style.textAlign = &quot;center&quot;;
+thanksEl.style.display = &quot;none&quot;;
+linkEl.style.display = &quot;none&quot;;
 
-    const circleEl = document.createElement(&#39;div&#39;);   
-    background.appendChild(circleEl);
+document.body.appendChild(background);
 
+const circleEl = document.createElement(&quot;div&quot;);
+background.appendChild(circleEl);
 
-    circleEl.style.position = &quot;fixed&quot;;
-    circleEl.style.top = &quot;50%&quot;;
-    circleEl.style.left = &quot;50%&quot;;
-    circleEl.style.transform = &quot;translate(-50%, -50%)&quot;;
-    circleEl.style.width = &quot;30px&quot;;
-    circleEl.style.height = &quot;30px&quot;;
-    circleEl.style.borderRadius = &quot;50%&quot;
-    circleEl.style.transition = &quot;transform 3.5s ease-in&quot;;
-    circleEl.style.transformOrigin = &quot;center&quot;;
-    circleEl.style.background = &quot;white&quot;
-    circleEl.style.zIndex = &#39;1001&#39;;
-    
-    var horn = new Audio(&quot;media/horn.wav&quot;);
-    let onHover = async function(){circleEl.style.transform = &quot;scale(100)&quot;;
-	horn.play();
- 	circleEl.removeEventListener(&quot;mouseover&quot;, onHover);
-    await new Promise(resolve =&gt; setTimeout(resolve, 7000));
-     thanksEl.style.display = &quot;block&quot;;
-     linkEl.style.display = &quot;block&quot;;
-     background.style.textAlign = &quot;center&quot;;
- 	}
-    
-    circleEl.addEventListener(&quot;mouseover&quot;, onHover);
-    console.log(State.variables.completed);
-    console.log(State.variables.toDoList);
-   &lt;&lt;/script&gt;&gt;
+circleEl.style.position = &quot;fixed&quot;;
+circleEl.style.top = &quot;50%&quot;;
+circleEl.style.left = &quot;50%&quot;;
+circleEl.style.transform = &quot;translate(-50%, -50%)&quot;;
+circleEl.style.width = &quot;30px&quot;;
+circleEl.style.height = &quot;30px&quot;;
+circleEl.style.borderRadius = &quot;50%&quot;;
+circleEl.style.transition = &quot;transform 3.5s ease-in&quot;;
+circleEl.style.transformOrigin = &quot;center&quot;;
+circleEl.style.background = &quot;white&quot;;
+circleEl.style.zIndex = &quot;1001&quot;;
+
+var horn = new Audio(&quot;media/horn.wav&quot;);
+let onHover = async function () {
+  circleEl.style.transform = &quot;scale(100)&quot;;
+  horn.play();
+  circleEl.removeEventListener(&quot;mouseover&quot;, onHover);
+  await new Promise((resolve) =&gt; setTimeout(resolve, 7000));
+  thanksEl.style.display = &quot;block&quot;;
+  linkEl.style.display = &quot;block&quot;;
+  background.style.textAlign = &quot;center&quot;;
+};
+
+circleEl.addEventListener(&quot;mouseover&quot;, onHover);
+
+console.log(State.variables.completed);
+console.log(State.variables.toDoList);
+&lt;&lt;/script&gt;&gt;
 
 </tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
