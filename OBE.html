@@ -459,7 +459,7 @@ Config.history.controls = false;
          &lt;&lt;set $task = $initList[3]&gt;&gt;
         &lt;&lt;post-it $task &quot;Credits&quot; &quot;&quot;&gt;&gt;
 &lt;!-- Post-it for Light Screen--&gt;
-&lt;&lt;if tags().includes(&quot;light&quot;)&gt;&gt;
+&lt;&lt;if tags().includes(&quot;results&quot;)&gt;&gt;
         &lt;&lt;set $task = $initList[4]&gt;&gt;
         &lt;&lt;post-it $task &quot;Menu&quot; &quot;&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;         
@@ -784,9 +784,9 @@ And in the immortal words of Jimmy Buffett...
  
  [[Continue|End]]</tw-passagedata><tw-passagedata pid="31" name="End" tags="noFooter" position="775,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Now that I&#39;m retired I&#39;ll surely be able to de-stress, relax a little, and not be overwhelmed by so much to do and keep track of!  &lt;/span&gt;
 
-[[Continue|Light]]</tw-passagedata><tw-passagedata pid="32" name="Light" tags="noFooter light" position="900,575" size="100,100">&lt;&lt;playlist &quot;obe&quot; fadeout&gt;&gt;
+[[Continue|Light]]</tw-passagedata><tw-passagedata pid="32" name="Light" tags="noFooter" position="900,575" size="100,100">&lt;&lt;playlist &quot;obe&quot; fadeout&gt;&gt;
 &lt;&lt;script&gt;&gt;
-	const background = document.createElement(&quot;div&quot;);
+const background = document.createElement(&quot;div&quot;);
 background.style.position = &quot;absolute&quot;;
 background.style.top = &quot;0px&quot;;
 background.style.display = &quot;flex&quot;;
@@ -825,19 +825,14 @@ let onHover = async function () {
   horn.play();
   circleEl.removeEventListener(&quot;mouseover&quot;, onHover);
   await new Promise((resolve) =&gt; setTimeout(resolve, 7000));
-  console.log(&quot;test&quot;);
-  Engine.play(&quot;Results&quot;);
-  console.log(&quot;test&quot;);
-  linkEl.style.display = &quot;block&quot;;
 };
 
 circleEl.addEventListener(&quot;mouseover&quot;, onHover);
 
 
 &lt;&lt;/script&gt;&gt;
-&lt;&lt;goto &quot;Results&quot;&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="33" name="Results" tags="" position="1025,575" size="100,100">Results
+</tw-passagedata><tw-passagedata pid="33" name="Results" tags="noFooter results" position="1025,575" size="100,100">Results
 
 /* const thanksEl = document.createElement(&quot;div&quot;);
 const linkEl = document.createElement(&quot;a&quot;);
