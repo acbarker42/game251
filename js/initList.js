@@ -60,8 +60,8 @@ window.initListImport = [
         color: "#C3BBD2"
     },
     { 
-        name: "Menu",
-        text: "Menu",
+        name: "BackToMenu",
+        text: "Back To Menu",
         time: 5,
         timeLeft: 5,
         visited: true,
@@ -69,9 +69,9 @@ window.initListImport = [
         stimText: "",
         resolutionText: "",
         storyText: "",
-        xPos: 200,
-        yPos: 300,
-        deg: -1,
-        color: "#C3BBD2"
+        xPos: 370,
+        yPos: 0,
+        deg: 2,
+        color: "#F7EC75"
     }
 ]

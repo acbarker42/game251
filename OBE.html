@@ -510,12 +510,11 @@ Config.history.controls = false;
         &lt;!-- Credits --&gt;
          &lt;&lt;set $task = $initList[3]&gt;&gt;
         &lt;&lt;post-it $task &quot;Credits&quot; &quot;&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;         
 &lt;!-- Post-it for Light Screen--&gt;
 &lt;&lt;if tags().includes(&quot;results&quot;)&gt;&gt;
         &lt;&lt;set $task = $initList[4]&gt;&gt;
         &lt;&lt;post-it $task &quot;Menu&quot; &quot;&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;         
-        
 &lt;&lt;/if&gt;&gt;
 &lt;!-- Post-its for everything else--&gt;
 &lt;&lt;if !tags().includes(&quot;noFooter&quot;)&gt;&gt;
@@ -605,21 +604,18 @@ Well, that&#39;s neat that I&#39;m studying a language here that was developed h
 &lt;/span&gt;
 [[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="13" name="Questions" tags="noFooter memory" position="875,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;I did it again.  I didn&#39;t hear anything he just said for the last 10 minutes.  What was I even thinking about?  I&#39;m so going to fail this class.  If I ask the professor a question they will certainly know by my question that &lt;span class=&quot;bold&quot;&gt; I wasn&#39;t paying attention. &lt;/span&gt;  What is wrong with me?
 &lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="14" name="Bus" tags="noFooter memory" position="625,150" size="100,100">&lt;span class=&quot;bold&quot;&gt;It&#39;s time to get ready for the bus.  It will be here in 2 min and you need to be outside waiting for it so they aren&#39;t waiting for you...again.
-&lt;/span&gt;
+[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="14" name="Bus" tags="noFooter memory" position="625,150" size="100,100">&lt;span class=&quot;bold&quot;&gt;Get ready for the bus.  It will be here in 2 min and you need to be outside waiting so they aren&#39;t waiting for you...again.
 ...
-&lt;span class=&quot;bold&quot;&gt;
+&lt;&lt;type 40ms start 4s &gt;&gt;
 Hello?  Are you listening to me?  You haven&#39;t even put your shoes on.
-&lt;/span&gt;
-...
-&lt;span class=&quot;bold&quot;&gt;
-You&#39;re going to be late for the bus.  If you miss the bus I will make you walk the four miles to school.  
-&lt;/span&gt;
-...
-&lt;span class=&quot;bold&quot;&gt;
-GET OUTSIDE THE BUS IS HERE!!!
-&lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="15" name="Late" tags="noFooter memory" position="1000,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;Ok...I&#39;m ready to go... just have 15 min till I need to leave for the appt.
+... &lt;&lt;/type&gt;&gt;&lt;&lt;type 20ms start 4s &gt;&gt;
+You&#39;re going miss the bus.  If you miss it I will make you walk the four miles to school.  
+...&lt;&lt;/type&gt;&gt;&lt;&lt;type 8ms start 4s &gt;&gt;
+&lt;h2&gt;GET OUTSIDE THE BUS IS HERE!!!&lt;/h2&gt;
+&lt;&lt;/type&gt;&gt;&lt;/span&gt;&lt;&lt;type 0ms &gt;&gt;
+[[Continue|BackAtIt]]
+&lt;&lt;/type&gt;&gt;
+</tw-passagedata><tw-passagedata pid="15" name="Late" tags="noFooter memory" position="1000,150" size="100,100">&lt;span class=&quot;italics&quot;&gt;Ok...I&#39;m ready to go... just have 15 min till I need to leave for the appt.
 I guess I&#39;ll...put away the game I left out...I don&#39;t want the cats dragging the pieces away.
 
 Alright 10 min to go... I can load the dishwasher quick and kick it off...
@@ -818,9 +814,30 @@ At least it&#39;s the weekend so I can catch up on some things I need to get don
 ]&gt;&gt;
 
 &lt;&lt;print either($backAtItOptions)&gt;&gt;
-[[Continue|Start]]</tw-passagedata><tw-passagedata pid="29" name="CatReel" tags="noFooter memory" position="625,400" size="100,100">&lt;span class=&quot;italics&quot;&gt;&lt;span class=&quot;bold&quot;&gt;AWE SO CUTE!&lt;/span&gt;&lt;/span&gt;
-I swipe to the next reel, titled “Cutest Cat Ever”, which is a ridiculously cute tiny gray kitten in a coffee mug.  I hear a noise outside and it distracts me from my phone.  I look at the clock and realize I’ve been scrolling for &lt;span class=&quot;bold&quot;&gt;20 minutes!&lt;/span&gt; In my head I overdramatically narrate that&lt;span class=&quot;italics&quot;&gt; “the undeniable appeal of more adorable animals calls to me like a long lost friend,”&lt;/span&gt; which makes me think, &lt;span class=&quot;italics&quot;&gt;&lt;br&gt;Hey! I should text my bestie because it’s been a bit since we connected.&lt;/span&gt; &lt;br&gt;&lt;br&gt; I turn back to my phone, and see a notification from my Spanish language learning app that I just need to spend 15 minutes practicing to meet my daily goal.  Excited to extend my streak and work towards my goal of learning a second language, I click into the app.  The intro screen greets me with some highly energetic words of encouragement, followed by an exciting announcement of new features.  The app now offers conversation practice with AI for only $5.99 per month.  I&#39;m intrigued at the possibilities…&lt;span class=&quot;italics&quot;&gt;it would be nice to practice talking more and using AI could be a great solution.&lt;/span&gt;  &lt;br&gt;&lt;br&gt;I swipe out of the app to research other, possibly free, options. I do a few searches, read a few articles, before I see a video titled “Top 5 AI language learning tools ranked by PhD polyglot.”  I click on the video and in 7 minutes have learned the pros and cons of various new tools.  The video ends and my feed suggests “Meet Nugget, the most adorbs kitten.”  I reflexively click on it.  &lt;span class=&quot;italics&quot;&gt;Why yes...yes I will.  Hello Nugget!&lt;/span&gt;
-[[Continue|BackAtIt]]</tw-passagedata><tw-passagedata pid="30" name="Retirement" tags="noFooter" position="650,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Oh god, they are going to expect me to say something.  What should I say?  I&#39;m so nervous.&lt;/span&gt;
+[[Continue|Start]]</tw-passagedata><tw-passagedata pid="29" name="CatReel" tags="noFooter memory" position="625,400" size="100,100">&lt;span id=&quot;cute&quot;&gt;&lt;span class=&quot;italics&quot;&gt;&lt;span class=&quot;bold&quot;&gt;&lt;&lt;link &quot;AWE SO CUTE!&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+
+  &lt;&lt;append &quot;#cute&quot;&gt;&gt;
+I swipe to the next reel, titled “Cutest Cat Ever”, which is a ridiculously cute tiny gray kitten in a coffee mug.  I hear a noise outside and it distracts me from my phone. I look at the clock and realize I’ve been scrolling for &lt;span class=&quot;bold&quot;&gt;20 minutes!&lt;/span&gt; In my head I overdramatically narrate that&lt;span class=&quot;italics&quot;&gt; “the undeniable appeal of more adorable animals calls to me like a long lost friend,”&lt;/span&gt; which makes me think, Hey! it’s been a bit since we connected. I should &lt;span id=&quot;bestie&quot;&gt;&lt;&lt;link &quot;text my bestie...&quot;&gt;&gt;&lt;/span&gt;&lt;br&gt;&lt;br&gt;
+   &lt;&lt;append &quot;#bestie&quot;&gt;&gt;
+I turn back to my phone, and see a notification from my Spanish language learning app that I just need to spend 15 minutes practicing to meet my daily goal.  Excited to extend my streak and work towards my goal of learning a second language, &lt;span id=&quot;app&quot;&gt;&lt;&lt;link &quot;I click into the app... &quot;&gt;&gt; &lt;/span&gt; 
+&lt;&lt;append &quot;#app&quot;&gt;&gt;
+The intro screen greets me with some highly energetic words of encouragement, followed by an exciting announcement of new features.  The app now offers conversation practice with AI for only $5.99 per month.  I&#39;m intrigued at the possibilities…&lt;span class=&quot;italics&quot;&gt;it would be nice to practice talking more and using AI could be a great solution.  &lt;/span&gt;&lt;span id=&quot;research&quot;&gt;&lt;&lt;link &quot;I should look into this...&quot;&gt;&gt;&lt;/span&gt;
+&lt;&lt;append &quot;#research&quot;&gt;&gt;
+I swipe out of the app to research other, possibly free, options. I do a few searches, read a few articles, before I see a video titled “Top 5 AI language learning tools ranked by PhD polyglot.”  I click on the video and in 7 minutes have learned the pros and cons of various new tools.  The video ends and my feed suggests “Meet Nugget, the most adorbs kitten.”  &lt;span id=&quot;nugget&quot;&gt;&lt;&lt;link &quot;I reflexively click on it...&quot;&gt;&gt;&lt;/span&gt;
+&lt;&lt;append &quot;#nugget&quot;&gt;&gt;
+&lt;span class=&quot;italics&quot;&gt;Why yes...yes I will.  Hello Nugget!&lt;/span&gt;
+[[Continue|BackAtIt]]
+	    	  	&lt;&lt;/append&gt;&gt;
+    		  	&lt;&lt;/link&gt;&gt;	
+	    	&lt;&lt;/append&gt;&gt;
+    		&lt;&lt;/link&gt;&gt;	
+	    &lt;&lt;/append&gt;&gt;
+    	&lt;&lt;/link&gt;&gt;	
+    &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/link&gt;&gt;
+ &lt;&lt;/append&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+</tw-passagedata><tw-passagedata pid="30" name="Retirement" tags="noFooter" position="650,575" size="100,100">&lt;span class=&quot;italics&quot;&gt;Oh god, they are going to expect me to say something.  What should I say?  I&#39;m so nervous.&lt;/span&gt;
 &lt;span class=&quot;bold&quot;&gt;Speech Speech Speech!&lt;/span&gt;
 
 Thank you all for coming today.  I&#39;m not one for public speaking but I do want to say one thing.  A boss I once worked for once welcomed me to a team by telling me this:
@@ -884,7 +901,8 @@ let onHover = async function () {
 circleEl.addEventListener(&quot;mouseover&quot;, onHover);
 
 
-&lt;&lt;/script&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Results" tags="noFooter results" position="1025,575" size="100,100">&lt;&lt;playlist &quot;obe&quot; loop play&gt;&gt;
+&lt;&lt;/script&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Results" tags="noFooter results" position="1025,575" size="100,100">&lt;&lt;run UIBar.stow()&gt;&gt;
+&lt;&lt;playlist &quot;obe&quot; loop play&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 &lt;div&gt;
 &lt;h1&gt;Thanks for Playing!&lt;/h1&gt;
