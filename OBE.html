@@ -279,7 +279,59 @@ a {
       100% {
         box-shadow: 0 0 40px 4px rgba(229, 229, 229, 0.8);
       }
-    }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
+    }
+
+
+
+#passage-results h1{
+	top: 0px;
+  	width: auto%;
+  	font-size: 300%;	
+ 	font-family: caveat;
+    color: #FFFFFF;
+}
+
+.complete h3, .uncomplete h3{
+  text-decoration: underline;
+  
+}
+
+
+ul.complete, ul.uncomplete {
+  list-style: none;
+  margin-left: 0px;
+  font-weight: bold;
+  position: absolute;
+  top: 200px;
+}
+
+ul.uncomplete {
+  position: absolute;
+  left: 350px;
+
+}
+ul.complete li, ul.uncomplete li {
+  line-height: 1.8;
+  position: relative;
+  margin-left: 25px;
+
+
+}
+ul.complete li:before{
+  color: #000000;
+  content: '✓';
+  font-weight: bold;
+  left: -25px;
+  position: absolute;
+}
+ul.uncomplete li:before{
+  color: #FF1400;
+  content: '✖';
+  font-weight: bold;
+  left: -25px;
+  position: absolute;
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*imports*/
 importScripts(
   ["js/initList.js","js/taskDB.js", "js/hoveredGame.js"]
 ).then (function(){
@@ -825,14 +877,33 @@ let onHover = async function () {
   horn.play();
   circleEl.removeEventListener(&quot;mouseover&quot;, onHover);
   await new Promise((resolve) =&gt; setTimeout(resolve, 7000));
+  document.body.removeChild(background);
+  Engine.play(&quot;Results&quot;);
 };
 
 circleEl.addEventListener(&quot;mouseover&quot;, onHover);
 
 
-&lt;&lt;/script&gt;&gt;
+&lt;&lt;/script&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Results" tags="noFooter results" position="1025,575" size="100,100">&lt;&lt;playlist &quot;obe&quot; loop play&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
+&lt;div&gt;
+&lt;h1&gt;Thanks for Playing!&lt;/h1&gt;
+&lt;p&gt;Here&#39;s a summary of all the good times you had, so you can put it in a scrapbook!&lt;/p&gt;
+&lt;ul class=&quot;complete&quot;&gt;&lt;h3&gt;Your Completed Tasks&lt;/h3&gt;
+&lt;&lt;for _i to 0; _i lt State.variables.completed.length; _i++&gt;&gt; 
+              &lt;&lt;set $task = State.variables.completed[_i]&gt;&gt;
+              &lt;&lt;print &quot;&lt;li&gt;&quot;+$task.text+&quot;&lt;/li&gt;&quot;&gt;&gt;
+          &lt;&lt;/for&gt;&gt;
+&lt;/ul&gt;          
+&lt;ul class=&quot;uncomplete&quot;&gt;&lt;h3&gt;Your Remaining Taks&lt;/h3&gt;
+&lt;&lt;for _i to 0; _i lt State.variables.toDoList.length; _i++&gt;&gt; 
+              &lt;&lt;set $task = State.variables.toDoList[_i]&gt;&gt;
+              &lt;&lt;print &quot;&lt;li&gt;&quot;+$task.text+&quot;&lt;/li&gt;&quot;&gt;&gt;
+          &lt;&lt;/for&gt;&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;&lt;/nobr&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="33" name="Results" tags="noFooter results" position="1025,575" size="100,100">Results
 
 /* const thanksEl = document.createElement(&quot;div&quot;);
 const linkEl = document.createElement(&quot;a&quot;);
@@ -856,6 +927,26 @@ thanksEl.style.display = &quot;none&quot;;
 
 console.log(State.variables.completed);
 console.log(State.variables.toDoList);
+
+&lt;&lt;script&gt;&gt;
+	const mainEl = document.querySelector(&quot;#passage nofooter results&quot;);
+    console.log(mainEl);
+	const thanksEl = document.createElement(&quot;div&quot;);
+	const completeEl = document.createElement(&quot;ul&quot;);
+	const uncompleteEl = document.createElement(&quot;ul&quot;);
+
+
+    for(var i=0; i &lt; State.variables.toDoList.length; i++){
+    	const li = document.createElement(&quot;li&quot;);
+        li.textContent = State.variables.toDoList[i].text;
+        completeEl.appendChild(li);
+    }
+   for(var i=0; i &lt; State.variables.toDoList.length; i++){
+    	const li = document.createElement(&quot;li&quot;);
+        li.textContent = State.variables.toDoList[i].text;
+        uncompleteEl.appendChild(li);
+    }
+&lt;&lt;/script&gt;&gt;
 */</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */

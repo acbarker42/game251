@@ -256,7 +256,7 @@ window.taskDBImport = [
     },
     {
         name: "SendBdayCard",
-        text: "Send Birthday Card",
+        text: "Send Bday Card",
         time: 20,
         timeLeft: 20,
         visited: false,
